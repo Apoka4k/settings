@@ -1,0 +1,64 @@
+
+# DEFAULT SETTINGS
+source /home/sbicego/.bash_files/default.sh
+
+# CUSTOM SETTINGS
+
+# set processes resources
+ulimit -m 2000
+# ulimit -s unlimited
+
+# don't create .pyc files
+export PYTHONDONTWRITEBYTECODE="avoid.pyc.pyo"
+
+# BASH PATHS
+
+# standard paths
+export PATH="/home/sbicego/bin:$PATH"
+
+# scripts paths
+source /home/sbicego/scripts/import.sh
+
+# PYTHON PATHS
+
+# scripts paths
+export PYTHONPATH="/home/sbicego/scripts/python/common/common:$PATH"
+
+# pycparser
+export PYTHONPATH="/home/sbicego/Desktop/pycparser:$PYTHONPATH:"
+
+# kratos
+export PYTHONPATH="/home/sbicego/Desktop/kratos/builds_release/kratos/tools:$PYTHONPATH"
+
+# pypdf
+export PYTHONPATH="/home/sbicego/Desktop/pyPdf:$PYTHONPATH"
+
+# nautilus extension
+# export PKG_CONFIG_PATH="/home/sbicego/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+# export LD_LIBRARY_PATH="/home/sbicego/usr/lib:$LD_LIBRARY_PATH"
+
+# SHORTCUTS
+
+# commands
+alias run="runlim -s 900 -r 3600"
+alias open="gnome-open"
+alias time="/usr/bin/time --format=\"\n-------------------\n%E s %M KB\n-------------------\n\""
+alias lines="wc -l <"
+
+# folders
+alias emacs-folder="cd /home/sbicego/.emacs_files"
+alias emacs-mode-folder="cd /home/sbicego/.emacs.d/modes"
+alias bash-folder="cd /home/sbicego/.bash_files"
+alias manual-folder="cd /home/sbicego/Desktop/sbicego/Manual"
+alias scripts-folder="cd /home/sbicego/scripts/python/common"
+alias latex-folder="cd /home/sbicego/texmf/tex/latex"
+alias shared-folder="cd /home/sbicego/Desktop/shared_folder"
+
+# WARNING
+#
+# To make the file changes effective,
+# execute the following terminal command:
+# $ source /home/sbicego/.bashrc
+#
+# or the script:
+# $ bash-up

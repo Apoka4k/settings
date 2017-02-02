@@ -1,0 +1,36 @@
+#!/usr/bin/python
+
+
+# imports
+import os
+import sys
+
+# custom imports
+import common
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) != 1:
+        print common.get_err_msg(fname)
+        sys.exit()
+
+    # get path
+    korein_cmds_path = common.path_glue(common.rep_root,
+                                        "Notes/attach/korein",
+                                        "korein_cmds")
+
+    # get file content
+    with open(korein_cmds_path, "r") as korein_cmds_path_ptr:
+        string = korein_cmds_path_ptr.read()
+
+    # print file content
+    print string
+
+    # show results
+    print common.get_succ_msg(fname)

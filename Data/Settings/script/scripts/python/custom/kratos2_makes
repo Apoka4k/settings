@@ -1,0 +1,75 @@
+#!/usr/bin/python
+
+
+# add system path
+import sys
+sys.path.append("/home/sbicego/scripts/common")
+
+
+# imports
+from common import color
+
+
+# print function
+def print_make(string):
+
+    text = \
+        color.END + "  " + \
+        color.blue + "cd" + " " + string + \
+        color.blue + " ; " + "make -j8" + \
+        color.END + "\n\n" + \
+        color.END + "    " + \
+        color.cyan + "make" + \
+        color.END + "\n"
+
+    print text
+
+
+# main
+if __name__ == "__main__":
+
+    path_list = []
+
+    # -- mode
+    # mode = "debug"
+    mode = "release"
+
+    # -- mathsat5
+    # mathsat5
+    path_list.append("/home/sbicego/Desktop/kratos_2/builds_" + mode +
+                     "/mathsat5")
+
+    # -- kratos2
+    # kratos2
+    path_list.append("/home/sbicego/Desktop/kratos_2/builds_" + mode +
+                     "/kratos2")
+
+    text = \
+        color.END + "\n" + "  " + \
+        color.green + "Press any key to show the next path" + \
+        color.END + "\n" + "  " + \
+        color.green + "(type " + \
+        color.yellow + "quit" + \
+        color.green + " or " + \
+        color.yellow + "q" + \
+        color.green + " to quit): " + \
+        color.END
+
+    for path in path_list:
+
+        typed = raw_input(text)
+        print ""
+
+        if typed in ["q", "quit"]:
+            sys.exit()
+        else:
+            print_make(path)
+
+    text = \
+        color.END + "\n" + "  " + \
+        color.pink + "Result" + \
+        color.green + ": finished!" + \
+        color.END + "\n" + "  " + \
+        color.END
+
+    print text

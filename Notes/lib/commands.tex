@@ -1,0 +1,20 @@
+
+% CUSTOM COMMANDS
+\newcommand{\bbox}{{\scriptsize $\blacksquare$}} % black box
+\newcommand{\bball}{{\scriptsize $\bullet$}} % black circle
+\newcommand{\skipline}{\vspace{\baselineskip}} % skip line
+\renewcommand{\to}{$\rightarrow$ \,}
+\newcommand{\too}{$>$} % right angular bracket
+\newcommand{\ang}[1]{$\langle$#1$\rangle$} % angular brackets
+\newcommand{\bs}{$\backslash$} % backslash
+\renewcommand{\hat}{\textasciicircum\;} % hat
+\newcommand{\da}{\b{--}} % dash
+
+% CUSTOM MACROS
+\newcommand{\bashcmd}[3]{\n{#1\,\$} \hspace{4pt} \tw{#2}\par \vspace{2pt} \bbox \; \n{#3}\par \skipline} % bash command
+\newcommand{\customcmd}[3]{\n{#1} \to \tw{#2}\par \vspace{2pt} \bbox \; \n{#3}\par \skipline} % custom command
+\newcommand{\termdesc}[2]{\b{#1}: #2\par \skipline} % term description
+\newcommand{\symboldesc}[2]{#1\par \bbox \; #2\par \skipline} % symbol description
+\newcommand{\enumtitle}[1]{\b{#1}:\par \skipline} % enumeration title
+\newcommand{\enumitem}[1]{\bbox \; #1\par} % enumeration item
+\newcommand{\example}[1]{\sc{esempio}. \; \tw{#1}\par \skipline} % example

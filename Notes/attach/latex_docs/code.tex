@@ -1,0 +1,59 @@
+% DOCUMENT SPECIFICATIONS
+\documentclass{article}
+
+% LIBRARIES
+\usepackage{listings}
+\usepackage{color}
+
+% COLOURS
+\definecolor{bianco}{rgb}{1,1,1}
+\definecolor{giallo}{rgb}{1,0.8,0}
+\definecolor{azzurro}{rgb}{0.12,0.56,1}
+\definecolor{arancione}{rgb}{1,0.6,0}
+\definecolor{rosso}{rgb}{0.78,0.03,0.08}
+\definecolor{nero}{rgb}{0,0,0}
+\definecolor{verde}{rgb}{0.01,0.75,0.24}
+
+% STYLE
+\lstset{
+% linguage
+language=[ANSI]C,
+% background
+backgroundcolor=\color{bianco},
+% punctuation
+basicstyle=\color{nero}\normalfont\small,
+% variables
+identifierstyle=\color{nero},
+% domains
+keywords=[1]{int},
+keywordstyle=[1]\color{verde}\textbf,
+% flow operators
+keywords=[2]{if,then,else,for,while,do,return},
+keywordstyle=[2]\color{azzurro}\textbf,
+% comments
+commentstyle=\color{rosso},
+% strings
+stringstyle=\color{rosso},
+% borders
+xleftmargin=-1.8cm,
+xrightmargin=-1.8cm,
+% frame
+rulecolor=\color{nero},
+% fixed parameters
+frame=none,
+breaklines=true,
+captionpos=b,
+keepspaces=true,
+showstringspaces=false,
+tabsize=4,
+extendedchars=true
+}
+
+% DOCUMENT CONTENT
+\begin{document}
+
+\begin{lstlisting}[frame=single]
+% CODE
+\end{lstlisting}
+
+\end{document}

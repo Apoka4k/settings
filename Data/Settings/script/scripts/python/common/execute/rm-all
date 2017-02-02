@@ -1,0 +1,73 @@
+#!/usr/bin/python
+
+
+# imports
+import os
+import subprocess
+import sys
+import tempfile
+
+# custom imports
+import common
+from common import color
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) != 1:
+        print common.get_err_msg(fname)
+        sys.exit()
+
+    # get paths
+    root_dir = common.home
+    tmp_find_out = tempfile.mktemp()
+
+    # get find commands
+    find_cmd_list = ["*~", "*#", "lextab.py", "yacctab.py", "*pyc"]
+
+    # get files
+    file_list = []
+
+    for item in find_cmd_list:
+        cmd = common.command("find", root_dir,
+                             "-name", "\"%s\"" % item, "-type", "f",
+                             ">", tmp_find_out)
+
+        res = subprocess.call(cmd, shell=True)
+        if res != 0:
+            print common.get_err_msg(fname)
+            sys.exit()
+        with open(tmp_find_out, "r") as tmp_find_out_ptr:
+            lines = tmp_find_out_ptr.readlines()
+        for line in lines:
+            file_list.append(common.clear_string(line))
+
+    file_list.sort()
+    common.rm_file(tmp_find_out)
+
+    # remove files
+    for current_file in file_list:
+        if os.path.isfile(current_file) is True:
+            common.rm_file(current_file)
+        else:
+            print common.get_err_msg(fname)
+            sys.exit()
+
+    # print results
+    text = color.green + "\n" + \
+        color.pink + "  Results" + \
+        color.green + ":" + "\n\n"
+
+    if file_list == []:
+        text += color.cyan + " " * 4 + "No file needed to be removed." + "\n"
+
+    for current_file in file_list:
+        text += color.blue + " " * 4 + current_file + "\n"
+
+    print text
+    print common.get_succ_msg(fname)

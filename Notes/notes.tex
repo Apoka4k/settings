@@ -1,0 +1,1133 @@
+
+% SETTINGS
+\input{lib/settings.tex}
+
+% COMMANDS
+\input{lib/commands.tex}
+
+% DOCUMENT CONTENT
+\begin{document}
+
+\begin{multicols}{2}
+\flushleft{\b{Michele Sbicego}}
+\flushright{\b{FBK}}
+\end{multicols}
+
+{\center\LARGE\b{Manuale}\\}
+
+\skipline
+
+\tableofcontents
+
+\clearpage
+
+\section{Notazione}
+
+\symboldesc{\$}{indica che ci troviamo sul terminale}
+\symboldesc{\too}{indica il passaggio ad una sottocartella}
+\symboldesc{\to}{indica il passaggio ad un'azione successiva}
+\symboldesc{\tw{+}}{indica la pressione contemporanea di piu' tasti}
+\symboldesc{$\langle$ $\rangle$}{il contenuto delle parentesi angolate e' a titolo di esempio e puo' variare}
+\symboldesc{\tw{[ ]}}{il contenuto delle parentesi quadre e' facoltativo, a parte nelle occorrenze in cui ne viene specificata esplicitamente una semantica}
+
+\section{Generale}
+
+\customcmd{}{\sc{bandierina}+\ang{arrow}}{modifica la posizione e le dimensioni della finestra corrente a seconda della freccia cliccata:
+\begin{align*}
+\b{freccia destra}&: \n{posiziona a destra,}\\
+\b{freccia sinistra}&: \n{posiziona a sinistra,}\\
+\b{freccia su}&: \n{a tutto schermo,}\\
+\b{freccia giu'}&: \n{ridimensiona ai valori di default.}\\
+\end{align*}}
+\customcmd{}{\sc{bandierina}+H}{minimizza la finestra attuale}
+
+\subsection{Percorsi}
+
+Sono supportati i percorsi di altre macchine. La sintassi e':
+\begin{itemize}
+\item[] \tw{/ssh:\ang{user}@\ang{machine}:\ang{path}}
+\end{itemize}
+
+\section{Installazione}
+
+Quando si vuole installare un'applicazione, solitamente si apre il terminale nella cartella sorgente dell'applicazione e si danno i seguenti comandi:
+\begin{itemize}
+\item[\bbox] \tw{./configure}
+\item[\bbox] \tw{make}
+\item[\bbox] \tw{make install}
+\end{itemize}
+L'installazione avviene nella \sc{root} della propria macchina, solitamente nel path \tw{/usr}. Se non si hanno diritti di amministratore sulla propria macchina bisogna installare l'applicazione nella propia \sc{home}. Solitamente i comandi da dare sono:
+\begin{itemize}
+\item[\bbox] \tw{./configure --prefix=\$HOME/usr}
+\item[\bbox] \tw{make}
+\item[\bbox] \tw{make install}
+\end{itemize}
+Successivamente, bisogna aggiungere l'informazione del nuovo path a bash. Bisogna aggiungere la riga:
+\begin{itemize}
+\item[] \tw{export PATH=``\$HOME/usr/bin:\$PATH''}
+\end{itemize}
+nel file \tw{\$HOME/.bash}. Facoltativamente, si puo' dare un soprannome all'eseguibile per dare la priorita' all'eseguibile nella \sc{home} rispetto a quello nella \sc{root}. Bisogna aggiungere la riga:
+\begin{itemize}
+\item[] \tw{alias \ang{exe}=``\$HOME/usr/bin/\ang{exe}''}
+\end{itemize}
+nel file \tw{\$HOME/.bash}.
+
+\section{Terminale}
+
+\termdesc{Descrizione}{il terminale consente di gestire i file e i processi.}
+
+\subsection{Istanze}
+
+\bashcmd{}{Ctrl + Shift + T}{apre un nuovo terminale nella finestra terminale corrente}
+\bashcmd{}{Ctrl + Shift + PageUp}{seleziona il terminale successivo della finestra terminale corrente}
+\bashcmd{}{Ctrl + Shift + PageDown}{seleziona il terminale precedente della finestra terminale corrente}
+
+\subsection{Cartelle e File}
+
+\bashcmd{}{pwd}{stampa la posizione assoluta attuale}
+\bashcmd{}{ls}{stampa gli oggetti presenti nella cartella attuale}
+\bashcmd{}{ll}{stampa gli oggetti presenti nella cartella attuale, con il tipo di accesso che permettono}
+\bashcmd{}{ls -a}{stampa gli oggetti presenti nella cartella attuale, compresi quelli nascosti}
+\bashcmd{}{cd \ang{path}}{sposta la posizione attuale nella cartella specificata}
+\bashcmd{}{rm \ang{file}}{cancella il file}
+\bashcmd{}{rm -rf \ang{folder}}{cancella la cartella}
+\bashcmd{}{cp [\ang{path}/]\ang{file} [\ang{path}/]\ang{new\_file}}{copia e incolla}
+\bashcmd{}{mv [\ang{path}/]\ang{file} [\ang{path}]\ang{new\_file}}{taglia e incolla con un nuovo nome -- come caso particolare si ottiene la ridenominazione}
+\bashcmd{}{scp [\ang{machine\_name}:][\ang{path}/]\ang{file} [\ang{machine\_name}:][\ang{path}]\ang{new\_file}}{copia e incolla in un'altra macchina}
+\bashcmd{}{touch \ang{new\_file}}{crea un nuovo file}
+\bashcmd{}{mkdir \ang{new\_folder}}{crea una nuova cartella}
+\bashcmd{}{cat \ang{file}}{stampa sul terminale il contenuto del file}
+\bashcmd{}{> \ang{file}}{stampa l'output sul file specificato}
+\bashcmd{}{ln -s \ang{path}/\ang{file\_or\_directory} \ang{path}/\ang{file\_or\_directory}}{crea un collegamento del primo oggetto nel luogo specificato dal secondo oggetto}
+\bashcmd{}{locate \ang{file}}{elenca i file che presentano la stringa specificata nel loro nome. La ricerca viene fatta in tutta la macchina}
+\bashcmd{}{cat \ang{file}}{stampa sul terminale il contenuto del file}
+\bashcmd{}{less \ang{file}}{scorre sul terminale il contenuto del file}
+\bashcmd{}{head [-n \ang{number}] \ang{file}}{stampa sul terminale le prime righe del file}
+\bashcmd{}{tail [-n \ang{number}] \ang{file}}{stampa sul terminale le ultime righe del file}
+
+\subsection{Processi}
+
+\customcmd{\$}{Ctrl+S}{mette in pausa il processo in corso}
+\customcmd{\$}{\ang{any\_key}}{fa riprendere il processo messo in pausa}
+\bashcmd{}{jobs}{stampa i processi in corso e la loro etichetta numerica}
+\customcmd{\$}{Ctrl+Z}{addormenta il processo in corso}
+\bashcmd{}{fg \ang{number}}{risveglia il processo con l'etichetta numerica specificata}
+\bashcmd{}{fg}{risveglia tutti i processi addormentati}
+\customcmd{\$}{Ctrl+C}{termina il processo in corso}
+\bashcmd{}{\ang{command}}{avvia il processo e blocca il terminale}
+\bashcmd{}{\ang{command} \&}{avvia il processo senza bloccare il terminale}
+\customcmd{\$}{Ctrl+Z \to bg}{se il terminale e' bloccata da un processo in corso, sblocca il terminale}
+\bashcmd{}{help \ang{command}}{solitamente, stampa le istruzioni relative al comando}
+\bashcmd{}{\ang{command} help}{solitamente, stampa le istruzioni relative al comando}
+\bashcmd{}{kill \ang{pid\_number}}{termina il processo associato al numero \sc{pid} specificato}
+\bashcmd{}{\ang{executable} [-j\ang{number}]}{esegue il processo usando il numero di processori specificato. Di solito viene specificato \tw{-j8}}
+\bashcmd{}{make}{compila}
+\bashcmd{}{make clean}{rimuove i file di compilazione. Prima di eseguire una nuova compilazione e' consigliato rimuovere i file di compilazione gia' esistenti, che potrebbero essere corrotti}
+\bashcmd{}{ldd \ang{executable}}{elenca le librerie linkate dall'eseguibile specificato}
+\bashcmd{}{watch \ang{executable}}{esegue il processo specificato ogni due secondi. In altre parole, esegue il processo specificato e lo aggiorna continuamente. \sc{esempio:} \tw{\$ watch head output\_file.txt}}
+\bashcmd{}{runlim -s \ang{number} \ang{command}}{esegue il comando specificato limitando i megabyte di \sc{ram} che il processo puo' usare al numero specificato}
+
+\subsection{Scrittura}
+
+\customcmd{\$}{Ctrl+Shift+C}{copia}
+\customcmd{\$}{Ctrl+Shift+V}{incolla}
+\bashcmd{}{clear}{pulisce il terminale}
+
+\subsection{Grep}
+
+\bashcmd{}{grep -Rn ``\ang{term}'' \ang{folder}}{cerca il termine in tutti i file della cartella e delle sue sottocartelle, ricorsivamente}
+
+\subsection{Percorsi}
+
+\symboldesc{\tw{./}}{la cartella attuale}
+\symboldesc{\tw{\ang{object}}}{se non e' specificato un percorso, il percorso e' impostato di default nella cartella attuale}
+\symboldesc{\tw{../}}{la cartella superiore}
+\symboldesc{\tw{./\ang{folder}}}{la sottocartella specificata}
+\symboldesc{\tw{\textasciitilde}}{la cartella \sc{home} dell'utente attuale}
+\symboldesc{\tw{/}}{la cartella \sc{root}}
+\symboldesc{\tw{./[\ang{path}]}}{il percorso relativo}
+\symboldesc{\tw{/[\ang{path}]}}{il percorso assoluto}
+\symboldesc{\tw{/tmp}}{la cartella dei file temporanei}
+
+\subsection{Accesso da Remoto}
+
+\bashcmd{}{ssh \ang{machine}[.fbk.eu]}{accede al terminale macchina dall'interno del centro \sc{fbk} come utente attuale}
+\bashcmd{}{ssh -X \ang{machine}[.fbk.eu]}{accede al terminale e all'interfaccia grafica della macchina dall'interno del centro \sc{fbk} come utente attuale}
+\bashcmd{}{ssh \ang{user}\%\ang{machine}@gate.fbk.eu}{accede al terminale macchina fuori dal centro \sc{fbk}}
+\bashcmd{}{ssh -X \ang{user}\%\ang{machine}@gate.fbk.eu}{accede al terminale e all'interfaccia grafica della macchina fuori dal centro \sc{fbk}}
+\bashcmd{}{hostname}{stampa il nome della macchina attuale}
+\customcmd{\$}{Ctrl+D}{esce dalla macchina attuale}
+
+\subsection{Script eseguibili}
+
+\tw{\#!\ang{path}/\ang{program}}\par
+\vspace{2pt}
+\bbox \; da incollare all'inizio del file per specificare che il file deve essere eseguito dal programma specificato\par
+
+\skipline
+
+\bashcmd{}{chmod \ang{number}\ang{number}\ang{number} \ang{file}}{rende eseguibile il file di script \b{--} il significato dei numeri e' piu' in basso}
+\bashcmd{}{./\ang{file}}{esegue il file di script}
+\bashcmd{}{\ang{file.sh}}{esegue il file di script, se il file e' nella cartella \tw{/home/sbicego/script} o in un'altra cartella il cui path e' stato aggiunto a quelli ispezionati da \sc{bash}}
+
+\subsubsection{Permessi}
+
+\bbox \; I permessi di un file eseguibile sono definiti da tre cifre.
+
+\skipline
+
+\bbox \; La posizione delle cifre ha il seguente significato:
+\begin{itemize}
+\item[\b{(1)}] i permessi del proprietario
+\item[\b{(2)}] i permessi degli utenti interni alla classe del file
+\item[\b{(3)}] i permessi degli utenti esterni alla classe del file
+\end{itemize}
+
+\skipline
+
+\bbox \; Il valore delle cifre ha il seguente significato:
+\begin{itemize}
+\item[\b{(0)}] nessun permesso
+\item[\b{(1)}] permesso di esecuzione
+\item[\b{(2)}] permesso di scrittura
+\item[\b{(4)}] permesso di lettura
+\item[\b{(n)}] l'insieme dei permessi corrispondenti all'unica combinazione di cifre la cui somma coincide con la cifra \b{n}
+\end{itemize}
+
+\skipline
+
+\bbox \; Il permesso consigliato e' \tw{chmod 644 \ang{file}} per tutti i file e \tw{chmod 744 \ang{file}} per gli eseguibili.
+
+\subsection{Sintassi}
+
+\bashcmd{}{`\ang{command}`}{restituisce il valore di ritorno del comando}
+\bashcmd{}{\$\ang{variable}}{restituisce il valore della variabile}
+\bashcmd{}{\ang{variable}=\ang{value}}{assegna il valore alla variabile (ed eventualmente la dichiara)}
+\bashcmd{}{unset \ang{variable}}{elimina la variabile (solo nell'istanza attuale del terminale)}
+\bashcmd{}{\ang{instruction};\ang{instruction}}{esegue in sequenza le istruzioni}
+
+\subsection{Varie}
+
+\bashcmd{}{wall ``\ang{string}''}{stampa la stringa specificata in tutti i terminali della macchina corrente}
+
+\section{EMACS}
+
+\termdesc{Descrizione}{\sc{emacs} e' un editor di testo.}
+
+\subsection{Scrittura}
+
+\customcmd{}{Ctrl+X \to S \to Y}{salva}
+\customcmd{}{Alt+W}{copia}
+\customcmd{}{Ctrl+W}{taglia}
+\customcmd{}{Ctrl+Y}{incolla}
+\customcmd{}{Ctrl+X \to U}{annulla}
+\customcmd{}{Ctrl+X \to H}{seleziona tutto}
+\customcmd{}{Ctrl+S \to \ang{term}}{cerca le occorrenze del termine specificato dal punto in cui si trova il cursore in avanti \b{--} una volta specificato un termine, la ripetizione del comando \tw{Ctrl+S} scorre le occorrenze del termine}
+\customcmd{}{Ctrl+R \to \ang{term}}{cerca le occorrenze del termine specificato dal punto in cui si trova il cursore all'indietro \b{--} una volta specificato un termine, la ripetizione del comando \tw{Ctrl+R} scorre le occorrenze del termine}
+\customcmd{}{Alt+G+G \to \ang{number}}{salta alla riga specificata}
+\customcmd{}{AltGr+/}{scorre i termini candidati a completare la parola}
+\customcmd{}{Shift+F1}{commenta la regione selezionata}
+\customcmd{}{Shift+F2}{decommenta la regione selezionata}
+\customcmd{}{Ctrl+Alt+F}{assunto di avere il cursore posizionato su una parentesi aperta, sposta il cursore sulla parentesi chiusa associata}
+\customcmd{}{Ctrl+Alt+N}{assunto di avere il cursore posizionato su una parentesi aperta, sposta il cursore sulla parentesi chiusa associata \b{--} \tw{N} sta per \sc{next}}
+\customcmd{}{Ctrl+Alt+P}{assunto di avere il cursore posizionato su una parentesi chiusa, sposta il cursore sulla parentesi aperta associata \b{--} \tw{P} sta per \sc{previous}}
+\customcmd{}{Ctrl+X \to (}{apre la memorizzazione di una macro da tastiera}
+\customcmd{}{Ctrl+X \to )}{chiude la memorizzazione della macro da tastiera}
+\customcmd{}{Ctrl+X \to E}{applica la macro da tastiera memorizzata \b{--} successivamente per continaure ad applicare la macro basta premere solo \tw{E}}
+\customcmd{}{name-last-kbd-macro \to \ang{name}}{associa la macro da tastiera attualmente memorizzata al nome specificato \b{--} successivamente per applicare la macro basta scrivere il nome corrispondente nel menu' \sc{Meta-X}}
+\customcmd{}{insert-kbd-macro \to \ang{name}}{salva permanentemente la macro specificata nel file di inizializzazione \tw{.emacs} di \sc{emacs}}
+\customcmd{}{Ctrl+X+C}{chiude il file attualmente aperto}
+\customcmd{}{Ctrl+SpaceBar}{inserisce un \sc{mark point} nella posizione attuale del cursore. Questo comando equivale a posizionare il cursore nel punto specificato e tenere premuto il tasto \tw{Shift}. In altre parole, invece di tenere premuti \tw{Shift+Ctrl} basta premere una sola volta \tw{Ctrl+SpaceBar}}
+\customcmd{}{Alt+G \to N}{muove il cursore alla segnalazione successiva del flycheck}
+\customcmd{}{Alt+G \to P}{muove il cursore alla segnalazione precedente del flycheck}
+\customcmd{}{Ctrl+X Ctrl+F}{apre un nuovo file in un nuovo buffer nella finestra corrente}
+\customcmd{}{Ctrl+D \to \ang{number} \ang{command}}{esegue il numero di volte specificato il comando specificato. Il comando deve essere singolo, non sono ammesse sequenze di piu' di un comando}
+\customcmd{}{Ctrl+C \to >}{aggiunge una tabulazione ad ogni riga della regione selezionata}
+\customcmd{}{Ctrl+C \to <}{toglie una tabulazione ad ogni riga della regione selezionata}
+
+\subsubsection{Bookmark}
+
+\termdesc{Descrizione}{Un \sc{bookmark} e' un collegamento ad un percorso.}
+
+\customcmd{}{Ctrl+X \to r \to m \to \ang{name}}{salva il percorso attuale in un bookmark}
+\customcmd{}{Ctrl+X \to r \to b \to \ang{name}}{salta al percorso del bookmark specificato}
+
+\subsection{Finestre e Buffer}
+
+\termdesc{Spiegazione}{Una finestra di \sc{emacs} contiene vari \sc{buffer}. Una finestra puo' essere divisa in sottofinestre, e ciascuna sottofinestra contiene un \sc{buffer} della finestra. Le sottofinestre e i \sc{buffer} possono essere scorsi.}
+
+\customcmd{}{Ctrl+X \to 3}{divide la finestra attuale in due sottofinestre verticali}
+\customcmd{}{Ctrl+X \to 2}{divide la finestra attuale in due sottofinestre verticali}
+\customcmd{}{Ctrl+X \to 1}{rimuove tutte le sottofinestre a parte quella selezionata}
+\customcmd{}{Ctrl+X \to o}{scorre le sottofinestre della finestra attuale}
+\customcmd{}{Crtl+X \to \ang{\sc{left} \n{or} \sc{right}}}{scorre i buffer della finestra attuale}
+\customcmd{}{Crtl+X \to Ctrl+F \to \ang{file}}{aggiunge il file specificato ai buffer della finestra attuale}
+\customcmd{}{Crtl+X \to K}{termina il \sc{buffer} selezionato}
+\customcmd{}{Crtl+X \to B}{mostra tutti i buffer della finestra corrente e permette di selezionarli col mouse}
+\customcmd{}{Ctrl+X \to revert-buffer}{aggiorna il buffer all'ultima versione. Se per esempio il file associato al buffer viene modificato da cause esterne, il comando aggiorna il buffer alla versione attuale del file}
+
+\subsection{Terminale}
+
+\customcmd{}{Alt+X \to shell}{apre il terminale all'interno della scheda attuale}
+
+\subsection{Meta-X}
+
+\termdesc{Descrizione}{il menu' \sc{meta-x} (scritto \tw{M-x}) viene aperto cliccando \tw{Alt+X} e viene chiuso all'esecuzione dell'istruzione.}
+
+\customcmd{}{Alt+X \to query-replace \to \ang{term} \to \ang{new\_term} \to [y] [n] [Shift+1]}{sostituisce tutte le occorrenze del primo termine col secondo termine all'interno della regione selezionata. Se non e' selezionata nessuna regione, dal punto selezionato dal cursore in poi. Non sono ammessi caratteri speciali. \tw{y} esegue la sostituzione dell'attuale occorrenza, \tw{n} salta la sostituzione dell'attuale occorrenza, \tw{Shift+1} esegue la sostituzione in tutte le occorrenze rimanenti}
+\customcmd{}{Alt+X \to query-replace-regexp \to \ang{term} \to \ang{new\_term} \to [y] [n] [Shift+1]}{sostituisce tutte le occorrenze del primo termine col secondo termine all'interno della regione selezionata. Se non e' selezionata nessuna regione, dal punto selezionato dal cursore in poi. Sono ammessi caratteri speciali. \tw{y} esegue la sostituzione dell'attuale occorrenza, \tw{n} salta la sostituzione dell'attuale occorrenza, \tw{Shift+1} esegue la sostituzione in tutte le occorrenze rimanenti}
+\customcmd{}{ESC \to ESC \to ESC}{esce dal menu \sc{meta-x}}
+\customcmd{}{Alt+X \to cc}{toglie l'evidenziatore dalle parole}
+\customcmd{}{Alt+X \to highlight-regexp \to \ang{regexp} \to \ang{color}}{evidenzia col colore specificato tutte le occorrenze dell'espressione specificata}
+
+\subsubsection{Scorciatoie}
+
+\termdesc{Descrizione}{le scorciatoie del menu' \sc{meta-x} sono definite nel file \tw{.emacs}.}
+
+\subsubsection{Caratteri Speciali}
+
+\symboldesc{\tw{\^}}{inizio riga}
+\symboldesc{\tw{\$}}{fine riga}
+\symboldesc{\tw{.}}{qualsiasi carattere a parte \sc{inizio riga} \tw{\^} e \sc{fine riga} \tw{\$}}
+\symboldesc{\tw{a-z}}{una lettera minuscola}
+\symboldesc{\tw{A-Z}}{una lettera maiuscola}
+\symboldesc{\tw{0-9}}{una cifra}
+\symboldesc{\tw{[\ang{characters\_set}]}}{le parentesi quadre racchiudono un insieme di caratteri}
+\symboldesc{\tw{[\tw{\^}\ang{characters\_set}]}}{le parentesi quadrate con cappuccio racchiudono l'insieme dei caratteri esclusi}
+\symboldesc{\tw{*}}{almeno 0 volte il carattere immediatamente precedente}
+\symboldesc{\tw{+}}{almeno 1 volta il carattere immediatamente precedente}
+\symboldesc{\tw{\bs|}}{disgiunzione logica}
+\symboldesc{\tw{\bs(\ang{characters\_set}\bs)}}{etichetta il contenuto delle parentesi con un numero}
+\symboldesc{\tw{\bs\ang{number}}}{stampa il contenuto etichettato col numero specificato}
+\symboldesc{\tw{\to Ctrl+Q \to Ctrl+J}}{a capo}
+
+\subsection{Lisp}
+
+\termdesc{Spiegazione}{\sc{emacs} viene personalizzato attraverso il linguaggio \sc{lisp}. Elenchiamo alcuni comandi legati al linguaggio \sc{lisp}.}
+
+\customcmd{}{Alt+X \to list-colors-display}{elenca tutti i colori che si possono usare per colorare i testi di \sc{emacs}}
+
+\subsection{Modi}
+
+\termdesc{Definizione}{Un \sc{modo} e' un insieme di funzionalita' che vengono applicate a uno o piu' buffer di \sc{emacs}.}
+
+\termdesc{Modo maggiore}{Ad un buffer di \sc{emacs} puo' essere associato al piu' un solo \sc{modo maggiore}. Per quello che ci riguarda il modo maggiore consiste nella colorazione e nell'indentazione del testo di un buffer.}
+
+\termdesc{Modo minore}{Ad un \sc{modo maggiore} possono essere associati piu' \sc{modi minori}. Per quello che ci riguarda il modo minore consiste nella segnalazione degli errori sintattici del testo di un buffer.}
+
+\subsubsection{Modo maggiore: colorazione e indentazione}
+
+Solitamente il modo maggiore viene definito in un file con estensione \tw{.el} che va posizionato nella cartella \sc{modi} di \sc{emacs}. All'interno del file di inizializzazione \tw{.emacs} di \sc{emacs} viene associato il modo maggiore al file \tw{.el} e si specificano quali tipi di file devono essere associati al modo maggiore.
+
+\subsubsection{Modo minore: segnalazione degli errori}
+
+Elenchiamo i passi per definire il modo minore che implementa la segnalazione degli errori.
+
+\begin{itemize}
+\item[\bbox] Si implementa un eseguibile, chiamiamolo \tw{parse.py}, che prende in input il nome di un file di testo (quello che successivamente sara' il nome del buffer di \sc{emacs}) e restituisce (stampato sullo standard output) un elenco di stringhe che rappresentano gli errori presenti nel file di testo.
+\item[] Solitamente si ha gia' a disposizione un eseguibile, chiamiamolo \tw{exe}, di cui ci interessa vedere segnalata la sintassi direttamente sui file sorgenti che verranno dati in input a tale eseguibile. L'eseguibile \tw{parse.py} quindi consiste nell'applicazione di \tw{exe} al file sorgente e alla stampa su standard output degli errori segnalati dal parser o dai checker gia' implementati in \tw{exe}.
+\item[] Il formato delle stringhe in output dipende da che tipo di \sc{flychecker} si vuole usare (\i{vedi punto successivo}).
+\item[\bbox] Nel file di inizializzazione \tw{.emacs} di \sc{emacs} si definisce un modo minore di tipo \sc{flychecker} e lo si associa all'eseguibile \tw{parse.py}.
+\item[] Sempre in \tw{.emacs} si associa il modo minore \sc{flychecker} al modo maggiore o ai tipi di file desiderati.
+\end{itemize}
+
+Quello che succede all'apertura di un buffer di \sc{emacs} associato al modo minore corrispondente alla segnalazione degli errori e' questo:
+
+\begin{itemize}
+\item[\bbox] \sc{emacs} apre il buffer.
+\item[\bbox] A ciclo continuo vengono eseguite le seguenti operazioni.
+\begin{itemize}
+\item[\bball] Il testo del buffer viene ricopiato in un altro file temporaneo.
+\item[\bball] Il file temporaneo viene dato in input a \tw{parse.py}.
+\item[\bball] Il file temporaneo viene dato in input a \tw{exe}.
+\item[\bball] \tw{exe} stampa i messaggi d'errore nel proprio standard error.
+\item[\bball] \tw{parse.py} legge i messaggi d'errore, eventualmente li manipola, e li stampa nel proprio standard output.
+\item[\bball] \sc{emacs} riceve questi messaggi d'errore, li parsa e li segnala nel buffer.
+\end{itemize}
+\end{itemize}
+\section{C}
+
+\subsection{CMake}
+
+\termdesc{Descrizione}{\sc{CMake} definisce un progetto \sc{C} e genera le istruzioni per la sua compilazione.}
+
+\enumtitle{Comandi}
+
+\bashcmd{project\too build}{cmake ..}{crea gli script \sc{CMake} che guidano la compilazione}
+\customcmd{project\too build\too CMakeChache.txt}{CMAKE\_BUILD\_TYPE:STRING=Debug}{abilita il debugger}
+\customcmd{project\too build\too CMakeChache.txt}{CMAKE\_BUILD\_TYPE:STRING=Release}{ottimizza il tempo d'esecuzione}
+\customcmd{project\too build\too CMakeChache.txt}{CMAKE\_BUILD\_TYPE:STRING=MinSizRel}{ottimizza le dimensioni dell'eseguibile}
+\bashcmd{project\too build}{make}{compila il progetto}
+
+\enumtitle{Requisiti}
+
+\enumitem{il programma \sc{CMake}, di versione 2.8 o superiore}
+\enumitem{il compilatore \sc{gcc}}
+
+\subsection{Progetto}
+
+\termdesc{Descrizione}{un progetto \sc{c} e' definito dalle seguenti cartelle:}
+
+\enumitem{\tw{project}}
+\enumitem{\tw{project\too src}}
+\enumitem{\tw{project\too build}}
+\enumitem{\tw{project\too docs}}
+\enumitem{\tw{project\too examples}}
+
+\skipline
+
+e dai seguenti file:
+
+\skipline
+
+\enumitem{\tw{project\too CMakeList.txt}}
+\enumitem{\tw{project\too src\too CMakeList.txt}}
+\enumitem{\tw{project\too src\too main.c}}
+\enumitem{\tw{project\too src\too library.c}}
+\enumitem{\tw{project\too src\too library.h}}
+
+\skipline
+
+\subsubsection{Allegati}
+
+\enumitem{la cartella \tw{project} contiene il prototipo di un progetto \sc{c}.}
+
+\subsection{Notazione}
+
+\b{Variabili}: lettere minuscole e underscore\par
+\b{Funzioni}: lettere minuscole e underscore\par
+\b{Domini}: lettere iniziali maiuscole, senza underscore
+
+\subsection{Valgrind}
+
+\termdesc{Descrizione}{\sc{Valgrid} e' un debugger di progetti \sc{c} che esegue in modo interattivo l'eseguibile. In particolare, individua le istruzioni in cui si accede ad aree di memoria non allocata e verifica se ogni \tw{malloc} viene corrisposta alla relativa \tw{free}.}
+
+\enumtitle{Comandi}
+
+\customcmd{project\too src\too \ang{file.c}}{Alt+X \to gud-gdb}{abilita l'esecuzione controllata dell'eseguibile generato dal file}
+\bashcmd{project\too build}{valgrind --leak-check=full ./\ang{executable}}{avvia l'esecuzione controllata dell'eseguibile}
+
+\enumtitle{Requisiti}
+
+\enumitem{il programma \sc{gdb}, che solitamente e' integrato in \sc{gcc}}
+
+\subsection{GTags}
+
+\termdesc{Descrizione}{\sc{GTags} genera la genealogia della variabili e delle funzioni di un progetto \sc{c} e individua il punto di codice dove e' stato definito ciascun oggetto.}
+
+\enumtitle{Comandi}
+
+\bashcmd{project}{gtags}{genera la genealogia del progetto dalla cartella corrente in giu' \b{--} ha senso chiamare questo comando dalla cartella superiore del progetto}
+\bashcmd{}{global \ang{object\_name}}{stampa il nome del file dove e' definito l'oggetto specificato \b{--} questo comando e' sconsigliato perche' scomodo}
+\customcmd{\ang{file.c}}{Alt+X \to xgtags-mode}{abilita la modalita' \sc{GTags}}
+\customcmd{\ang{file.c}}{Alt+. \to \ang{term}}{salta al punto in cui viene definito il termine \b{--} il termine indicato di default e' quello selezionato dal cursore del mouse; per selezionare un altro termine scriverlo nel menu' \tw{M-x}; se esistono piu' definizioni del termine, il salto avviene su quella correlata al codice da cui parte il salto; se si vuole saltare ad un'altra delle definizioni, cliccare su quella desiderata e premere \sc{invio}}
+\customcmd{\ang{file.c}}{Alt+,}{torna al punto precedente all'ultimo salto}
+
+\subsection{GDB}
+
+\termdesc{Descrizione}{\sc{gdb} associa il file sorgente di un eseguibile \sc{c} alla sua esecuzione. L'esecuzione viene svolta in modo interattivo.}
+
+\termdesc{Avvio}{le seguenti istruzioni sono valide se il progetto \sc{c} e' definito con \sc{CMake}.}
+
+\enumitem{Eseguire con la \sc{shell} il comando \tw{project/build \$ cmake ..}}
+\enumitem{Nel file \tw{project/build/CMakeCache.txt} aggiungere il termine \tw{Debug} in modo che una delle righe sia\par \quad \, \tw{CMAKE\_BUILD\_TYPE:STRING=Debug}}
+\enumitem{Eseguire con la \sc{shell} il comando \tw{project/build \$ make}}
+\enumitem{Aprire \sc{emacs}}
+\enumitem{Aprire il menu \tw{M-x} ed eseguire il comando \tw{gdb [-i=mi \ang{path}\ang{executable}]} \b{--} facoltativamente, si puo' specificare gia' ora l'eseguibile}
+\enumitem{Nel menu \tw{(gdb)} eseguire il comando \tw{file [\ang{path}]\ang{executable}} \b{--} il comando va eseguito solo se l'eseguibile non e' gia' stato specificato}
+\enumitem{Prima di eseguire il programma col comando \tw{run} aggiungere almeno un \sc{breakpoint}, altrimenti il programma termina senza dare la possibilita' di fare l'analisi interattiva.}
+
+\skipline
+
+\enumtitle{Comandi}
+
+\symboldesc{(gdb) Ctrl+\sc{up}}{riscrive nel menu l'ultimo comando precedentemente eseguito}
+\symboldesc{(gdb) \sc{enter}}{esegue l'ultimo comando precedentemente eseguito}
+\symboldesc{(gdb) \tw{run \ang{command\_line\_arguments}}}{esegue il file eseguibile con gli argomenti da terminale specificati}
+\symboldesc{(gdb) \tw{kill}}{interrompe l'esecuzione}
+\symboldesc{(gdb) \tw{quit}}{esce da \sc{gdb}}
+\symboldesc{(gdb) \tw{break \ang{file.c}:\ang{line\_number}}}{inserisce un \sc{breakpoint} alla prima occorrenza dell'esecuzione del punto del codice sorgente specificato}
+\symboldesc{(gdb) \tw{break \ang{file.c}:\ang{function}}}{inserisce un \sc{breakpoint} alla prima chiamata della funzione specificata}
+\customcmd{}{Ctrl+X \to \sc{spacebar}}{inserisce un \sc{breakpoint} nella riga selezionata}
+\symboldesc{(gdb) \tw{continue}}{continua l'esecuzione fino al prossimo \sc{breakpoint} o al prossimo punto di interazione con l'utente}
+\symboldesc{(gdb) \tw{clear}}{rimuove il \sc{breakpoint} della riga selezionata}
+\symboldesc{(gdb) \tw{delete}}{rimuove tutti i \sc{breakpoint}}
+\symboldesc{(gdb) \tw{step [\ang{number}]}}{esegue l'istruzione successiva, o il numero di istruzioni successive se specificato. L'esecuzione interattiva non entra nel corpo delle funzioni chiamate: le funzioni chiamate vengono eseguite completamente e l'esecuzione si ferma alla riga successiva a quella della funzione chiamata}
+\symboldesc{(gdb) \tw{next [\ang{number}]}}{esegue l'istruzione successiva, o il numero di istruzioni successive se specificato. L'esecuzione entra nel corpo delle funzioni chiamate}
+\symboldesc{(gdb) \tw{until [\ang{file.c/line\_number} \n{or} \ang{file.c/function}]}}{esegue il programma fino alla prima occorrenza dell'esecuzione dell'oggetto speficicato}
+\symboldesc{(gdb) \tw{where}}{stampa il numero di riga e la funzione in esecuzione dello stato attuale}
+\symboldesc{(gdb) \tw{jump \ang{line\_number}}}{esegue il programma fino alla riga specificata all'interno del file attuale}
+\symboldesc{(gdb) \tw{backtrace}}{stampa lo stack nello stato attuale}
+\symboldesc{(gdb) \tw{up [\ang{number}]}}{sale di una posizione nello stack, o del numero di posizioni specificato}
+\symboldesc{(gdb) \tw{down [\ang{number}]}}{scende di una posizione nello stack, o del numero di posizioni specificato}
+\symboldesc{(gdb) \tw{print \ang{variable}}}{stampa il valore della variabile specificata nello stato attuale}
+\symboldesc{(gdb) \tw{delete breakpoints}}{cancella i breakpoint attuali}
+
+\subsubsection{Scorciatoie}
+
+\symboldesc{(gdb) \tw{bt}}{stampa lo stack}
+\symboldesc{(gdb) \tw{up}}{sale nello stack}
+\symboldesc{(gdb) \tw{down}}{scende nello stack}
+\symboldesc{(gdb) \tw{n}}{esegue l'istruzione successiva. Se viene chiamata una funzione, l'esecuzione entra nel corpo della funzione}
+\symboldesc{(gdb) \tw{s}}{esegue l'istruzione successiva. Se viene chiamata una funzione, l'intera funzione viene eseguita}
+\symboldesc{(gdb) \tw{c}}{continua l'esecuzione fino al prossimo breakpoint o fino alla prossima interruzione del'esecuzione}
+\symboldesc{(gdb) \tw{r}}{avvia l'esecuzione del programma}
+\symboldesc{(gdb) \tw{d breakpoints}}{cancella i breakpoint attuali}
+
+\section{CPP}
+
+\termdesc{Descrizione}{il preprocessore \sc{cpp} definisce che parti di codice sorgente devono essere compilate e sposta pezzi di codice sorgente secondo le istruzioni che gli vengono fornite.}
+
+\enumtitle{Istruzioni}
+
+\symboldesc{\tw{\#include ``[\ang{path}/]\ang{file}''}}{incolla il contenuto del file specificato nel file attuale, al posto dell'istruzione \tw{\#include} stessa}
+\symboldesc{\tw{\#define \ang{term} \ang{value}}}{ogni occorrenza del termine viene sostituita dal valore}
+\symboldesc{\tw{\#define \ang{term}}}{il \sc{cpp} informa se stesso che il termine e' definito}
+\symboldesc{\tw{\#ifdef \ang{term}}}{il codice successivo alla direttiva viene compilato solo se il termine e' gia' stato definito}
+\symboldesc{\tw{\#ifndef \ang{term}}}{il codice successivo alla direttiva viene compilato solo se il termine non e' gia' stato definito}
+\symboldesc{\tw{\#if \ang{boolean\_term}}}{il codice successivo alla direttiva viene compilato solo se il termine booleano e' vero}
+\symboldesc{\tw{\#else}}{il codice successivo alla direttiva viene compilato solo se la condizione dell'\tw{\#ifdef}, dell'\tw{\#ifndef} o dell'\tw{\#if} immediatamente precedente non e' soddisfatta}
+\symboldesc{\tw{\#endif}}{chiude il contesto aperto dall'\tw{\#ifdef}, dall'\tw{\#ifndef} o dall'\tw{\#if} immediatamente precedente}
+
+\enumtitle{Comandi}
+
+\bashcmd{}{cpp \ang{input\_file} \ang{output\_file}}{esegue le direttive del file di input e stampa il risultato nel file di output}
+
+\enumtitle{Requisiti}
+
+\enumitem{il preprocessore \sc{cpp}, solitamente integrato in \sc{gcc}}
+
+\section{Latex}
+
+\termdesc{Descrizione}{\sc{latex} e' un compilatore che produce file di testo e file grafici.}
+
+\subsection{Compilazione}
+
+\bashcmd{}{latex \ang{file.tex}}{compila il file \tw{.tex} in \tw{.dvi}}
+\bashcmd{}{pdflatex \ang{file.tex}}{compila il file \tw{.tex} in \tw{.pdf}}
+\bashcmd{}{latexmk -pdf -pvc \ang{file.tex}}{compila il file \tw{.tex} in \tw{.pdf} automaticamente ad ogni salvataggio}
+
+\subsection{Documento}
+
+\tw{\bs documentclass[a4paper,12pt,fleqn,leqno,twoside,openany]\{article\}}\par
+\vspace{2pt}
+\bbox \; il documento di tipo \sc{articolo}\par
+
+\skipline
+
+\tw{\bs documentclass[final,pdftex,a4paper,12pt,leqno]\{beamer\}}\par
+\vspace{2pt}
+\bbox \; il documento di tipo \sc{slide}\par
+
+\skipline
+
+\tw{\bs mode$<$presentation$>$\{\bs usetheme\{Madrid\}\}}\par
+\tw{\bs beamertemplatenavigationsymbolsempty}\par
+\vspace{2pt}
+\bbox \; lo stile del documento di tipo \sc{slide}\par
+
+\subsection{Librerie}
+
+\tw{\bs usepackage[utf8]\{inputenc\}}\par
+\tw{\bs usepackage[english]\{babel\}}\par
+\tw{\bs usepackage\{latexsym\}}\par
+\tw{\bs usepackage\{amsmath\}}\par
+\tw{\bs usepackage\{amssymb\}}\par
+\tw{\bs usepackage\{amsfonts\}}\par
+\tw{\bs usepackage\{mathrsfs\}}\par
+\tw{\bs usepackage\{makeidx\}}\par
+\tw{\bs usepackage\{amsmath\}}\par
+\tw{\bs usepackage\{graphicx\}}\par
+\tw{\bs usepackage\{makeidx\}}\par
+\tw{\bs usepackage\{booktabs\}}\par
+\tw{\bs usepackage\{geometry\}}\par
+\tw{\bs usepackage\{url\}}\par
+\tw{\bs usepackage\{xspace\}}\par
+\tw{\bs usepackage\{xcolor\}}\par
+\tw{\bs usepackage\{verbatim\}}\par
+\tw{\bs usepackage\{listings\}}\par
+\tw{\bs usepackage\{color\}}\par
+\vspace{2pt}
+\bbox \; le librerie\par
+
+\subsection{Comandi Personalizzati}
+
+\tw{\bs newcommand\{\bs n\}\{\bs textnormal\} \% normal}\par
+\tw{\bs renewcommand\{\bs i\}\{\bs textit\} \% italic}\par
+\tw{\bs renewcommand\{\bs b\}\{\bs textbf\} \% bold}\par
+\tw{\bs newcommand\{\bs tw\}\{\bs texttt\} \% typewriter}\par
+\tw{\bs renewcommand\{\bs sc\}\{\bs textsc\} \% small caps}\par
+\tw{\bs renewcommand\{\bs cal\}[1]\{\$\bs mathcal\{\#1\}\$\} \% calligraphic}\par
+\tw{\bs newcommand\{\bs mat\}[1]\{\$\bs mathcbb\{\#1\}\$\} \% mathematical}\par
+\tw{\bs newcommand\{\bs pn\}[1]\{\bs n\{\#1\}\;\} \% proper name}\par
+\vspace{2pt}
+\bbox \; gli stili di testo\par
+
+\skipline
+
+\tw{\bs newcommand\{\bs bbox\}\{\{\bs scriptsize \$\bs blacksquare\$\}\} \% black box}\par
+\tw{\bs newcommand\{\bs bball\}\{\{\bs scriptsize \$\bs bullet\$\}\} \% black circle}\par
+\tw{\bs newcommand\{\bs skipline\}\{\bs vspace\{\bs baselineskip\}\} \% skip line}\par
+\vspace{2pt}
+\bbox \; i comandi personalizzati\par
+
+\skipline
+
+\tw{\bs geometry\{left=20mm, right=20mm, top=15mm, bottom=15mm\}}\par
+\vspace{2pt}
+\bbox \; i bordi della pagina\par
+
+\subsection{Comandi Standard}
+
+\tw{\bs . \bs , \bs : \bs ; \bs quad \bs qquad}\par
+\tw{\bs hspace\{\ang{number}[pt][cm]\}}\par
+\vspace{2pt}
+\bbox \; le spaziature orizzontali\par
+
+\skipline
+
+\tw{\bs smallskip \bs medskip \bs bigskip}\par
+\tw{\bs baselineskip}\par
+\tw{\bs vspace\{\ang{number}[pt][cm]\}}\par
+\vspace{2pt}
+\bbox \; le spaziature verticali\par
+
+\skipline
+
+\tw{\bs bigr \bs Bigr \bs biggr \bs Biggr}\par
+\tw{\bs bigl \bs Bigl \bs biggl \bs Biggl}\par
+\vspace{2pt}
+\bbox \; le parentesi\par
+
+\skipline
+
+\tw{\bs displaystyle}\par
+\vspace{2pt}
+\bbox \; il formato delle formule\par
+
+\skipline
+
+\tw{\bs cite\{\ang{term}\}}\par
+\tw{\bs cite[\ang{name}]\{\ang{term}\}}\par
+\vspace{2pt}
+\bbox \; le citazioni\par
+
+\skipline
+
+\tw{-}\par
+\tw{--}\par
+\tw{---}\par
+\vspace{2pt}
+\bbox \; i trattini\par
+
+\subsection{Indentazione}
+
+\tw{\bs setlength\{\bs parindent\}\{0pt\}}\par
+\vspace{2pt}
+\bbox \; l'indentazione\par
+
+\skipline
+
+\tw{\bs addtolength\{\bs itemindent\}\{1cm\}}\par
+\vspace{2pt}
+\bbox \; l'indentazione all'interno dell'ambiente \tw{itemize}\par
+
+\subsection{Codice}
+
+\tw{\bs definecolor\{white\}\{rgb\}\{1,1,1\}}\par
+\tw{\bs definecolor\{yellow\}\{rgb\}\{1,0.8,0\}}\par
+\tw{\bs definecolor\{light\_blue\}\{rgb}{0.12,0.56,1\}}\par
+\tw{\bs definecolor\{orange\}\{rgb\}\{1,0.6,0\}}\par
+\tw{\bs definecolor\{red\}\{rgb\}\{0.78,0.03,0.08\}}\par
+\tw{\bs definecolor\{black\}\{rgb\}\{0,0,0\}}\par
+\tw{\bs definecolor\{green\}\{rgb\}\{0.01,0.75,0.24\}}\par
+\vspace{2pt}
+\bbox \; i colori dell'ambiente \tw{lstlisting}\par
+
+\skipline
+
+\tw{\bs lstset\{}\par
+\tw{language=[ANSI]C,}\par
+\tw{backgroundcolor=\bs color\{bianco\},}\par
+\tw{basicstyle=\bs color\{nero\}\bs normalfont\bs small,}\par
+\tw{identifierstyle=\bs color\{nero\},}\par
+\tw{keywords=[1]\{int\},}\par
+\tw{keywordstyle=[1]\bs color\{verde\}\bs textbf,}\par
+\tw{keywords=[2]\{if,then,else,for,while,do,return\},}\par
+\tw{keywordstyle=[2]\bs color\{azzurro\}\bs textbf,}\par
+\tw{commentstyle=\bs color\{rosso\},}\par
+\tw{stringstyle=\bs color\{rosso\},}\par
+\tw{xleftmargin=-1.8cm,}\par
+\tw{xrightmargin=-1.8cm,}\par
+\tw{rulecolor=\bs color\{nero\},}\par
+\tw{frame=none,}\par
+\tw{breaklines=true,}\par
+\tw{captionpos=b,}\par
+\tw{keepspaces=true,}\par
+\tw{showstringspaces=false,}\par
+\tw{tabsize=4,}\par
+\tw{extendedchars=true}\par
+\tw{\}}\par
+\vspace{2pt}
+\bbox \; lo stile dell'ambiente \tw{lstlisting} per il codice \sc{c}\par
+
+\subsection{Dati}
+
+\tw{\bs chapter\{\ang{name}\}}\par
+\tw{\bs section\{\ang{name}\}}\par
+\tw{\bs subsection\{\ang{name}\}}\par
+\tw{\bs subsubsection\{\ang{name}\}}\par
+\tw{\bs tableofcontents}\par
+\vspace{2pt}
+\bbox \; l'indice\par
+
+\skipline
+
+\tw{\bs addcontentsline\{toc\}\{section\}\{Bibliography\}}\par
+\tw{\bs begin\{thebibliography\}\{\}}\par
+\tw{\bs bibitem\{\ang{reference}\} \ang{authors}: \bs s\{\ang{title}\}. \ang{editer}, \ang{date}.}\par
+\tw{\bs end\{thebibliography\}}\par
+\vspace{2pt}
+\bbox \; la bibliografia\par
+
+\skipline
+
+\tw{\bs title[\ang{short\_title}]\{\ang{title}\}}\par
+\tw{\bs author[\ang{short\_authors}]\{\ang{authors}\}}\par
+\tw{\bs institute[\ang{short\_institute}]\{\ang{institute}\}}\par
+\tw{\bs date\{\ang{date}\}}\par
+\tw{\bs titlepage}\par
+\vspace{2pt}
+\bbox \; la titolazione\par
+
+\subsection{Allegati}
+
+\enumitem{la cartella \tw{latex\_docs} contiene i prototipi di alcuni documenti \sc{latex}.}
+
+\section{nuXmv}
+
+\subsection{Lettura}
+
+\bashcmd{}{nuXmv -int}{avvia nuXmv in modalita' interattiva}
+\bashcmd{nuXmv}{set pp\_list cpp}{abilita l'uso del preprocessore \sc{cpp}}
+\bashcmd{}{nuXmv -int -pre cpp}{avvia nuXmv col preprocessore \sc{cpp} abilitato}
+\bashcmd{nuXmv}{read\_model -i \ang{file.smv}}{legge il modello contenuto nel file}
+\bashcmd{nuXmv}{reset}{chiude il modello attualmente letto}
+
+\subsection{Compilazione}
+
+\subsubsection{Modelli Finiti}
+
+\bashcmd{nuXmv}{go}{compila il modello}
+\bashcmd{nuXmv}{check\_ltlspec [-k $<$\ang{number}$>$]}{verifica le specifiche di tipo \sc{ltlspec}, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{check\_ltlspec -p ``\ang{formula}'' [-k $<$\ang{number}$>$]}{verifica la specifica di tipo \sc{ltlspec} indicata, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{check\_invar [-k $<$\ang{number}$>$]}{verifica le specifiche di tipo \sc{invarspec}, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{check\_invar -p ``\ang{formula}'' [-k $<$\ang{number}$>$]}{verifica la specifica di tipo \sc{invarspec} indicata, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{check\_ctlspec [-k $<$\ang{number}$>$]}{verifica le specifiche di tipo \sc{ctlspec}, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{check\_ctlspec -p ``\ang{formula}'' [-k $<$\ang{number}$>$]}{verifica la specifica di tipo \sc{ctlspec} indicata, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{pick\_state -i}{fa scegliere lo stato iniziale}
+\bashcmd{nuXmv}{simulate -i}{avvia la simulazione interattiva del modello}
+
+\subsubsection{Modelli Infiniti}
+
+\bashcmd{nuXmv}{go\_msat}{compila il modello}
+\bashcmd{nuXmv}{msat\_check\_ltlspec\_bmc [-k $<$\ang{number}$>$]}{verifica le specifiche di tipo \sc{ltlspec}, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{msat\_check\_ltlspec\_bmc -p ``\ang{formula}'' [-k $<$\ang{number}$>$]}{verifica la specifica di tipo \sc{ltlspec} indicata, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{msat\_check\_invar\_bmc [-k $<$\ang{number}$>$]}{verifica le specifiche di tipo \sc{invarspec}, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{msat\_check\_invar\_bmc -p ``\ang{formula}'' [-k $<$\ang{number}$>$]}{verifica la specifica di tipo \sc{invarspec} indicata, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{msat\_check\_ctlspec\_bmc [-k $<$\ang{number}$>$]}{verifica le specifiche di tipo \sc{ctlspec}, limitando il numero di stati controllati al valore specificato}
+\bashcmd{nuXmv}{msat\_check\_ctlspec\_bmc -p ``\ang{formula}'' [-k $<$\ang{number}$>$]}{verifica la specifica di tipo \sc{ctlspec} indicata, limitando il numero di stati controllati al valore specificato}
+
+\subsection{Analisi}
+
+\bashcmd{nuXmv}{write\_flat\_model -o \ang{file.smv}}{stampa sul file specificato l'appiattimento del modello attualmente in lettura}
+
+\subsection{Scorciatoie}
+\bashcmd{nuXmv}{-source \ang{nuXmv\_shell\_file}}{avvia \sc{nuXmv} ed esegue le istruzioni da shell interattiva contenute nel file specificato}
+
+\section{Repository}
+
+\termdesc{Descrizione}{una repository e' un server che permette il salvataggio, l'accesso e la modifica di file e cartelle e che conserva la storia delle modifiche che i file e le cartelle hanno subito. Una repository consiste in un insieme di dati sul server e in una loro copia locale presente in una cartella della macchina. Ciascun dato ha due versioni: una locale e una sul server. L'utente modifica i dati locali e poi impone ai dati sul server di aggiornarsi alle loro versioni locali, oppure impone ai dati locali di aggiornarsi alle loro versioni sul server.}
+
+\subsection{SVN}
+
+\bashcmd{\ang{folder}}{svn co \ang{web\_address}}{la repository dell'indirizzo specificato viene clonata nella cartella attuale della macchina}
+\bashcmd{\ang{svn\_folder}}{svn status}{stampa le differenze tra la repository nel server e il suo clone locale. \tw{?} vuol dire che il file e' presente nella cartella ma non nel server, \tw{A} vuol dire che il file e' presente nella cartella e non nel server ma che e' stato regolarmente aggiunto al server, \tw{M} vuol dire che il file e' presente sia nella cartella che nel server ma che le due versioni sono diverse, \tw{D} vuol dire che il file e' stato regolarmente rimosso sia dalla cartella sia dal server, \tw{!} vuol dire che il file e' presente nel server ma non nella cartella}
+\bashcmd{\ang{svn\_folder}}{svn add \ang{file}}{informa il programma di voler copiare il file dalla cartella e di volerlo incollare nel server -- e' necessario che una versione del file non sia gia' presente nel server}
+\bashcmd{\ang{svn\_folder}}{svn up \ang{file}}{informa il programma di voler copiare il file dalla cartella e di volerlo incollare nel server -- e' necessario che una versione del file sia gia' presente nel server}
+\bashcmd{\ang{svn\_folder}}{svn rm \ang{file}}{rimuove il file dalla cartella e informa il programma di voler rimuovere il file dal server}
+\bashcmd{\ang{svn\_folder}}{svn commit}{modifica i file del server in base alle istruzioni specificate in precedenza}
+\bashcmd{\ang{svn\_folder}}{svn revert \ang{file}}{copia il file dal server e lo incolla nella cartella, sostituendo l'eventuale versione locale}
+\bashcmd{\ang{svn\_folder}}{svn up}{informa il programma di voler copiare i file dal server e di volerli incollare nella cartella, conservando le differenze delle versioni locali che non sono in contraddizione con le versioni nel server}
+\bashcmd{\ang{svn\_folder}}{svn log [-v]}{stampa l'elenco dei \sc{commit} in ordine cronologico, coi rispettivi codici. Se l'opzione \tw{-v} e' specificata vengono stampate le modifiche effettuate su ciascun file per ogni \sc{commit}}
+\bashcmd{\ang{svn\_folder}}{svn checkout -r \ang{commit\_code}}{copia la versione sul server associata al \sc{commit} indicato nella cartella locale}
+\bashcmd{\ang{svn\_folder}}{svn rm --keep-local \ang{file}}{retrocede il file specificato da file addato a file non addato, senza pero' cancellarlo dal locale}
+
+\subsubsection{Caratteri Speciali}
+
+\symboldesc{\tw{*}}{tutte le stringhe}
+\symboldesc{\tw{[\ang{string}]*[\ang{string}]}}{tutte le stringhe che cominciano e terminano con le successioni di caratteri indicate}
+
+\subsection{GitLab}
+
+\termdesc{Descrizione}{\sc{GitLab} permette di creare piu' rami di storia e di unire due rami mantenendo i dati di entrambi, a meno che non siano contraddittori. Permette anche di creare rami di storia locali.}
+
+\bashcmd{\ang{folder}}{git clone \ang{web\_address} [``\ang{alias\_name}'']}{la repository dell'indirizzo specificato viene clonata nella cartella attuale della macchina, eventualmente rinominando la cartella col nome specificato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git status}{stampa le differenze tra il ramo selezionato locale e la cartella}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git diff [file\_name]}{stampa su terminale le differenze, riga per riga, tra la versione del file nella cartella e la versione del file sul server (se il file non e' specificato, stampa le differenze tra tutti i file che contengono differenze)}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git add \ang{file}}{informa il programma di voler copiare il file dalla cartella e di volerlo incollare nel ramo selezionato locale -- e' necessario che una versione del file non sia gia' presente nel ramo selezionato del server}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git up \ang{file}}{informa il programma di voler copiare il file dalla cartella e di volerlo incollare nel ramo selezionato locale -- e' necessario che una versione del file sia gia' presente nel ramo selezionato locale}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git rm \ang{file}}{rimuove il file dalla cartella e informa il programma di voler rimuovere il file dal ramo selezionato locale}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git commit}{modifica i file del ramo selezionato locale in base alle istruzioni specificate in precedenza}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git push origin \ang{branch}}{unisce il ramo locale selezionato al rispettivo ramo sul server, conservando i dati di entrambi, a meno che non siano contraddittori, e in tal caso chiede di specificare manualmente l'unione dei punti critici}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git push}{unisce tutti i rami locali ai rispettivi rami sul server, conservando i dati di entrambi, a meno che non siano contraddittori, e in tal caso chiede di specificare manualmente l'unione dei punti critici}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git pull}{copia i file dal ramo selezionato sul server e li incolla nella cartella}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git checkout \ang{branch}}{passa al ramo indicato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git checkout -b \ang{branch}}{crea a partire dal punto del ramo selezionato un nuovo ramo locale che viene chiamato col nome indicato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git push origin \ang{branch}}{promuove il ramo locale selezionato a ramo sul server}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git branch}{stampa i rami locali}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git branch -r}{stampa i rami remoti}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git branch -a}{stampa tutti i rami, sia locali sia remoti}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git reset --hard \ang{code}}{torna al punto di ramo associato al commit di codice indicato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git branch -D \ang{branch}}{il ramo indicato rimane sul server ma viene cancellato dal locale}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git clean -f -d}{elimina dal ramo locale i file, gli \tw{add} e i \tw{commit} che non sono stati pushati nel ramo sul server}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git reset --hard origin/master}{elimina dal ramo locale i file, gli \tw{add} e i \tw{commit} che non sono stati pushati nel ramo \tw{master}}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git fetch \to git merge origin/master}{copia i file del ramo \tw{master} sul server e li incolla nel ramo locale selezionato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git format-patch \ang{branch} --stdout \to \ang{name}.patch}{genera un file patch con le differenze tra il ramo attuale e il ramo indicato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{gitk}{apre l'interfaccia grafica -- viene usato solo per la lettura}
+
+\subsubsection{File}
+
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git checkout -- \ang{folder \n{or} file}}{l'oggetto specificato viene ripristinato localmente alla sua versione nel server}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git reset HEAD \ang{file}}{retrocede un file addato ad un file non addato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git log [--author=\ang{name}] [-p \ang{path}]}{stampa la storia dei commit dell'autore specificato riguardanti il percorso specificato. Se l'autore non viene specificato vengono mostrati tutti gli autori, e se il percorso non viene specificato viene considerata la cartella dell'intera repository}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git log [--stat]}{stampa la storia dei commit. Se l'opzione \tw{--stat} e' specificata, per ogni commit vengono mostrati i file modificati}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git checkout -- \ang{file}}{ripristina il file locale alla versione sul server}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git add -e}{stampa le differenze tra i file locali e quelli sul branch e fa scegliere riga per riga quali modifiche addare \b{--} questo comando e' consigliato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git add -p}{chiede in modo interattivo quali file o pezzi di file si vogliono addare. Il significato delle lettere stampate e' il seguente:
+\begin{itemize}
+\item[\tw{y}]: aggiungi il pezzo attuale
+\item[\tw{n}]: non aggiungere il pezzo attuale
+\item[\tw{q}]: non aggiungere i pezzi rimanenti
+\item[\tw{s}]: dividi ulteriormente il pezzo attuale
+\item[\tw{e}]: dividi manualmente il pezzo attuale
+\item[\tw{?}]: stampa le istruzioni
+\end{itemize}
+}
+
+\subsubsection{Branch}
+
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git reset --hard \ang{code}}{il puntatore di storia attuale passa al commit associato al codice specificato, ignorando ma mantenendo tutti i commit successivi}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git rebase -p -onto \ang{code}\hat \ang{code}}{il puntatore attuale di storia ignora il commit indicato, ma lo mantiene}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git commit -c HEAD}{promuove il puntatore di storia attuale a testa del branch, cioe' rimuove localmente tutti i commit attualmente ignorati}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git push origin -f}{esporta le modifiche locali sul server. In particolare, rimuove dal server i commit rimossi in locale}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git reset HEAD\hat}{muove il puntatore al penultimo commit, senza modificare i file}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git commit --amend}{aggiunge le modifiche all'ultimo commit invece di crearne uno nuovo}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git push origin \ang{code}:\ang{branch}}{pusha nel branch specificato tutti i commit fino a quello di codice specificato, non pushando ma mantenendo in locale i commit successivi}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git revert \ang{code}}{applica un commit che cancella le modifiche del commit di codice specificato. Nella sostanza, cancella il commit indicato ma in modo costruttivo, cioe' aggiungendo un nuovo commit che esegue le azioni contrarie di quelle del commit che vuole essere cancellato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git rebase -i origin/\ang{branch}}{apre una finestra interattiva in cui viene stampato l'elenco dei commit successivi all'ultimo push e viene permessa la loro modifica \b{--} viene usato per modificare o cancellare commit locali}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git merge \ang{branch}}{mergia il branch specificato nel branch corrente}
+
+\subsubsection{Merge}
+
+\termdesc{Descrizione}{per richiedere l'aggiunta di un ramo locale ad un ramo sul server, eseguire le seguenti istruzioni:}
+
+\begin{itemize}
+\item[\bbox] andare nella pagina web della repository \sc{GitLab}: \tw{https://gitlab.fbk.eu/}
+\item[\bbox] eventualmente cliccare sull'icona \tw{Dashboard}, in alto a sinistra, dove compare la faccia di una volpe
+\item[\bbox] cliccare sul tasto \tw{Create Merge Request}, il alto a destra
+\item[\bbox] eventualmente cliccare sul tasto \tw{Change branches}, in alto a destra, e indicare quale ramo si vuole immergere in quale ramo
+\item[\bbox] compilare la scheda e cliccare sul tasto \tw{Submit merge request}, in basso
+\end{itemize}
+
+\skipline
+
+o in alternativa, eseguire le seguenti istruzioni:
+
+\skipline
+
+\begin{itemize}
+\item[\bbox] digitare \ang{git\_folder} (\ang{branch}) \$ \tw{git format-patch \ang{branch} --stdout \to \ang{name}.patch}
+\item[\bbox] osservare che e' stato generato un file di patch con le differenze tra il ramo attuale e il ramo indicato
+\item[\bbox] inviare il file di patch all'amministratore del ramo che vuole essere aggiornato
+\item[\bbox] l'amministratore sceglie se applicare la patch al ramo da aggiornare o meno
+\end{itemize}
+
+\section{Python}
+
+\subsection{Terminale}
+
+\bashcmd{}{python \ang{file.py}}{esegue il file}
+\customcmd{\ang{file.py}\;\$}{Alt+X \to python-checker \to [\ang{file.py}]}{avvia il debugger}
+\customcmd{python-checker\;\$}{G}{ricalcola gli errori del file}
+
+\subsection{Sintassi}
+
+\termdesc{Allegato}{La cartella \tw{python\_syntax} contiene un file che descrive i costrutti sintattici piu' comuni di \sc{python}.}
+
+\termdesc{Descrizione}{qui di seguito riportiamo alcuni tipi di oggetti.}
+
+\symboldesc{\sc{mutabili}}{vengono passati per riferimento}
+\symboldesc{\sc{immutabili}}{vengono passati per valore}
+\symboldesc{\sc{iterabili}}{possono incorrere in cicli \sc{for}}
+\symboldesc{\sc{contestuali}}{possono incorrere in operatori \sc{with as}}
+
+\termdesc{Descrizione}{qui di seguito riportiamo alcuni costrutti sintattici notevoli.}
+
+\symboldesc{\tw{\ang{string\_1}+\ang{string\_1}}}{concatena due stringhe che si trovano sulla stessa riga}
+\symboldesc{\tw{\ang{string\_1}\bs}\par\tw{\ang{string\_2}}}{concatena due stringhe che si trovano su righe diverse}
+\symboldesc{\tw{\ang{partial\_instruction\_1}}\bs\par\tw{\ang{partial\_instruction\_2}}}{il \sc{backslash} permette di spezzare un'istruzione su piu' righe}
+
+\subsection{Librerie}
+
+\symboldesc{\tw{from \_\_future\_\_ import absolute\_import}}{obbliga i path degli \tw{import} ad essere relativi ad una cartella di \tw{sys.path}, cioe' vieta l'uso implicito della cartella corrente \tw{os.getcwd()} come possibile cartella da cui specificare path di importazione (a meno che non sia in \tw{sys.path})}
+
+\symboldesc{\tw{\_\_init\_\_.py}}{durante l'esecuzione di un \tw{import}, ogni volta che si passa attraverso una cartella (anche solo transitoriamente) viene eseguito il contenuto dell'eventuale file {\_\_init\_\_.py} contenuto in quella cartella}
+
+\subsection{Importazione da C}
+
+\termdesc{Descrizione}{in un file \sc{python} e' possibile importare oggetti (solitamente funzioni) implementate e compilate in \sc{c}. Elenchiamo i passi che bisogna seguire per creare una libreria \sc{c} importabile in \sc{python}.}
+
+L'esempio che riportiamo si riferisce ai file che si trovano in allegato nella cartella \tw{python\_c}.
+
+\begin{itemize}
+\item[\bbox] Prendiamo il file \sc{c} con gli oggetti che ci interessano esportare in \sc{python}. In allegato il file e' \tw{file.c}.
+\item[\bbox] Creiamo un file con estensione \tw{.i} in cui elenchiamo gli oggetti che vogliamo importare in \sc{python} e diamo un nome alla libreria \sc{c} che vogliamo creare. In allegato il file e' \tw{file.i} e il nome della libreria e' \tw{my\_library}.
+\item[] La sintassi del file \tw{.i} e' semplice e si puo' capire guardando \tw{file.i}.
+\item[] I file \tw{file.c} e \tw{file.i} devono avere lo stesso nome base.
+\item[] L'estensione \tw{.i} specifica all'eseguibile \tw{swig} che il file non deve essere precompilato da \sc{cpp}.
+\item[\bbox] Eseguiamo il comando terminale:\par
+\tw{swig -python file.i}
+\item[] Vengono generati due file: \tw{file\_wrap.c} serve per creare la libreria \sc{c}, \tw{my\_library.py} e' ridondante e serve da interfaccia: se non si vuole includere direttamente la libreria \sc{c}, che si chiamera' \tw{\_my\_library.so}, si puo' importare \tw{my\_library.py}, che a sua volta importa \tw{\_my\_library.so}, ma con maggiori controlli.
+\item[\bbox] Eseguiamo il comando terminale:\par
+\tw{gcc -c file.c}
+\item[] Il comando consiste nella compilazione di \tw{file.c} e nella creazione dell'eseguibile \tw{file.o}.
+\item[] L'opzione \tw{-c} rimuove l'operazione di \sc{linking}.
+\item[\bbox] Eseguiamo il comando terminale:\par
+\tw{gcc -fPIC -c file\_wrap.c -I/usr/include/python2.7}
+\item[] Il comando consiste nella compilazione di \tw{file\_wrap.c} e nella creazione dell'eseguibile \tw{file\_wrap.o}.
+\item[] L'opzione \tw{-fPIC} e' necessaria ma non si sa a cosa serve.
+\item[] L'opzione \tw{-c} rimuove l'operazione di \sc{linking}.
+\item[] L'opzione \tw{-I/usr/include/python2.7} include nel path del preprocessore \sc{cpp} la cartella che contiene il file \tw{Parser.h}. Questa cartella potrebbe avere dei percorsi diversi a seconda della macchina.
+\item[\bbox] Eseguiamo il comando terminale:\par
+\tw{ld -shared file.o file\_wrap.o -o \_my\_library.so}
+\item[] Il comando consiste nell'unione degli eseguibili \tw{file.o}, \tw{file\_wrap.o} e nella creazione della libreria \tw{\_my\_library.so}, che li comprende entrambi.
+\item[] L'opzione \tw{-shared} serve per mettere assieme i due eseguibili.
+\item[] L'opzione \tw{-o} serve per specificare il nome della libreria di output.
+\item[] E' necessario che il nome base della libreria sia uguale a quella del file \tw{my\_library.py} con un \sc{underscore} \tw{\_} come prefisso.
+\item[] Dopo la creazione della libreria \tw{\_my\_library.so} gli eseguibili \tw{file.o}, \tw{file\_wrap.o} possono essere cancellati, non servono piu'.
+\item[\bbox] Prendiamo il file \sc{python} dove vogliamo importare la libreria \sc{c}, nel nostro caso \tw{test.py}.
+\item[] All'interno di questo file e' possibile importare equivalentemente la libreria \sc{c} \tw{\_my\_library.so} o l'interfaccia \sc{python} \tw{my\_library.py}.
+\item[] Solitamente e' preferibile importare l'interfaccia \sc{python} \tw{my\_library.py}.
+\end{itemize}
+
+\section{Parser}
+
+\b{Parser}. Un \sc{parser} e' un programma che prende in input una stringa \b{--} per esempio il contenuto di un file \b{--} e restiuisce il suo albero sintattico.\par
+L'albero sintattico e' formato da nodi, e i nodi contengono delle informazioni.
+
+\skipline
+
+\b{Attenzione}. Esistono piu' metodi per creare un parser. Qui presentiamo uno dei metodi piu' diffusi.
+
+\skipline
+
+\b{Definizione}. La definizione di un \sc{parser} si divide in due parti: la definizione del lessico e la definizione della sintassi.
+
+\skipline
+
+\b{Presentazione}. Esistono due modi per descrivere la definizione di un parser, uno astratto e uno tecnico.
+
+\subsection{Descrizione astratta}
+
+\b{Definizione}. Il lessico viene definito usando un programma chiamato \sc{lexer}, la sintassi viene definita usando un programma chiamato \sc{generatore di parser}.
+
+\skipline
+
+Un parser non viene definito esplicitamente, ma viene generato automaticamente in base alle regole specificate al \sc{lexer} e al \sc{generatore di parser}.
+
+\skipline
+
+\b{Lexer}. Il \sc{lexer} e' un programma che prende in input una stringa \b{--} per esempio il contenuto di un file \b{--} e la divide in una lista stringhe primitive, in base alle regole grammaticali che gli vengono specificate.
+
+\skipline
+
+\b{Generatore di parser}. Il \sc{generatore di parser} e' un programma che prende in input una lista di stringhe e costruisce il corrispondente albero sintattico, in base alle regole sintattiche che gli vengono specificate.
+
+\subsection{Descrizione tecnica}
+
+\b{Definizione}. Il lessico viene definito usando un programma chiamato \sc{lexer}, la sintassi viene definita usando un programma chiamato \sc{generatore di parser}. Questi due programmi sono stati creati apposta per essere usati assieme: la loro funzione combinata e' quella di creare un parser e non ha senso usarli separatamente.
+
+\skipline
+
+Un parser non viene definito esplicitamente, ma viene generato automaticamente in base alle regole specificate al \sc{lexer} e al \sc{generatore di parser}.
+
+\skipline
+
+\b{Programmi}. Il \sc{lexer} che usiamo si chiama \sc{flex}. Il \sc{generatore di parser} che usiamo si chiama \sc{bison}.
+
+\subsubsection{Flex}
+
+\b{Flex}. \sc{flex} e' un programma che prende in input un file \tw{input.l}, su cui e' definito il lessico, e restituisce un file \tw{input.c} che implementa una funzione chiamata \sc{prossimo token}.
+
+\skipline
+
+\b{Prossimo token}. La funzione \sc{prossimo token} ad ogni chiamata restituisce il \sc{token} associato alla stringa primitiva successiva.
+
+\skipline
+
+\b{Token}. Un \sc{token} e' una struttura che contiene le informazioni riguardanti una stringa primitiva.
+
+\skipline
+
+\b{input.l}. All'interno del file \tw{input.l} viene specificata il lessico, cioe' quali sono le stringhe primitive e quali sono le informazioni che vanno aggiunte ai rispettivi \sc{token} \b{--} genericamente ad ogni stringa primitiva viene associato un \sc{token}.
+
+\subsubsection{Bison}
+
+\b{Bison}. \sc{bison} e' un programma che prende in input un file \tw{grammar.y}, su cui e' definita la sintassi, e la funzione \sc{prossimo token}, che implementa il lessico, e restituisce una coppia di file \tw{grammar.c}, \tw{grammar.h}, che implementano il \sc{parser}.
+
+\skipline
+
+I file \tw{grammar.c}, \tw{grammar.h} contengono una funzione che implementa il \sc{parser}. Il file \tw{grammar.h} deve essere incluso nel file \sc{c} dell'utente, e per eseguire il parsing all'interno del file dell'utente basta chiamare la funzione che parsa.
+
+\skipline
+
+\b{Albero sintattico}. L'albero sintattico e' formato da \sc{nodi}. Un \sc{nodo} e' una struttura che contiene delle informazioni \b{--} genericamente ad ogni \sc{token} viene associato un \sc{nodo}.
+
+\skipline
+
+\b{grammar.y}. All'interno del file \tw{grammar.y} viene specificata la sintassi, cioe' le regole mediante cui dalla successione di \sc{token} viene generato l'albero sintattico.
+
+\skipline
+
+Nel file \tw{grammar.y} vengono specificate le informazioni che vanno aggiunte ai \sc{nodi}.
+
+\subsubsection{CMake}
+
+\b{Compilazione}. I passi della creazione del \sc{parser} sono i seguenti:
+\begin{itemize}
+\item[\b{(1)}] il programma \sc{flex} viene invocato e la sua esecuzione prende in input il file \tw{input.l} e genera i file \tw{input.c}, \tw{input.h}
+\item[\b{(2)}] il programma \sc{bison} viene invocato e la sua esecuzione prende in input il file \tw{grammar.y} e genera il file \tw{grammar.c}
+\item[\b{(3)}] l'unione dei file sorgenti \sc{c} dell'utente e dei file \tw{input.c}, \tw{input.h}, \tw{grammar.c} costituisce il progetto \sc{c} completo e puo' essere compilato
+\end{itemize}
+
+Per non dover chiamare l'esecuzione di 3 programmi diversi \b{--} cioe' \sc{flex}, \sc{bison} e il compilatore \sc{c} \b{--} con \sc{CMake} si puo' definire un unico script che esegue tutti e 3 i programmi.
+
+\skipline
+
+In questo modo i file sorgenti del progetto sono esattamente:
+\begin{itemize}
+\item[\bbox] i file sorgenti \sc{c} dell'utente
+\item[\bbox] il file \tw{input.l}
+\item[\bbox] il file \tw{grammar.y}
+\end{itemize}
+
+I file \tw{input.c}, \tw{input.h}, \tw{grammar.c} non sono file sorgenti ma vengono generati ad ogni compilazione, e si trovano all'interno della cartella \tw{build}.
+
+\skipline
+
+Il vantaggio e' che i file \tw{input.l}, \tw{grammar.y} sono molto piu' compatti, comprensibili e manipolabili rispetto ai rispettivi file \tw{input.c}, \tw{input.h}, \tw{grammar.c}, e questo consente di modificare le regole del \sc{parser} con minore difficolta'.
+
+\subsubsection{Allegato}
+
+Nella cartella \tw{parser\_example} e' definito il \sc{parser} di una calcolatrice.
+
+\section{Kratos}
+
+\subsection{Concorrenza}
+
+\termdesc{Concorrenza}{uno \sc{scheduler} implementa una concorrenza tra i \sc{task}. Il modo in cui viene usato lo \sc{scheduler} consente o vieta modellizzazioni di tipo diverso.}
+\termdesc{Concorrenza con preempt}{uno \sc{scheduler} manda il segnale \tw{do} al \sc{task}, ma durante l'esecuzione del \sc{task} lo \sc{scheduler} puo' inviare il segnale \tw{stop} (chiamato anche \sc{preempt}, o \sc{interrupt}), eseguire altre istruzioni, e poi mandare il segnale \tw{resume} al \sc{task} per far riprendere l'esecuzione del \sc{task} da dove era stata interrotta.}
+\termdesc{Concorrenza cooperativa}{uno \sc{scheduler} manda il segnale \tw{do} al \sc{task} e attende il segnale \tw{done} dal \sc{task}. Fino a quando non riceve il segnale \tw{done}, lo \sc{scheduler} non puo' eseguire altre istruzioni e non puo' interrompere il \sc{task}.}
+
+\subsection{Kratos}
+
+\termdesc{ESST}{la tecnica \sc{esst} \b{--} per esteso \sc{explicit scheduler and symbolic threads} \b{--} e' una tecnica per modellizzare un codice che presenta uno \sc{scheduler} e dei \sc{task}. Il modello prevede la definizione individuale dello \sc{scheduler} e dei \sc{task}, e definisce la loro interazione mediante \sc{concorrenza cooperativa}.}
+
+\termdesc{SystemC}{e' un sottolinguaggio di \sc{C++} definito per descrivere \sc{processi concorrenti}.}
+
+\termdesc{Kratos}{e' un programma che traduce un codice \sc{SystemC} in un modello \sc{nuXmv} servendosi della tecnica \sc{esst}, cioe' implementando una concorrenza cooperativa dello \sc{scheduler} e dei \sc{task}.}
+
+\section{Siti Web}
+
+\bashcmd{}{wget -r \ang{url}}{scarica in contenuto della pagina web specificata}
+
+\bashcmd{}{wget -r -H \ang{url}}{scarica in contenuto della pagina web specificata e di tutte le sottopagine e i link, ricorsivamente}
+
+\section{Cluster}
+
+Una \b{coda} e' un insieme di macchine, dette \b{nodi}. Il \b{cluster} e' un insieme di \b{code}.
+
+\skipline
+
+Le code del cluster sono:
+\begin{itemize}
+\item[\bbox] \b{es.q}: riservata all'unita' \sc{es}, ciascun nodo ha 96 giga di \sc{ram};
+\item[\bbox] \b{es2.q}: riservata all'unita' \sc{es}, ciascun nodo ha 48 giga di \sc{ram};
+\item[\bbox] \b{bld.q}: condivisa da tutto \sc{fbk}.
+\end{itemize}
+
+\skipline
+
+Ci sono due modi per usare il cluster:
+\begin{itemize}
+\item[\bbox] \b{qlogin}: si accede al cluster usando una shell interattiva;
+\item[\bbox] \b{qsub}: si aggiungono in coda al cluster dei comandi.
+\end{itemize}
+
+\subsection{Qlogin}
+
+\bashcmd{\ang{user\_machine}}{ssh korein \to \ang{password}}{accede alla zona di ingresso del cluster \da non siamo ancora in una coda}
+\example{cube\$ ssh korein}
+
+\bashcmd{korein}{screen}{crea una nuova sessione}
+\example{korein\$ screen}
+
+\bashcmd{korein}{screen -ls}{elenca le sessioni aperte}
+\example{korein\$ screen -ls}
+
+\bashcmd{korein}{screen -r \ang{session\_name}}{riprende la sessione gia' esistente specificata}
+\example{korein\$ screen -r 8179.pts-81.korein}
+
+\bashcmd{korein}{qlogin -q \ang{queue\_name} -l mf=\ang{giga\_number}G}{accede alla coda specificata allocando la quantita' di memoria specificata}
+\example{korein\$ qlogin -q es.q -l mf=40G}
+\example{korein\$ qlogin -q es2.q -l mf=85G}
+
+\bashcmd{korein}{Ctrl + A + D}{esce dalla sessione corrente senza ucciderla}
+
+\bashcmd{korein}{exit}{esce dalla sessione corrente uccidendola}
+
+\bashcmd{\ang{user\_machine}}{scp [\ang{machine\_1}]: \ang{machine\_1\_path} [\ang{machine\_2}]: \ang{machine\_2\_path}}{copia il file specificato nel primo path nella posizione specificata nel secondo path}
+\example{cube\$ scp ./shared\_folder/file korein: /es0/sbicego/shared\_folder/file}
+\example{cube\$ scp korein: /es0/sbicego/shared\_folder/file cube: /tmp/file}
+
+\bashcmd{korein\_emacs}{Ctrl+X+C}{chiude il file attualmente aperto con \sc{emacs}}
+
+\subsection{Qsub}
+
+\bashcmd{\ang{user\_machine}}{ssh korein \to \ang{password}}{accede alla zona di ingresso del cluster \da non siamo ancora in una coda}
+\example{cube\$ ssh korein}
+
+\bashcmd{korein}{qsub -q \ang{queue\_name} -l mf=\ang{giga\_number}G -N \ang{nickname} -S \ang{executable}}{aggiunge alla coda specificata il processo specificato}
+\example{korein\$ qsub -q es.q -l mf=40G -S ./nuXmv -source cmds /es0/sbicego/model.smv}
+\example{korein\$ qsub -q es.q -l mf=40G -S /bin/bash /es0/sbicego/script.sh}
+
+L'esecuzione di un processo produce due file:
+\begin{itemize}
+\item[\bbox] \tw{\ang{executable\_or\_nickname}.o\ang{process\_name}}: lo standard output;
+\item[\bbox] \tw{\ang{executable\_or\_nickname}.e\ang{process\_name}}: lo standard error.
+\end{itemize}
+\example{nuXmv.o868921}
+
+\bashcmd{korein}{qstat -q \ang{queue\_name} -f}{elenca le macchine e i processi della coda specificata}
+\example{korein\$ qstat -q es.q -f}
+
+\bashcmd{korein}{qdel \ang{process\_name}}{uccide il processo specificato}
+\example{korein\$ qdel 868920}
+
+\section{Web}
+
+\customcmd{\ang{web\_page}}{F5}{ricarica la pagina senza ricaricare la cash}
+\customcmd{\ang{web\_page}}{Ctrl+Shift+R}{ricarica la pagina}
+
+\end{document}

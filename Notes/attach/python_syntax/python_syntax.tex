@@ -1,0 +1,391 @@
+% DOCUMENT SPECIFICATIONS
+\documentclass[a4paper,12pt,fleqn,leqno,twoside]{article}
+
+% LIBRARIES
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+% TEXT FONTS
+\newcommand{\n}{\textnormal} % normal
+\renewcommand{\i}{\textit} % italic
+\renewcommand{\b}{\textbf} % bold
+\newcommand{\tw}{\texttt} % typewriter
+\renewcommand{\sc}{\textsc} % small caps
+\renewcommand{\cal}[1]{$\mathcal{#1}$} % calligraphic
+\newcommand{\mat}[1]{$\mathcbb{#1}$} % mathematical
+\newcommand{\pn}[1]{\n{#1}\;} % proper name
+
+% CUSTOM SETTINGS
+\geometry{left=10mm, right=10mm, top=15mm, bottom=15mm} % layer borders
+\setlength{\parindent}{0pt} % indentation
+\hypersetup{colorlinks=true,allcolors=black} % interactive index
+
+% CUSTOM COMMANDS
+\newcommand{\bbox}{{\scriptsize $\blacksquare$}} % black box
+\newcommand{\bball}{{\scriptsize $\bullet$}} % black circle
+\newcommand{\skipline}{\vspace{\baselineskip}} % skip line
+\newcommand{\bs}{$\backslash$} % backslash
+
+% CUSTOM MACROS
+\newcommand{\bitem}[1]{\bbox \; #1\par \skipline}
+
+% DOCUMENT CONTENT
+\begin{document}
+
+{\center\LARGE\b{Python Basic Syntax}\par}
+
+\skipline
+
+\tableofcontents
+
+\clearpage
+
+\section{Commenti}
+
+\bitem{Cominciano col cancelletto \tw{\#} e terminano col terminatore di riga \tw{\bs n}.}
+
+\section{Parentesi Tonde}
+
+\bitem{Le parentesi tonde servono per chiarire le precedenze.}
+
+\section{Termini Speciali}
+
+\bitem{L'\sc{underscore} \tw{\_} significa che il valore assegnato a tale simbolo non ci interessa.}
+
+\bitem{Il termine \tw{None} e' il valore nullo.}
+
+\section{Esecuzione}
+
+\bitem{L'esecuzione e' sequenziale, avviene riga per riga. Il linguaggio e' imperativo.}
+
+\bitem{Molte librerie implementano in modo imperativo dei comportamenti funzionali, quindi nella pratica quando si usano librerie avanzate il tipo di programmazione diventa sia imperativa che funzionale.}
+
+\section{Valori Semplici e Composti}
+
+\bitem{Con \b{valore semplice} intendiamo un valore del tipo: \tw{4}, \tw{True}.}
+
+\bitem{Con \b{valore composto} intendiamo un valore del tipo: \tw{[(1, 'g'), 4]}, \tw{3 == 2}.}
+
+\bitem{Non esistono differenze sintattiche tra valori semplici e valori composti.}
+
+\bitem{Chiamiamo con \sc{valore} tutti i valori, sia quelli semplici sia quelli composti.}
+
+\section{Variabili Mutabili e Immutabili}
+
+\bitem{Esistono due tipi di variabili: quelle \b{mutabili} e quelle \b{immutabili}.}
+
+\bitem{Le variabili immutabili sono le variabili di tipo \sc{numero}, \sc{verita'}, \sc{stringa} e \sc{n-upla}.}
+
+\bitem{Le variabili mutabili sono le variabili di tutti gli altri tipi.}
+
+\bitem{Le variabili immutabili sono passate \b{per valore}, le variabili mutabili sono passate \b{per riferimento}.}
+
+\b{Esempio.}\par
+\tw{A = 1}\par
+\tw{B = A}\par
+\tw{B = 2}\par
+\tw{\# ora A ha valore 1}
+
+\skipline
+
+\b{Esempio.}\par
+\tw{A = [1]}\par
+\tw{B = A}\par
+\tw{B = [2]}\par
+\tw{\# ora A ha valore [1]}
+
+\skipline
+
+\b{Esempio.}\par
+\tw{A = [1]}\par
+\tw{B = A}\par
+\tw{B[0] = 2}\par
+\tw{\# ora A ha valore [2]}
+
+\skipline
+
+\bitem{Per poter passare per valore una variabile mutabile bisogna farne una copia e passare la copia.}
+
+\bitem{L'espressione \tw{variable\_type(variable)} restituisce una copia della variabile.}
+
+\bitem{L'espressione \tw{copy.copy(variable)} restituisce una copia della variabile, ma eventuali sottovariabili mutabili vengono passate per riferimento \b{--} ad esempio quando la variabile e' un oggetto di una classe e contiene attributi mutabili.}
+
+\bitem{L'espressione \tw{copy.deepcopy(variable)} restituisce una copia della variabile, e anche tutte le sottovariabili vengono copiate. In altre parole, la copia avviene ricorsivamente e tutte le variabili vengono copiate per valore invece che per riferimento.}
+
+\section{Assegnazione}
+
+\bitem{L'assegnazione ha la forma: \tw{term} = \tw{term}.}
+
+\section{Domini}
+
+\bitem{Non esiste la dichiarazione esplicita dei domini.}
+
+\bitem{I simboli delle operazioni assumono un significato diverso a seconda del dominio dei termini su cui si applicano.}
+
+\bitem{Il valore nullo \tw{None} fa parte di tutti i domini.}
+
+\section{Operatori Booleani}
+
+\bitem{Gli operatori booleani sono: \tw{==} \tw{<=} \tw{>=} \tw{<} \tw{>} \tw{!=} \tw{and} \tw{or}.}
+
+\section{Numeri}
+
+\bitem{Le operazioni usuali sono: \tw{+} \tw{-} \tw{*} \tw{/}.}
+
+\bitem{L'elevamento a potenza e': \tw{**}.}
+
+\bitem{Gli intervalli interi sono definiti dall'espressione:\par
+\tw{range([integer\_1, ]integer\_2[, integer\_3])}\par
+che restituisce la lista degli interi da \tw{integer\_1} (o da \tw{0} se non specificato) a \tw{integer\_2 - 1} con passo \tw{integer\_3} (o con passo \tw{1} se non specificato).}
+
+\section{Stringhe}
+
+\bitem{Sono racchiuse dalle doppie virgolette \tw{``...''} o dalle singole virgolette \tw{`...'}.}
+
+\bitem{L'incollamento di due stringhe avviene con l'espressione:\par
+\tw{``...''S``...''}\par
+dove \tw{S} puo' essere: niente, degli spazi, delle andate a capo.}
+
+\bitem{Il carattere speciale e': \tw{\bs}.}
+
+\bitem{La nuova riga e': \tw{\bs n}.}
+
+\bitem{Per trasformare l'andare a capo in un \tw{\bs n} bisogna usare le triple virgolette doppie \tw{``````...''''''} o le triple virgolette singole \tw{```...'''}.}
+
+\bitem{Per cancellare un andare a capo dentro le triple virgolette si mette il carattere \tw{\bs} esattamente prima dell'andata a capo.}
+
+\bitem{Non esiste il tipo \sc{carattere}.}
+
+\bitem{Le stringhe sono liste di caratteri non modificabili.}
+
+\section{Liste}
+
+\bitem{La notazione esplicita e': \tw{[term\_1,...,term\_n]}.}
+
+\bitem{Gli elementi di una lista possono essere eterogenei.}
+
+\bitem{Gli indici positivi o nulli partono dal primo elemento. Gli indici negativi partono dall'ultimo elemento.}
+
+\bitem{L'espressione \tw{list[index]} restituisce l'elemento di indice specificato.}
+
+\bitem{L'espressione \tw{list[index\_1:index\_2]} restituisce la sottolista da \tw{index\_1} a \tw{index\_2}.}
+
+\bitem{L'espressione \tw{list[:index]} estrae la sottolista dall'inizio a \tw{index}.}
+
+\bitem{L'espressione \tw{list[index:]} estrae la sottolista da \tw{index} alla fine.}
+
+\bitem{L'espressione \tw{list[:]} estrae la sottolista dall'inizio alla fine.}
+
+\bitem{L'espressione \tw{list[index\_1:index\_2:integer]} estrae la sottolista da \tw{index\_1} a \tw{index\_2} con passo \tw{integer}.}
+
+\bitem{L'estrazione delle sottoliste scarta automaticamente gli indici che sono fuori dal dominio, senza dare errore.}
+
+\bitem{L'espressione \tw{len(list)} restituisce la lunghezza della lista.}
+
+\bitem{La concatenazione di liste e': \tw{list\_1 + list\_2}.}
+
+\bitem{La moltiplicazione di liste e': \tw{integer * list}.}
+
+\bitem{Le espressioni \tw{term in list}, \tw{term not in list} restituiscono rispettivamente la presenza o l'assenza dell'elemento nella lista.}
+
+\bitem{L'elemento minimo e' \tw{min(list)}.}
+
+\bitem{L'elemento minimo e' \tw{max(list)}.}
+
+\bitem{Il primo indice di un elemento e' \tw{list.index(term)}. Se l'elemento non c'e' viene restituito un errore.}
+
+\bitem{Il numero di occorrenze di un elemento e' \tw{list.count(term)}.}
+
+\bitem{L'aggiunta di un elemento in coda e' \tw{list.append(term)}.}
+
+\bitem{L'espressione \tw{list.insert(index, term)} inserisce il termine nella posizione dell'indice specificato. I termini successivi vengono spostati in avanti di un posto.}
+
+\section{N-uple}
+
+\bitem{La notazione esplicita e': \tw{term\_1,...,term\_n}.}
+
+\section{Indentazione}
+
+\bitem{L'indentazione ha una semantica: ha il ruolo di quelle che negli altri linguaggi di programmazione sono le parentesi graffe.}
+
+\bitem{Le istruzioni allineate fanno parte dello stesso contesto. Le istruzioni che sono spostate a destra fanno parte del contesto successivo. Le istruzioni che stanno a sinistra fanno parte del contesto precedente.}
+
+\bitem{Un'istruzione ha termine con un'andata a capo.}
+
+\section{Operatori di Flusso}
+
+\bitem{Il ciclo \sc{while} e':}
+
+\tw{while boolean\_term:}\par
+\tw{\qquad instructions}\par
+\tw{[else:}\par
+\tw{\qquad instructions]}
+
+\skipline
+
+\bitem{L'\tw{else} viene eseguito solo se il \tw{while} non e' terminato da un \tw{break}.}
+
+\bitem{Il ciclo \sc{if} e':}
+
+\tw{if boolean\_term:}\par
+\tw{\qquad instructions}\par
+\tw{[elif:}\par
+\tw{\qquad instructions]}\par
+\tw{[else:}\par
+\tw{\qquad instructions]}
+
+\skipline
+
+\bitem{\tw{elif} e' un'abbreviazione di \tw{else if}.}
+
+\bitem{Il ciclo \sc{for} e':}
+
+\tw{for term in iterable\_object:}\par
+\tw{\qquad istructions}\par
+\tw{[else:}\par
+\tw{\qquad istructions]}
+
+\skipline
+
+\bitem{L'\tw{else} viene eseguito solo se il \tw{for} non e' terminato da un \tw{break}.}
+
+\section{Break}
+
+\bitem{La notazione e': \tw{break}.}
+
+\bitem{Esce dal ciclo \tw{while} o \tw{for} piu' vicino.}
+
+\section{Continue}
+
+\bitem{La notazione e': \tw{continue}.}
+
+\bitem{Salta l'esecuzione delle istruzioni successive del termine attuale del \tw{for} e passa direttamente all'esecuzione del \tw{for} del termine successivo.}
+
+\section{Pass}
+
+\bitem{La notazione e': \tw{pass}.}
+
+\bitem{E' l'istruzione vuota. Serve solo per inserire almeno un'istruzione dove altrimenti ci sarebbe un errore.}
+
+\section{Try}
+
+\bitem{La notazione e':}
+
+\tw{try:}\par
+\tw{\qquad instructions}\par
+\tw{except [(]string\_1[,...,string\_n)]:}\par
+\tw{\qquad instructions}\par
+
+\skipline
+
+\bitem{Ogni errore e' associato ad una stringa.}
+
+\bitem{Se le istruzioni danno un errore, allora la loro esecuzione viene interrotta e l'esecuzione riparte dall'\tw{except} piu' vicino che nella n-upla di stringhe al proprio fianco presenta stringa associata all'errore.}
+
+\section{Funzioni}
+
+\bitem{La notazione e':}
+
+\tw{def string([string\_1[= term\_1],...,string\_n[= term\_n]]):}\par
+\tw{\qquad instructions}\par
+\tw{\qquad [return term]}\par
+\tw{\qquad [yield term]}
+
+\skipline
+
+\bitem{\tw{string} e' il nome della funzione. Le \tw{string\_i} sono gli argomenti della funzione. \tw{term} e' il valore di ritorno della funzione. Se non c'e' esplicitamente un valore di ritorno, il valore di ritorno e' posto \tw{None}.}
+
+\bitem{Se viene eseguito il comando \tw{return} allora le variabili interne della funzione vengono distrutte e alla prossima chiamata della funzione le istruzioni ripartono da capo.}
+
+\bitem{Se viene eseguito il comando \tw{yield} allora le variabili interne della funzione mantengono il proprio valore e alla prossima chiamata della funzione le istruzioni ripartono dalla riga successiva allo \tw{yield}.}
+
+\bitem{Una funzione puo' essere chiamata specificando esplicitamente il valore degli argomenti \b{--} per esempio:\par
+\tw{function(argument\_1 = 4, argument\_2 = "ciao")}\par
+Questo e' utile per non dover necessariamente dare importanza all'ordine degli argomenti.}
+
+\bitem{Alcuni argomenti possono avere un valore di inizializzazione \b{--} ad esempio:\par
+\tw{def function(argument\_1 = 4, argument\_2)}\par
+Gli argomenti inizializzati sono facoltativi, e se non vengono specificati esplicitamente nel momento della chiamata della funzione assumono implicitamente il loro valore di inizializzazione.}
+
+\section{Librerie}
+
+\bitem{Una notazione e': \tw{import library[.sublibrary]}. La notazione e' ricorsiva.}
+
+\bitem{In questo caso un oggetto della libreria viene chiamato scrivendo \tw{library.object}.}
+
+\bitem{Un'altra notazione e':\par
+\tw{from library[.sublibrary] import object\_1 [as nickname\_1][,...,object\_n [as nickname\_n]]}}
+
+\skipline
+
+\bitem{In questo caso un oggetto della libreria viene chiamato scrivendo \tw{object} o equivalentemente \tw{nickname}.}
+
+\section{Oggetti Context}
+
+\bitem{Gli oggetti di tipo \sc{context} possono incorrere nell'espressione \sc{with}:}
+
+\tw{with object as nickname:}\par
+\tw{\qquad instructions}
+
+\skipline
+
+\bitem{All'interno delle istruzioni ci si riferisce all'oggetto col termine \tw{nickname}.}
+
+\bitem{L'oggetto viene aperto quando viene chiamato il \tw{with} e viene chiuso automaticamente quando finisce il contesto del \tw{with}. Anche tutti gli altri oggetti che vengono aperti dentro al \tw{with} vengono chiusi automaticamente quando finisce il contesto del \tw{with}.}
+
+\bitem{Il \tw{with} e' utile perche' gestisce da solo la chiusura degli oggetti aperti nel suo contesto.}
+
+\section{Classi}
+
+\bbox \; Gli elementi primitivi sono i seguenti:
+\begin{align*}
+\tw{classe}&: \n{e' un nuovo dominio, composto sia da variabili sia da funzioni}\\
+\tw{oggetto}&: \n{e' una variabile di dominio classe \b{--} detta anche istanziazione della classe}\\
+\tw{attributo}&: \n{e' una componente di tipo variabile dell'oggetto}\\
+\tw{metodo}&: \n{e' componente di tipo funzione dell'oggetto}\\
+\end{align*}
+
+\section{Main}
+
+\bitem{Cio' che segue la seguente espressione:}
+
+\tw{if \_\_name\_\_ == ``\_\_main\_\_'':}
+
+\skipline
+
+viene eseguito solo se il file che e' stato indicato all'interprete di \sc{python} e' il file attuale.
+
+\skipline
+
+\bitem{La struttura tipica di un file sorgente \sc{python} e':}
+
+\tw{definizioni di domini e funzioni}\par
+\tw{\# sono utili in questo file ma possibilmente anche in altri file}
+
+\skipline
+
+\tw{if \_\_name\_\_ == ``\_\_main\_\_'':}
+
+\skipline
+
+\tw{codice che viene eseguito quando si comunica all'interprete di eseguire questo file}\par
+\tw{\# usa i domini e le funzioni di questo file ma possibilmente anche quelle di altri file}
+
+\end{document}

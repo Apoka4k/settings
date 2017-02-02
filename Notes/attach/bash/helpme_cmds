@@ -1,0 +1,34 @@
+
+============================================================
+Croppare le slide PDF di Computability_and_Complexity.
+------------------------------------------------------------
+
+pdfcrop -i input.pdf -o output.pdf -m "10 20 30 -30"
+
+============================================================
+Opzioni di Latex.
+------------------------------------------------------------
+
+\tiny
+\scriptsize
+\footnotesize
+\small
+\normalsize   - normal
+\large
+\Large
+\LARGE
+\huge
+\Huge
+
+\textrm \rmfamily - normal
+\textsf \sffamily - pseudonormal
+\texttt \ttfamily - typewriter
+
+\textmd \mdseries - normal
+\textbf \bfseries - bold
+\textsl \slshape  - slanted
+\textsc \scshape  - small caps
+\textit \itshape  - italic
+\textup \upshape
+
+============================================================

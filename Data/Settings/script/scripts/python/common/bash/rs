@@ -1,0 +1,34 @@
+#!/usr/bin/python
+
+
+# imports
+import os
+import subprocess
+import sys
+
+
+# custom imports
+import common
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) != 1:
+        print common.get_err_msg(fname)
+        sys.exit()
+
+    # get command
+    cmd = "reset"
+
+    # execute command
+    res = subprocess.call(cmd, shell=True)
+
+    # check correctness
+    if res != 0:
+        print common.get_err_msg(fname)
+        sys.exit()

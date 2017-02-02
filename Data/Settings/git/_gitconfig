@@ -1,0 +1,7 @@
+[user]
+    name = Michele Sbicego
+    email = sbicego@fbk.eu
+[core]
+    editor = emacs
+[push]
+    default = current

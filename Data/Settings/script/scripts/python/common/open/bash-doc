@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+
+# imports
+import os
+import subprocess
+import sys
+
+# custom imports
+import common
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) != 1:
+        print common.get_err_msg(fname)
+        sys.exit()
+
+    # get executable
+    exe = "gnome-open"
+
+    # get path
+    pdf_path = common.path_glue(common.rep_root, "Docs/Bash", "manual.pdf")
+
+    # get command
+    cmd = common.command(exe, pdf_path, "&")
+
+    # execute command
+    res = subprocess.call(cmd, shell=True)
+
+    # show results
+    common.show_results(res, fname)

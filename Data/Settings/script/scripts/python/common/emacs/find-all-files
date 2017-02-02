@@ -1,0 +1,160 @@
+#!/usr/bin/python
+
+
+# imports
+import os
+import subprocess
+import sys
+import tempfile
+
+# custom imports
+import common
+from common import color
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) not in [1, 2]:
+        print common.get_err_msg(fname)
+        common.show_usage(fname, ["number"])
+        sys.exit()
+
+    # get args
+    if len(sys.argv) >= 2:
+        number = sys.argv[1]
+    else:
+        number = None
+
+    # get current dir
+    current_dir = os.getcwd()
+
+    # execute find
+    _, tmp_find_output = tempfile.mkstemp()
+
+    cmd = common.command("find", ".", "-name", "\"*\"",
+                         ">", tmp_find_output)
+
+    subprocess.call(cmd, shell=True)
+
+    # get find output
+    with open(tmp_find_output, "r") as tmp_find_output_ptr:
+        lines = tmp_find_output_ptr.readlines()
+    os.unlink(tmp_find_output)
+
+    # collect find output
+    fnames_list = []
+    dirnames_list = []
+
+    for line in lines:
+
+        rel_path = common.clear_string(line)
+
+        if rel_path[-1] not in ["~", "#"]:
+
+            abs_path = common.path_glue(current_dir, rel_path)
+
+            if os.path.isfile(abs_path):
+                fnames_list.append(abs_path)
+            elif os.path.isdir(abs_path):
+                dirnames_list.append(abs_path)
+
+    # sort output
+    fnames_list.sort()
+    dirnames_list.sort()
+
+    # get results
+    text_list = []
+
+    text = color.green + "\n" + \
+        color.pink + "  Results" + \
+        color.green + ":"
+    text_list.append(text)
+
+    max_length = len(str(max(len(fnames_list), len(dirnames_list))))
+    counter = 1
+
+    # get files
+    text = color.green + "\n\n" + \
+        color.blue + "  FILES" + \
+        color.green + ":" + "\n"
+    text_list.append(text)
+
+    indexing_dict = {}
+
+    for fname in fnames_list:
+
+        indexing_dict[str(counter)] = fname
+
+        current_length = len(str(counter))
+        current_difference = max_length - current_length
+
+        text_line = " " * (4 + current_difference) + \
+                    color.blue + str(counter) + \
+                    color.cyan + " " + fname
+
+        text_list.append(text_line)
+
+        counter += 1
+
+    # get dirs
+    text = color.green + "\n\n" + \
+        color.blue + "  DIRECTORIES" + \
+        color.green + ":" + "\n"
+    text_list.append(text)
+
+    for dirname in dirnames_list:
+
+        current_length = len(str(counter))
+        current_difference = max_length - current_length
+
+        text_line = " " * (4 + current_difference) + \
+                    color.blue + str(counter) + \
+                    color.cyan + " " + dirname
+
+        text_list.append(text_line)
+
+        counter += 1
+
+    # get selected file
+    if number is not None:
+        text = color.green + "\n\n" + \
+            color.blue + "  OPEN FILE" + \
+            color.green + ":" + "\n"
+        text_list.append(text)
+
+        if number not in indexing_dict.keys():
+            correct_index = False
+            text = color.green = " " * 4 + \
+                color.pink + "Error" + \
+                color.green + ": index " + \
+                color.yellow + str(number) + \
+                color.green + " out of range."
+            text_list.append(text)
+        else:
+            correct_index = True
+            current_length = len(str(number))
+            current_difference = max_length - current_length
+
+            text = " " * (4 + current_difference) + \
+                   color.blue + str(number) + \
+                   color.cyan + " " + indexing_dict[number]
+
+            text_list.append(text)
+
+    # get spacing
+    text_list.append("\n")
+
+    # print output
+    for line in text_list:
+        print line
+
+    # open selected file
+    if number is not None:
+        if correct_index is True:
+            cmd = common.command("emacs", indexing_dict[number], "&")
+            subprocess.call(cmd, shell=True)

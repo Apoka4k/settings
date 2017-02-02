@@ -1,0 +1,44 @@
+#!/usr/bin/python
+
+
+# imports
+import os
+import sys
+import subprocess
+
+# custom imports
+import common
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) != 2:
+        print common.get_err_msg(fname)
+        common.show_usage(fname, ["file"], [])
+        sys.exit()
+
+    # get file name
+    file_name = os.path.basename(sys.argv[1])
+
+    # get directories paths
+    cube_shared_folder = common.path_glue(common.home, "Desktop/shared_folder")
+    korein_shared_folder = common.path_glue(common.korein_root,
+                                            "shared_folder")
+
+    # get files paths
+    cube_file = common.path_glue(cube_shared_folder, file_name)
+    korein_file = common.path_glue(korein_shared_folder, file_name)
+
+    # get command
+    scp_cmd = common.command("scp", "korein:" + korein_file, cube_file)
+
+    # execute command
+    res = subprocess.call(scp_cmd, shell=True)
+
+    # show results
+    common.show_results(res, fname)

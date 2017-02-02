@@ -1,0 +1,44 @@
+#!/usr/bin/python
+
+
+#imports
+import subprocess
+import os
+import sys
+
+# custom imports
+import common
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) not in [1, 2]:
+        print common.get_err_msg(fname)
+
+    # get executable
+    exe = "cp"
+
+    # get paths
+    current_dir = os.getcwd()
+
+    latex_src = common.path_glue(common.rep_root,
+                                 "Notes/attach/latex_docs",
+                                 "code.tex")
+    if len(sys.argv) == 1:
+        latex_tgt = common.path_glue(current_dir, "code.tex")
+    if len(sys.argv) == 2:
+        name = sys.argv[1]
+        name = (os.path.splitext(name))[0]
+        latex_tgt = common.path_glue(current_dir, name + ".tex")
+
+    # execute commands
+    cmd = common.command(exe, latex_src, latex_tgt)
+    res = subprocess.call(cmd, shell=True)
+
+    # check results
+    common.show_results(res, fname)

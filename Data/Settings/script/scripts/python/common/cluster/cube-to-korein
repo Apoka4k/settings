@@ -1,0 +1,62 @@
+#!/usr/bin/python
+
+
+# standard imports
+import os
+import sys
+import subprocess
+
+# custom imports
+import common
+
+
+# remove temporary files
+def clear_files(files):
+
+    out_files = []
+    for item_file in files:
+        if item_file[-1] not in ["~", "#"]:
+            out_files.append(item_file)
+    return out_files
+
+
+# main
+def main():
+
+    # get script info
+    script_path = os.path.realpath(__file__)
+    script_name = os.path.basename(script_path)
+
+    # check arguments
+    if len(sys.argv) != 1:
+        print ""
+        print common.get_show_usage(script_name, [], [])
+        sys.exit()
+
+    # get files
+    files = clear_files(common.get_dir_content(common.cube_shared_root))
+
+    # get commands
+    cmds = []
+    for item_file in files:
+        basename = os.path.basename(item_file)
+        tgt_file = common.path_glue(common.korein_shared_root, basename)
+        cmd = common.command("scp", item_file, "korein:" + tgt_file)
+        cmds.append(cmd)
+
+    # execute commands
+    for cmd in cmds:
+        res = subprocess.call(cmd, shell=True)
+        if res != 0:
+            print common.get_err_msg(script_path)
+            sys.exit
+
+    # show success
+    print common.get_succ_msg(script_path)
+    sys.exit()
+
+
+# main call
+if __name__ == "__main__":
+
+    main()

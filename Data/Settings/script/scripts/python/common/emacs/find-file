@@ -1,0 +1,124 @@
+#!/usr/bin/python
+
+
+# imports
+import os
+import subprocess
+import sys
+
+# custom imports
+import common
+from common import color
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) not in [2, 3]:
+        print common.get_err_msg(fname)
+        common.show_usage(fname, ["string"], ["number"])
+        sys.exit()
+
+    # get args
+    file_name = sys.argv[1]
+
+    # get current dir
+    current_dir = os.getcwd()
+
+    # search files
+    rlist = []
+    for (path, _, flist) in os.walk(current_dir):
+        for name in flist:
+            if file_name in name:
+                rlist.append(common.path_glue(path, name))
+
+    # sort files
+    rlist.sort()
+
+    # print results
+    max_length = len(str(len(rlist)))
+
+    text = color.green + "\n" + \
+        color.pink + "  Results" + \
+        color.green + ":" + "\n\n"
+
+    if rlist == []:
+        text += color.green + " " * 4 + "file containing string " + \
+            color.yellow + file_name + \
+            color.green + " does not exist." + "\n" + \
+            color.END
+        print text
+        sys.exit()
+    else:
+        files_dict = {}
+        counter = 1
+        for name in rlist:
+            files_dict[counter] = name
+            current_length = len(str(counter))
+            current_difference = max_length - current_length
+            text += " " * (4 + current_difference) + \
+                color.blue + str(counter) + \
+                color.cyan + " " + name + "\n"
+            counter += 1
+        text += color.END
+
+    if len(sys.argv) == 2:
+        print text
+        sys.exit()
+
+    if len(sys.argv) == 3:
+        index = sys.argv[2]
+
+        if common.positive_integer(index) is True:
+            index = int(index)
+
+            if index in files_dict.keys():
+
+                # print selected file
+                current_length = len(str(index))
+                current_difference = max_length - current_length
+                text = color.green + "\n" + \
+                    color.pink + "  Results" + \
+                    color.green + ":" + "\n\n" + \
+                    " " * (4 + current_difference) + \
+                    color.blue + str(index) + \
+                    color.cyan + " " + files_dict[index] + "\n" + \
+                    color.END
+                print text
+
+                # open selected file
+                cmd = common.command("emacs", files_dict[index], "&")
+                res = subprocess.call(cmd, shell=True)
+                if res != 0:
+                    print common.get_err_msg(fname)
+                sys.exit()
+            else:
+                text = color.green + "\n" + \
+                    color.pink + "  Results" + \
+                    color.green + ":" + "\n\n" + \
+                    color.green + " " * 4 + "string " + \
+                    color.yellow + file_name + \
+                    color.green + " exists in some file" + "\n" + \
+                    color.green + " " * 4 + "but index " + \
+                    color.yellow + str(index) + \
+                    color.green + " is out of range." + "\n" + \
+                    color.END
+                print text
+                sys.exit()
+        else:
+            text = color.green + "\n" + \
+                color.pink + "  Results" + \
+                color.green + ":" + "\n\n" + \
+                color.green + " " * 4 + "string " + \
+                color.yellow + file_name + \
+                color.green + " exists in some file" + "\n" + \
+                color.green + " " * 4 + "but index " + \
+                color.yellow + index + \
+                color.green + " is invalid." + "\n" + \
+                color.END
+            print text
+            sys.exit()
