@@ -25,17 +25,13 @@ source /home/sbicego/scripts/import.sh
 export PYTHONPATH="/home/sbicego/scripts/python/common/common:$PATH"
 
 # pycparser
-export PYTHONPATH="/home/sbicego/Desktop/pycparser:$PYTHONPATH:"
+export PYTHONPATH="/home/sbicego/Desktop/executables/pycparser:$PYTHONPATH:"
 
 # kratos
-export PYTHONPATH="/home/sbicego/Desktop/kratos/builds_release/kratos/tools:$PYTHONPATH"
+export PYTHONPATH="/home/sbicego/Desktop/executables/kratos/builds_release/kratos/tools:$PYTHONPATH"
 
 # pypdf
-export PYTHONPATH="/home/sbicego/Desktop/pyPdf:$PYTHONPATH"
-
-# nautilus extension
-# export PKG_CONFIG_PATH="/home/sbicego/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-# export LD_LIBRARY_PATH="/home/sbicego/usr/lib:$LD_LIBRARY_PATH"
+export PYTHONPATH="/home/sbicego/Desktop/executables/pyPdf:$PYTHONPATH"
 
 # SHORTCUTS
 
