@@ -2,4 +2,7 @@
 # patterns ignored by git
 
 *~
-*.pdf
+*#
+
+theory.pdf
+laboratory.pdf
