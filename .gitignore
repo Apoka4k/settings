@@ -2,3 +2,4 @@
 # patterns ignored by git
 
 *~
+*.pdf
