@@ -13,15 +13,18 @@ export PYTHONDONTWRITEBYTECODE="avoid.pyc.pyo"
 
 # BASH PATHS
 
-# standard paths
+# standard
 export PATH="/home/sbicego/bin:$PATH"
 
-# scripts paths
+# scripts
 source /home/sbicego/scripts/import.sh
+
+# corral and z3
+export PATH="/home/sbicego/Desktop/executables/corral:$PATH"
 
 # PYTHON PATHS
 
-# scripts paths
+# scripts
 export PYTHONPATH="/home/sbicego/scripts/python/common/common:$PATH"
 
 # pycparser
@@ -45,10 +48,10 @@ alias lines="wc -l <"
 alias emacs-folder="cd /home/sbicego/.emacs_files"
 alias emacs-mode-folder="cd /home/sbicego/.emacs.d/modes"
 alias bash-folder="cd /home/sbicego/.bash_files"
-alias manual-folder="cd /home/sbicego/Desktop/sbicego/Manual"
 alias scripts-folder="cd /home/sbicego/scripts/python/common"
 alias latex-folder="cd /home/sbicego/texmf/tex/latex"
 alias shared-folder="cd /home/sbicego/Desktop/shared_folder"
+alias manual-folder="cd /home/sbicego/Desktop/Settings/Notes"
 
 # WARNING
 #
