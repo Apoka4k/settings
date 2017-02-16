@@ -29,7 +29,7 @@
 ;; evidenziare le occorrenze della stringa
 (defalias 'hh 'highlight-regexp)
 
-;; rimuovere le evidenziazioni
+;; rimuovere l'evidenziazione delle occorrenze di una stringa
 (defalias 'hhh 'unhighlight-regexp)
 
 ;; stampare i colori usabili per le evidenziazioni
@@ -48,6 +48,18 @@
 ;; apri un buffer con i colori di EMACS
 (defalias 'colors 'list-colors-display)
 
+;; etichetta la macro attuale
+(defalias 'macro-name 'name-last-kbd-macro)
+
+;; salva la macro con l'etichetta specificata
+(defalias 'macro-save 'insert-kbd-macro)
+
+;; elimina le righe che matchano l'espressione regolare
+(defalias 'remove-lines-regexp 'flush-lines)
+
+;; salva solo le righe che matchano l'espressione regolare
+(defalias 'keep-lines-regexp 'keep-lines)
+
 ;; SCORCIATOIE DA TASTIERA
 
 ;; copia il token attualmente selezionato
@@ -63,8 +75,7 @@
 (fset 'gg
    [?\C-s ?\{ S-left ?\S-\C-\M-n S-left ?\M-w])
 
-;; comando per il cluter:
-;;   trasforma l'output di un ($ ls) in una colonna di stringhe
-;;   del tipo (korein-to-cube-one-file *.txt;)
+;; predisporre ad essere copiati da korein a cube
+;; tutti i file con estensione txt
 (fset 'cluster
-   [?\C-x ?h ?\M-x ?q ?q ?q return ?. ?* ?\[ ?. ?\] ?n ?u ?x ?m ?v ?\C-q ?\C-j return return ?! ?\C-x ?h ?\M-x ?q ?q ?q return ?. ?* ?\[ ?. ?\] ?s ?h ?\C-q ?\C-j return return ?! ?\C-x ?h ?\M-x ?q ?q ?q return ?. ?* ?\[ ?. ?\] ?t ?\C-q ?\C-j return return ?! ?\C-x ?h ?\M-x ?q ?q ?q return ?. ?* ?\[ ?. ?\] ?s ?m ?v ?\C-q ?\C-j return return ?! ?\C-x ?h ?\M-x ?q ?q ?q return ?n ?u ?X ?m ?v ?\C-q ?\C-j return return ?! ?\C-x ?h ?\M-x ?q ?q ?q return ?^ return ?k ?o ?r ?e ?i ?n ?- ?t ?o ?- ?c ?u ?b ?e ?- ?o ?n ?e ?- ?f ?i ?l ?e ?  return ?! ?\C-x ?h ?\M-x ?q ?q ?q return ?$ return ?\; return ?!])
+   [?\C-x ?h ?\M-x ?k ?e ?e ?p ?- ?l ?i ?n ?e ?s return ?^ ?. ?* ?\[ ?. ?\] ?t ?x ?t ?$ return ?\C-x ?h ?\M-x ?q ?q ?q kp-enter ?^ return ?k ?o ?r ?e ?i ?n ?- ?t ?o ?- ?c ?u ?b ?e ?- ?o ?n ?e ?- ?f ?i ?l ?e ?  return ?! ?\C-x ?h ?\M-x ?q ?q ?q return ?$ return ?\; return ?!])
