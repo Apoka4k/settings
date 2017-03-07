@@ -25,14 +25,9 @@ if __name__ == "__main__":
     # get file name
     file_name = os.path.basename(sys.argv[1])
 
-    # get directories paths
-    cube_shared_folder = common.path_glue(common.home, "Desktop/shared_folder")
-    korein_shared_folder = common.path_glue(common.korein_root,
-                                            "shared_folder")
-
     # get files paths
-    cube_file = common.path_glue(cube_shared_folder, file_name)
-    korein_file = common.path_glue(korein_shared_folder, file_name)
+    cube_file = common.path_glue(common.cube_shared_root, file_name)
+    korein_file = common.path_glue(common.korein_shared_root, file_name)
 
     # get command
     scp_cmd = common.command("scp", cube_file, "korein:" + korein_file)

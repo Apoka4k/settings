@@ -426,10 +426,10 @@ rep_root = path_glue(home, "Desktop/Settings")
 korein_root = path_glue("/es0", "sbicego")
 
 # cube shared folder root path
-cube_shared_root = path_glue(home, "Desktop/shared_folder")
+cube_shared_root = path_glue(home, "Desktop/shared")
 
 # korein shared folder root path
-korein_shared_root = path_glue(korein_root, "shared_folder")
+korein_shared_root = path_glue(korein_root, "default")
 
 
 # =========================================================================== #

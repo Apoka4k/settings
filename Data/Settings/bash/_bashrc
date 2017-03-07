@@ -5,7 +5,7 @@ source /home/sbicego/.bash_files/default.sh
 # CUSTOM SETTINGS
 
 # set processes resources
-ulimit -m 2000
+# ulimit -m 2000
 # ulimit -s unlimited
 
 # don't create .pyc files
@@ -21,6 +21,9 @@ source /home/sbicego/scripts/import.sh
 
 # corral and z3
 export PATH="/home/sbicego/Desktop/executables/corral:$PATH"
+
+# nuXmv
+export PATH="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/nuXmv/bin:$PATH"
 
 # PYTHON PATHS
 
