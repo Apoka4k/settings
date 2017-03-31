@@ -26,6 +26,9 @@
 ;; copiare il token selezionato
 (defalias 'ww 'copy-word)
 
+; ricarica il file .emacs
+(defalias 'll 'reload-init-file)
+
 ;; evidenziare le occorrenze della stringa
 (defalias 'hh 'highlight-regexp)
 

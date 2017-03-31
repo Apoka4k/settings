@@ -771,9 +771,9 @@ e dai seguenti file:
 \symboldesc{\tw{*}}{tutte le stringhe}
 \symboldesc{\tw{[\ang{string}]*[\ang{string}]}}{tutte le stringhe che cominciano e terminano con le successioni di caratteri indicate}
 
-\subsection{GitLab}
+\subsection{Git}
 
-\termdesc{Descrizione}{\sc{GitLab} permette di creare piu' rami di storia e di unire due rami mantenendo i dati di entrambi, a meno che non siano contraddittori. Permette anche di creare rami di storia locali.}
+\termdesc{Descrizione}{\sc{Git} permette di creare piu' rami di storia e di unire due rami mantenendo i dati di entrambi, a meno che non siano contraddittori. Permette anche di creare rami di storia locali. \sc{GitLab} e' l'interfaccia grafica online di \sc{Git}.}
 
 \bashcmd{\ang{folder}}{git clone \ang{web\_address} [``\ang{alias\_name}'']}{la repository dell'indirizzo specificato viene clonata nella cartella attuale della macchina, eventualmente rinominando la cartella col nome specificato}
 \bashcmd{\ang{git\_folder} (\ang{branch})}{git status}{stampa le differenze tra il ramo selezionato locale e la cartella}
@@ -830,6 +830,8 @@ e dai seguenti file:
 \bashcmd{\ang{git\_folder} (\ang{branch})}{git revert \ang{code}}{applica un commit che cancella le modifiche del commit di codice specificato. Nella sostanza, cancella il commit indicato ma in modo costruttivo, cioe' aggiungendo un nuovo commit che esegue le azioni contrarie di quelle del commit che vuole essere cancellato}
 \bashcmd{\ang{git\_folder} (\ang{branch})}{git rebase -i origin/\ang{branch}}{apre una finestra interattiva in cui viene stampato l'elenco dei commit successivi all'ultimo push e viene permessa la loro modifica \b{--} viene usato per modificare o cancellare commit locali}
 \bashcmd{\ang{git\_folder} (\ang{branch})}{git merge \ang{branch}}{mergia il branch specificato nel branch corrente}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git checkout \ang{branch}}{crea localmente il branch specificato}
+\bashcmd{\ang{git\_folder} (\ang{branch})}{git push origin \ang{branch}}{pusha sul server il branch locale specificato}
 
 \subsubsection{Merge}
 

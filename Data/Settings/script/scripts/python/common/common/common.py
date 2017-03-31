@@ -419,8 +419,11 @@ def get_separator():
 # home path
 home = "/home/sbicego"
 
-# repository root path
+# settings repository root path
 rep_root = path_glue(home, "Desktop/Settings")
+
+# personal repository root path
+personal_rep_root = path_glue(home, "Desktop/Sbicego")
 
 # korein root path
 korein_root = path_glue("/es0", "sbicego")

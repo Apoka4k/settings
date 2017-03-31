@@ -1,66 +1,119 @@
 
-# DEFAULT SETTINGS
+# ------------------------------------------------------------------------ #
+# EXTERNAL FILES                                                           #
+# ------------------------------------------------------------------------ #
+
+# -- default settings --
 source /home/sbicego/.bash_files/default.sh
 
-# CUSTOM SETTINGS
+# ------------------------------------------------------------------------ #
+# RESOURCES BOUNDS                                                         #
+# ------------------------------------------------------------------------ #
 
-# set processes resources
+# -- RAM bound (MB) --
 # ulimit -m 2000
+
+# -- stack bound (MB or unlimited) --
 # ulimit -s unlimited
 
-# don't create .pyc files
+# ------------------------------------------------------------------------ #
+# PROCESSES SETTINGS                                                       #
+# ------------------------------------------------------------------------ #
+
+# -- don't create .pyc files --
 export PYTHONDONTWRITEBYTECODE="avoid.pyc.pyo"
 
-# BASH PATHS
+# ------------------------------------------------------------------------ #
+# BIN PATHS                                                                #
+# ------------------------------------------------------------------------ #
 
-# standard
+# -- standard binaries --
 export PATH="/home/sbicego/bin:$PATH"
 
-# scripts
+# -- scripts --
 source /home/sbicego/scripts/import.sh
 
-# corral and z3
+# -- corral and z3 --
 export PATH="/home/sbicego/Desktop/executables/corral:$PATH"
 
-# nuXmv
+# -- nuXmv --
 export PATH="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/nuXmv/bin:$PATH"
 
-# PYTHON PATHS
+# ------------------------------------------------------------------------ #
+# PYTHON PATHS                                                             #
+# ------------------------------------------------------------------------ #
 
-# scripts
+# -- scripts --
 export PYTHONPATH="/home/sbicego/scripts/python/common/common:$PATH"
 
-# pycparser
+# -- pycparser --
 export PYTHONPATH="/home/sbicego/Desktop/executables/pycparser:$PYTHONPATH:"
 
-# kratos
+# -- kratos --
 export PYTHONPATH="/home/sbicego/Desktop/executables/kratos/builds_release/kratos/tools:$PYTHONPATH"
 
-# pypdf
+# -- ply --
+export PYTHONPATH="/home/sbicego/Desktop/executables/ply:$PYTHONPATH:"
+
+# -- pypdf --
 export PYTHONPATH="/home/sbicego/Desktop/executables/pyPdf:$PYTHONPATH"
 
-# SHORTCUTS
+# ------------------------------------------------------------------------ #
+# COMMANDS                                                                 #
+# ------------------------------------------------------------------------ #
 
-# commands
-alias run="runlim -s 900 -r 3600"
+# -- process execution with resources bound --
+# -- usage: run <process>
+alias run="runlim -s 3000 -r 3600"
+
+# -- guess right tool to open file --
+# -- usage: open <file>
 alias open="gnome-open"
+
+# -- show resources used by process --
+# -- usage: time <process>
 alias time="/usr/bin/time --format=\"\n-------------------\n%E s %M KB\n-------------------\n\""
+
+# -- show file lines number --
+# -- usage: lines <file>
 alias lines="wc -l <"
 
-# folders
-alias emacs-folder="cd /home/sbicego/.emacs_files"
-alias emacs-mode-folder="cd /home/sbicego/.emacs.d/modes"
-alias bash-folder="cd /home/sbicego/.bash_files"
-alias scripts-folder="cd /home/sbicego/scripts/python/common"
-alias latex-folder="cd /home/sbicego/texmf/tex/latex"
-alias shared-folder="cd /home/sbicego/Desktop/shared_folder"
-alias manual-folder="cd /home/sbicego/Desktop/Settings/Notes"
+# ------------------------------------------------------------------------ #
+# FOLDERS                                                                  #
+# ------------------------------------------------------------------------ #
 
-# WARNING
-#
+# -- emacs settings files --
+alias emacs-folder="cd /home/sbicego/.emacs_files"
+
+# -- emacs modes files --
+alias emacs-mode-folder="cd /home/sbicego/.emacs.d/modes"
+
+# -- bash settings files --
+alias bash-folder="cd /home/sbicego/.bash_files"
+
+# -- python scripts --
+alias scripts-folder="cd /home/sbicego/scripts/python/common"
+
+# -- latex packages --
+alias latex-folder="cd /home/sbicego/texmf/tex/latex"
+
+# -- shared dir --
+alias shared-dir="cd /home/sbicego/Desktop/shared"
+
+# -- manual --
+alias manual-dir="cd /home/sbicego/Desktop/Settings/Notes"
+
+# ------------------------------------------------------------------------ #
+# WARNING                                                                  #
+# ------------------------------------------------------------------------ #
+
 # To make the file changes effective,
-# execute the following terminal command:
+# execute the following bash command:
+#
 # $ source /home/sbicego/.bashrc
 #
-# or the script:
+# or execute the following script:
+#
 # $ bash-up
+
+# ------------------------------------------------------------------------ #

@@ -45,3 +45,9 @@
   (interactive "P")
   (copy-thing 'backward-word 'forward-word arg)
   )
+
+;; COMANDO PER RICARICARE IL FILE .EMACS
+; definisci la funzione
+(defun reload-init-file ()
+  (interactive)
+  (load-file "~/.emacs"))
