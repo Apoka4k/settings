@@ -1,6 +1,12 @@
 
 ;; SCORCIATOIE NEL MENU M-x
 
+;; aggiornare il buffer
+(defalias 'bb 'revert-buffer)
+
+; ricarica il file .emacs
+(defalias 'll 'reload-init-file)
+
 ;; rimuovere le evidenziazioni
 (defalias 'cc 'lazy-highlight-cleanup)
 
@@ -20,14 +26,8 @@
 ;; attivare la modalita' gtags
 (defalias 'xx 'xgtags-mode)
 
-;; aggiornare il buffer
-(defalias 'bb 'revert-buffer)
-
 ;; copiare il token selezionato
 (defalias 'ww 'copy-word)
-
-; ricarica il file .emacs
-(defalias 'll 'reload-init-file)
 
 ;; evidenziare le occorrenze della stringa
 (defalias 'hh 'highlight-regexp)
@@ -62,6 +62,9 @@
 
 ;; salva solo le righe che matchano l'espressione regolare
 (defalias 'keep-lines-regexp 'keep-lines)
+
+;; comunica il numero di occorrenze dell'espressione regolare
+(defalias 'oo 'count-matches)
 
 ;; SCORCIATOIE DA TASTIERA
 
