@@ -33,12 +33,6 @@ export PATH="/home/sbicego/bin:$PATH"
 # -- scripts --
 source /home/sbicego/scripts/import.sh
 
-# -- corral and z3 --
-export PATH="/home/sbicego/Desktop/executables/corral:$PATH"
-
-# -- nuXmv --
-export PATH="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/nuXmv/bin:$PATH"
-
 # ------------------------------------------------------------------------ #
 # PYTHON PATHS                                                             #
 # ------------------------------------------------------------------------ #
@@ -57,6 +51,22 @@ export PYTHONPATH="/home/sbicego/Desktop/executables/ply:$PYTHONPATH:"
 
 # -- pypdf --
 export PYTHONPATH="/home/sbicego/Desktop/executables/pyPdf:$PYTHONPATH"
+
+# ------------------------------------------------------------------------ #
+# BINS                                                                     #
+# ------------------------------------------------------------------------ #
+
+# -- corral --
+alias corral="/home/sbicego/Desktop/executables/corral/corral"
+
+# -- nuXmv --
+alias nuXmv="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/nuXmv/bin/nuXmv"
+
+# -- mathsat --
+alias mathsat="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/mathsat5/mathsat"
+
+# -- msatic3 --
+alias msatic3="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/msatic3/msatic3"
 
 # ------------------------------------------------------------------------ #
 # COMMANDS                                                                 #
