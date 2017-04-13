@@ -48,18 +48,23 @@ Sono supportati i percorsi di altre macchine. La sintassi e':
 \item[] \tw{/ssh:\ang{user}@\ang{machine}:\ang{path}}
 \end{itemize}
 
+\subsection{Macchina}
+
+\bashcmd{}{lfcpu}{stampa informazioni sul processore della macchina}
+\bashcmd{}{lsblk}{stampa i device della macchina e le loro partizioni}
+\bashcmd{}{df -h}{stampa lo stato delle partizioni della macchina}
+\bashcmd{}{free -m}{stampa lo stato della RAM}
+
 \section{Installazione}
 
 Quando si vuole installare un'applicazione, solitamente si apre il terminale nella cartella sorgente dell'applicazione e si danno i seguenti comandi:
 \begin{itemize}
 \item[\bbox] \tw{./configure}
-\item[\bbox] \tw{make}
 \item[\bbox] \tw{make install}
 \end{itemize}
 L'installazione avviene nella \sc{root} della propria macchina, solitamente nel path \tw{/usr}. Se non si hanno diritti di amministratore sulla propria macchina bisogna installare l'applicazione nella propia \sc{home}. Solitamente i comandi da dare sono:
 \begin{itemize}
 \item[\bbox] \tw{./configure --prefix=\$HOME/usr}
-\item[\bbox] \tw{make}
 \item[\bbox] \tw{make install}
 \end{itemize}
 Successivamente, bisogna aggiungere l'informazione del nuovo path a bash. Bisogna aggiungere la riga:
