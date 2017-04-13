@@ -70,16 +70,11 @@ if __name__ == "__main__":
     # get results
     text_list = []
 
-    text = color.green + "\n" + \
-        color.pink + "  Results" + \
-        color.green + ":"
-    text_list.append(text)
-
     max_length = len(str(max(len(fnames_list), len(dirnames_list))))
     counter = 1
 
     # get files
-    text = color.green + "\n\n" + \
+    text = color.green + "\n" + \
         color.blue + "  FILES" + \
         color.green + ":" + "\n"
     text_list.append(text)
@@ -129,11 +124,11 @@ if __name__ == "__main__":
 
         if number not in indexing_dict.keys():
             correct_index = False
-            text = color.green = " " * 4 + \
-                color.pink + "Error" + \
+            text = color.green + " " * 4 + \
+                color.pink + "Warning" + \
                 color.green + ": index " + \
                 color.yellow + str(number) + \
-                color.green + " out of range."
+                color.green + " out of range or invalid."
             text_list.append(text)
         else:
             correct_index = True

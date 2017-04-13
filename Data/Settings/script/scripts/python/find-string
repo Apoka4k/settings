@@ -66,9 +66,7 @@ if __name__ == "__main__":
         fnames_dict[met_fname].sort()
 
     # print results
-    text = color.green + "\n" + \
-        color.pink + "  Results" + \
-        color.green + ":" + "\n\n"
+    text = "\n"
 
     max_length = len(str(len(met_fnames)))
     text_list = []
@@ -102,9 +100,10 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 2:
         if text_list == []:
-            text += color.green + " " * 4 + "file containing string " + \
+            text += color.green + " " * 4 + \
+                color.green + "No file contains string " + \
                 color.yellow + string + \
-                color.green + " does not exist." + "\n" + \
+                color.green + "." + "\n" + \
                 color.END
             print text
             sys.exit()
@@ -121,47 +120,28 @@ if __name__ == "__main__":
         if common.positive_integer(index) is True:
             index = int(index)
 
-            if index in index_dict.keys():
+        if index in index_dict.keys():
 
-                # print selected file
-                current_length = len(str(index))
-                current_difference = max_length - current_length
-                text = color.green + "\n" + \
-                    color.pink + "  Results" + \
-                    color.green + ":" + "\n\n" + \
-                    index_dict[index] + \
-                    color.END
-                print text
-
-                # open selected file
-                cmd = common.command("emacs", fname_dict[index], "&")
-                res = subprocess.call(cmd, shell=True)
-                if res != 0:
-                    print common.get_err_msg(fname)
-                sys.exit()
-            else:
-                text = color.green + "\n" + \
-                    color.pink + "  Results" + \
-                    color.green + ":" + "\n\n" + \
-                    color.green + " " * 4 + "string " + \
-                    color.yellow + string + \
-                    color.green + " exists in some file" + "\n" + \
-                    color.green + " " * 4 + "but index " + \
-                    color.yellow + str(index) + \
-                    color.green + " is out of range." + "\n" + \
-                    color.END
-                print text
-                sys.exit()
-        else:
+            # print selected file
+            current_length = len(str(index))
+            current_difference = max_length - current_length
             text = color.green + "\n" + \
-                color.pink + "  Results" + \
-                color.green + ":" + "\n\n" + \
-                color.green + " " * 4 + "string " + \
-                color.yellow + string + \
-                color.green + " exists in some file" + "\n" + \
-                color.green + " " * 4 + "but index " + \
-                color.yellow + index + \
-                color.green + " is invalid." + "\n" + \
+                index_dict[index] + \
+                color.END
+            print text
+
+            # open selected file
+            cmd = common.command("emacs", fname_dict[index], "&")
+            res = subprocess.call(cmd, shell=True)
+            if res != 0:
+                print common.get_err_msg(fname)
+            sys.exit()
+        else:
+            text = color.green + "\n" + " " * 4 + \
+                color.pink + "Warning" + \
+                color.green + ": index " + \
+                color.yellow + str(index) + \
+                color.green + " out of range or invalid." + "\n" + \
                 color.END
             print text
             sys.exit()
