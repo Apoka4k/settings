@@ -454,8 +454,9 @@ class Backup():
 
         # bash files
         bash_paths = {}
-        bash_paths["file"] = [path_glue(home, ".bashrc")]
-        bash_paths["dir"] = [path_glue(home, ".bash_files")]
+        bash_paths["file"] = [path_glue(home, ".bashrc"),
+                              path_glue(home, ".bash_profile")]
+        bash_paths["dir"] = []
         bash_paths["tgt_dir"] = "bash"
         self.backup_list.append(bash_paths)
 

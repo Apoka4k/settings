@@ -1,10 +1,41 @@
 
 # ------------------------------------------------------------------------ #
-# EXTERNAL FILES                                                           #
+# DEFAULT SETTINGS                                                         #
 # ------------------------------------------------------------------------ #
 
+# -- home --
+export HOME="/home/sbicego"
+
 # -- default settings --
-source /home/sbicego/.bash_files/default.sh
+source /etc/bashrc
+source /home/sbicego/.bash_profile
+
+# -- git interface --
+source /home/sbicego/bin/git-prompt.sh
+
+# -- prompt indenting message --
+export PS1="\[\e[1;34m\]\W\[\e[1;32m\] \\$ \[$(tput sgr0)\]"
+
+# -- git-compatible prompt indenting message (overwrites PS1) --
+export PROMPT_COMMAND='__git_ps1 "\[\e[1;34m\]\W\[\e[1;97m\]" " \[\e[1;32m\]\\\$ \[$(tput sgr0)\]"'
+
+# -- default paths --
+export PATH="/home/sbicego/bin:$PATH"
+export HOME="/home/sbicego"
+
+# -- default identifiers --
+export EDITOR="emacs"
+export PERL5LIB="/home/sbicego/lib/perl5:/home/sbicego/lib/x86_64-linux-thread-multi"
+export LD_LIBRARY_PATH="/home/sbicego/lib:/home/sbicego/lib64:/home/sbicego/lib/perl5/x86_64-linux-thread-multi/auto/:/home/sbicego/lib/perl5/x86_64-linux-thread-multi/Alien/SVN"
+export LD_RUN_PATH="/home/sbicego/lib:$LD_RUN_PATH"
+export PKG_CONFIG_PATH="/home/sbicego/lib/pkgconfig:$PKG_CONFIG_PATH"
+export C_INCLUDE_PATH="/home/sbicego/include:$C_INCLUDE_PATH"
+export CPLUS_INCLUDE_PATH="/home/sbicego/include:$CPLUS_INCLUDE_PATH"
+export LIBRARY_PATH="/home/sbicego/lib:$LIBRARY_PATH"
+export LUA_PATH="./?.lua;/home/sbicego/share/lua/5.1/?.lua;/home/sbicego/share/lua/5.1/?/init.lua;/home/sbicego/lib/lua/5.1/?.lua;/home/sbicego/lib/lua/5.1/?/init.lua;"
+export LUA_CPATH="./?.so;/home/sbicego/lib/lua/5.1/?.so;/home/sbicego/lib/lua/5.1/loadall.so"
+export GREP_OPTIONS='--color=auto'
+export WINDOW_MANAGER="/home/sbicego/bin/awesome"
 
 # ------------------------------------------------------------------------ #
 # RESOURCES BOUNDS                                                         #
@@ -27,27 +58,32 @@ export PYTHONDONTWRITEBYTECODE="avoid.pyc.pyo"
 # BINS                                                                     #
 # ------------------------------------------------------------------------ #
 
-# -- standard dirs --
+# -- standard bins --
 export PATH="/home/sbicego/bin:$PATH"
 export PATH="/home/sbicego/usr/bin:$PATH"
 
 # -- scripts --
 source /home/sbicego/scripts/import.sh
 
-# -- corral --
-alias corral="/home/sbicego/Desktop/executables/corral/corral"
-
 # -- nuXmv --
-alias nuXmv="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/nuXmv/bin/nuXmv"
-
+export PATH="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/nuXmv/bin:$PATH"
 # -- mathsat --
 alias mathsat="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/mathsat5/mathsat"
-
 # -- msatic3 --
 alias msatic3="/home/sbicego/Desktop/executables/nuXmv/builds_release/ESTools/msatic3/msatic3"
 
+# -- kratos --
+alias kratos="/home/sbicego/Desktop/executables/kratos/builds_release/kratos/kratos"
+
 # -- matlab --
 export PATH="/home/sbicego/Desktop/executables/MATLAB/R2017a/bin:$PATH"
+
+# -- lustrec --
+export PATH="/home/sbicego/Desktop/executables/cocoSim/builds_release/lustrec/bin:$PATH"
+# -- z3 --
+export PATH="/home/sbicego/Desktop/executables/cocoSim/builds_release/z3/bin:$PATH"
+# -- zustre --
+export PATH="/home/sbicego/Desktop/executables/cocoSim/builds_release/zustre/run/bin:$PATH"
 
 # ------------------------------------------------------------------------ #
 # PYTHON PATHS                                                             #
@@ -64,9 +100,6 @@ export PYTHONPATH="/home/sbicego/Desktop/executables/kratos/builds_release/krato
 
 # -- ply --
 export PYTHONPATH="/home/sbicego/Desktop/executables/ply:$PYTHONPATH:"
-
-# -- pypdf --
-export PYTHONPATH="/home/sbicego/Desktop/executables/pyPdf:$PYTHONPATH"
 
 # ------------------------------------------------------------------------ #
 # COMMANDS                                                                 #
