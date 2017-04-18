@@ -1,0 +1,15 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
+;; CARICARE I FILE DI INIZIALIZZAZIONE
+(load "/home/sbicego/emacs/settings.lisp")
+(load "/home/sbicego/emacs/functions.lisp")
+(load "/home/sbicego/emacs/shortcuts.lisp")
+(load "/home/sbicego/emacs/modes.lisp")
+(load "/home/sbicego/emacs/flymake.lisp")
+(load "/home/sbicego/emacs/flycheck.lisp")
+(load "/home/sbicego/emacs/packages.lisp")
+
+(provide '.emacs)
+;;; .emacs ends here

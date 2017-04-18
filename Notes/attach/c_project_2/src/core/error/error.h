@@ -1,2 +1,0 @@
-
-void error(char* string);
