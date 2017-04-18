@@ -473,6 +473,13 @@ class Backup():
         git_paths["tgt_dir"] = "git"
         self.backup_list.append(git_paths)
 
+        # input files
+        input_paths = {}
+        input_paths["file"] = [path_glue(home, ".inputrc")]
+        input_paths["dir"] = []
+        input_paths["tgt_dir"] = "input"
+        self.backup_list.append(input_paths)
+
         # latex files
         latex_paths = {}
         latex_paths["file"] = []

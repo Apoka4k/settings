@@ -5,3 +5,13 @@
     editor = emacs
 [push]
     default = current
+[color]
+    status = auto
+[color "status"]
+    header = normal
+    branch = normal
+    added = green
+    updated = green
+    changed = green
+    untracked = red
+    nobranch = red

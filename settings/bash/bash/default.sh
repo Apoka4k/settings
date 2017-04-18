@@ -8,6 +8,7 @@ source /etc/bashrc
 
 # -- git interface --
 source /home/sbicego/usr/etc/git/git-prompt.sh
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 # -- prompt indenting message --
 export PS1="\[\e[1;34m\]\W\[\e[1;32m\] \\$ \[$(tput sgr0)\]"
