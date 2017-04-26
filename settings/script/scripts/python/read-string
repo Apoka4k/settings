@@ -18,18 +18,18 @@ if __name__ == "__main__":
     fname = os.path.realpath(__file__)
 
     # check args
-    if len(sys.argv) != 2:
+    if len(sys.argv) not in [2, 3]:
         print common.get_err_msg(fname)
-        common.show_usage(fname, ["string"], [])
+        common.show_usage(fname, ["string"], ["number"])
         sys.exit()
 
     # get args
     string = "\"" + sys.argv[1] + "\""
 
     if len(sys.argv) == 3:
-        index = sys.argv[2]
+        number = sys.argv[2]
     else:
-        index = "0"
+        number = "0"
 
     # print results
     # print preamble
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     print text
 
     # execute command
-    cmd = common.command("grep", "-Rn", "-C", str(index), string)
+    cmd = common.command("grep", "-Rn", "-C", str(number), string)
     res = subprocess.call(cmd, shell=True)
 
     # print postamble
