@@ -38,11 +38,10 @@ source /home/sbicego/.opam/opam-init/init.sh
 source /home/sbicego/scripts/import.sh
 
 # -- eclipse --
-alias eclipse="/home/sbicego/exe/eclipse/jee-neon/eclipse/eclipse"
+alias eclipse="/home/sbicego/exe/eclipse/jee-neon/eclipse/eclipse &"
 
 # -- matlab --
-export PATH="/home/sbicego/exe/matlab/R2017a/bin:$PATH"
-alias matlab="/home/sbicego/exe/matlab/R2017a/bin/matlab -sd /home/sbicego/exe/cocoSim/source/cocoSim"
+alias matlab="/home/sbicego/exe/matlab/R2017a/bin/matlab -sd /home/sbicego/exe/cocoSim/source/cocoSim &"
 
 # -- nuXmv --
 export PATH="/home/sbicego/exe/nuXmv/build/ESTools/nuXmv/bin:$PATH"
@@ -53,13 +52,6 @@ alias msatic3="/home/sbicego/exe/nuXmv/build/ESTools/msatic3/msatic3"
 
 # -- kratos --
 alias kratos="/home/sbicego/exe/kratos/build/kratos/kratos"
-
-# -- lustrec --
-export PATH="/home/sbicego/exe/cocoSim/build/lustrec/bin:$PATH"
-# -- z3 --
-export PATH="/home/sbicego/exe/cocoSim/build/z3/bin:$PATH"
-# -- zustre --
-export PATH="/home/sbicego/exe/cocoSim/build/zustre/run/bin:$PATH"
 
 # ------------------------------------------------------------------------ #
 # PYTHON PATHS                                                             #

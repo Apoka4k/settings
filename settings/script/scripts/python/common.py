@@ -14,6 +14,8 @@ import sys
 # =========================================================================== #
 
 class color:
+
+    # normal
     blue = "\033[0;34m"
     cyan = "\033[0;36m"
     gray = "\033[0;30m"
@@ -23,6 +25,19 @@ class color:
     red = "\033[0;31m"
     white = "\033[0;37m"
     yellow = "\033[0;33m"
+
+    # bold
+    blue_bold = "\033[1;34m"
+    cyan_bold = "\033[1;36m"
+    gray_bold = "\033[1;30m"
+    green_bold = "\033[1;32m"
+    light_green_bold = "\033[1;38m"
+    pink_bold = "\033[1;35m"
+    red_bold = "\033[1;31m"
+    white_bold = "\033[1;37m"
+    yellow_bold = "\033[1;33m"
+
+    # default
     END = "\033[0;m"
 
 # end color
