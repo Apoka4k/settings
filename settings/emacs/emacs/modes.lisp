@@ -30,7 +30,7 @@
    '(
      ("\t+" . general-tab-face)
      ("[ ]+$" . general-space-face)
-     ("^.\\{80,\\}$" (0 'general-line-face t))
+     ;; ("^.\\{80,\\}$" (0 'general-line-face t))
      )))
 ;; aggiungere il sottomodo ai modi
 ; (general-mode 'kratos-mode)
@@ -38,6 +38,7 @@
 (general-mode 'c++-mode)
 (general-mode 'python-mode)
 (general-mode 'caml-mode)
+(general-mode 'matlab-mode)
 
 ;; CARICARE AUTOMATICAMENTE IL MODO XGTAGS IN MODALITA' C
 (add-hook 'c-mode-hook 'xgtags-mode)
@@ -102,3 +103,10 @@
 (autoload 'camldebug "camldebug" "Run ocamldebug on program." t)
 (add-to-list 'interpreter-mode-alist '("ocamlrun" . caml-mode))
 (add-to-list 'interpreter-mode-alist '("ocaml" . caml-mode))
+
+;; AGGIUNGERE IL MODO MATLAB
+(autoload 'matlab-mode "matlab.el" "Major mode for matlab files." t)
+(setq auto-mode-alist
+      (append
+       (list (cons "\\.m" 'matlab-mode))
+       auto-mode-alist))

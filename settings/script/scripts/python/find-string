@@ -47,6 +47,9 @@ if __name__ == "__main__":
 
     for line in lines:
 
+        if "~" in line or "#" in line:
+            continue
+
         if ":" in line:
             met_fname, rest = line.split(":", 1)
 

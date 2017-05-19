@@ -1,5 +1,15 @@
 
 ============================================================
+Comandi git.
+------------------------------------------------------------
+
+creare un nuovo branch locale
+git checkout -b <branch_name>
+
+promuovere il branch locale a branch sul server
+git push -u origin <branch_name>
+
+============================================================
 Croppare le slide PDF di Computability_and_Complexity.
 ------------------------------------------------------------
 

@@ -3,4 +3,4 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; AUMENTARE IL NUMERO DI ERRORI VISIBILI
-(setq flycheck-checker-error-threshold 10000)
+(setq flycheck-checker-error-threshold 100)

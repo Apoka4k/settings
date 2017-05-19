@@ -28,7 +28,7 @@ export PYTHONDONTWRITEBYTECODE="_"
 # ------------------------------------------------------------------------ #
 
 # -- opam --
-source /home/sbicego/.opam/opam-init/init.sh
+# source /home/sbicego/.opam/opam-init/init.sh
 
 # ------------------------------------------------------------------------ #
 # BINS                                                                     #
@@ -41,7 +41,8 @@ source /home/sbicego/scripts/import.sh
 alias eclipse="/home/sbicego/exe/eclipse/jee-neon/eclipse/eclipse &"
 
 # -- matlab --
-alias matlab="/home/sbicego/exe/matlab/R2017a/bin/matlab -sd /home/sbicego/exe/cocoSim/source/cocoSim &"
+alias matlab="/home/sbicego/exe/matlab/R2017a/bin/matlab &"
+# alias matlab="/home/sbicego/exe/matlab/R2017a/bin/matlab -sd /home/sbicego/exe/cocoSim &"
 
 # -- nuXmv --
 export PATH="/home/sbicego/exe/nuXmv/build/ESTools/nuXmv/bin:$PATH"
@@ -67,7 +68,11 @@ export PYTHONPATH="/home/sbicego/exe/pycparser:$PYTHONPATH:"
 export PYTHONPATH="/home/sbicego/exe/kratos/build/kratos/tools:$PYTHONPATH"
 
 # -- ply --
-export PYTHONPATH="/home/sbicego/exe/ply:$PYTHONPATH:"
+export PYTHONPATH="/home/sbicego/exe/ply:$PYTHONPATH"
+
+# -- cocoSim --
+# export PYTHONPATH="/hardmnt/cube0/home/sbicego/exe/cocoSim/tools/verifiers/jkind/Z3/bin/python:$PYTHONPATH"
+# export PYTHONPATH="/hardmnt/cube0/home/sbicego/exe/cocoSim/tools/verifiers/linux/lib/zustrepy:$PYTHONPATH"
 
 # ------------------------------------------------------------------------ #
 # COMMANDS                                                                 #

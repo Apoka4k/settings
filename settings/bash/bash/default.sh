@@ -6,6 +6,9 @@
 # -- root settings --
 source /etc/bashrc
 
+# -- toolset --
+# source /opt/rh/devtoolset-6/enable
+
 # -- git interface --
 source /home/sbicego/usr/etc/git/git-prompt.sh
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
@@ -23,9 +26,9 @@ export HOME="/home/sbicego"
 export PATH="/home/sbicego/usr/bin:$PATH"
 
 # -- lib --
-export LIBRARY_PATH="/home/sbicego/usr/lib"
-export LD_LIBRARY_PATH="/home/sbicego/usr/lib"
-export LD_RUN_PATH="/home/sbicego/usr/lib"
+export LIBRARY_PATH="/home/sbicego/usr/lib:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="/home/sbicego/usr/li:$LD_LIBRARY_PATHb"
+export LD_RUN_PATH="/home/sbicego/usr/lib:$LD_RUN_PATH"
 
 # -- pkg --
 export PKG_CONFIG_PATH="/home/sbicego/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
