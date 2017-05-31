@@ -76,6 +76,6 @@ if [ -f ~/script/import.sh ]; then
 fi
 
 # aliases
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.bash_dir/bash_aliases.sh ]; then
+    . ~/.bash_dir/bash_aliases.sh
 fi

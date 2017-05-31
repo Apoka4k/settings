@@ -29,9 +29,9 @@ if __name__ == "__main__":
 
     # get command
     cmd = common.command(exe, dot_bashrc_path)
-
+    print cmd
     # execute command
     res = subprocess.call(cmd, shell=True)
-
+    
     # show results
-    print common.get_succ_msg(fname)
+    print common.show_results(res, fname)

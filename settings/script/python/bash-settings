@@ -25,7 +25,8 @@ if __name__ == "__main__":
     exe = "emacs"
 
     # get path
-    dot_bash_path = common.path_glue(common.home, ".bashrc")
+    dot_bash_path = common.path_glue(common.home,
+                                     ".bash_dir/bash_aliases.sh")
 
     # get command
     cmd = common.command(exe, dot_bash_path, "&")

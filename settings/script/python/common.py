@@ -463,16 +463,14 @@ class Backup():
         # emacs files
         emacs_paths = {}
         emacs_paths["file"] = [path_glue(home, ".emacs")]
-        emacs_paths["dir"] = []
+        emacs_paths["dir"] = [path_glue(home, ".emacs_dir")]
         emacs_paths["tgt_dir"] = "emacs"
         self.backup_list.append(emacs_paths)
 
         # bash files
         bash_paths = {}
-        bash_paths["file"] = [path_glue(home, ".bashrc"),
-                              path_glue(home, ".bash_aliases"),
-                              "/usr/etc/git/git-prompt.sh"]
-        bash_paths["dir"] = []
+        bash_paths["file"] = [path_glue(home, ".bashrc")]
+        bash_paths["dir"] = [path_glue(home, ".bash_dir"),]
         bash_paths["tgt_dir"] = "bash"
         self.backup_list.append(bash_paths)
 
