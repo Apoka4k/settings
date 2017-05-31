@@ -470,6 +470,7 @@ class Backup():
         # bash files
         bash_paths = {}
         bash_paths["file"] = [path_glue(home, ".bashrc"),
+                              path_glue(home, ".bash_aliases"),
                               "/usr/etc/git/git-prompt.sh"]
         bash_paths["dir"] = []
         bash_paths["tgt_dir"] = "bash"
