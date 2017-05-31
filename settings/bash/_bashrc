@@ -1,120 +1,81 @@
 
-# ------------------------------------------------------------------------ #
-# DEFAULT SETTINGS                                                         #
-# ------------------------------------------------------------------------ #
+# if not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-# -- default settings --
-source /home/sbicego/bash/default.sh
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
 
-# ------------------------------------------------------------------------ #
-# RESOURCES BOUNDS                                                         #
-# ------------------------------------------------------------------------ #
+# append to the history file, don't overwrite it
+shopt -s histappend
 
-# -- RAM bound (MB) --
-# ulimit -m 2000
+# set history length
+HISTSIZE=1000
+HISTFILESIZE=2000
 
-# -- stack bound (MB or unlimited) --
-# ulimit -s unlimited
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-# ------------------------------------------------------------------------ #
-# PROCESSES SETTINGS                                                       #
-# ------------------------------------------------------------------------ #
+# make less more friendly for non-text input files
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# -- don't create .pyc .pyo files --
-export PYTHONDONTWRITEBYTECODE="_"
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
 
-# ------------------------------------------------------------------------ #
-# STANDARD BINS                                                            #
-# ------------------------------------------------------------------------ #
+# set regular prompt
+export PS1="\[\e[1;33m\]\W\[\e[1;32m\] \\$ \[$(tput sgr0)\]"
 
-# -- opam --
-# source /home/sbicego/.opam/opam-init/init.sh
+# set git prompt
+if [ -f /usr/etc/git/git-prompt.sh ]; then
+    . /usr/etc/git/git-prompt.sh
+    export PROMPT_COMMAND='__git_ps1 "\[\e[1;33m\]\W\[\e[1;97m\]" " \[\e[1;32m\]\\\$ \[$(tput sgr0)\]"'
+    export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+fi
 
-# ------------------------------------------------------------------------ #
-# BINS                                                                     #
-# ------------------------------------------------------------------------ #
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
-# -- scripts --
-source /home/sbicego/scripts/import.sh
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
-# -- eclipse --
-alias eclipse="/home/sbicego/exe/eclipse/jee-neon/eclipse/eclipse &"
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# -- matlab --
-alias matlab="/home/sbicego/exe/matlab/R2017a/bin/matlab &"
-# alias matlab="/home/sbicego/exe/matlab/R2017a/bin/matlab -sd /home/sbicego/exe/cocoSim &"
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
-# -- nuXmv --
-export PATH="/home/sbicego/exe/nuXmv/build/ESTools/nuXmv/bin:$PATH"
-# -- mathsat --
-alias mathsat="/home/sbicego/exe/nuXmv/build/ESTools/mathsat5/mathsat"
-# -- msatic3 --
-alias msatic3="/home/sbicego/exe/nuXmv/build/ESTools/msatic3/msatic3"
+# add an "alert" alias for long running commands;
+# usage: sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# -- kratos --
-alias kratos="/home/sbicego/exe/kratos/build/kratos/kratos"
+# enable programmable completion features
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
-# ------------------------------------------------------------------------ #
-# PYTHON PATHS                                                             #
-# ------------------------------------------------------------------------ #
+# scripts
+if [ -f ~/script/import.sh ]; then
+    . ~/script/import.sh
+fi
 
-# -- scripts --
-export PYTHONPATH="/home/sbicego/scripts/python:$PATH"
-
-# -- pycparser --
-export PYTHONPATH="/home/sbicego/exe/pycparser:$PYTHONPATH:"
-
-# -- kratos --
-export PYTHONPATH="/home/sbicego/exe/kratos/build/kratos/tools:$PYTHONPATH"
-
-# -- ply --
-export PYTHONPATH="/home/sbicego/exe/ply:$PYTHONPATH"
-
-# -- cocoSim --
-# export PYTHONPATH="/hardmnt/cube0/home/sbicego/exe/cocoSim/tools/verifiers/jkind/Z3/bin/python:$PYTHONPATH"
-# export PYTHONPATH="/hardmnt/cube0/home/sbicego/exe/cocoSim/tools/verifiers/linux/lib/zustrepy:$PYTHONPATH"
-
-# ------------------------------------------------------------------------ #
-# COMMANDS                                                                 #
-# ------------------------------------------------------------------------ #
-
-# -- process execution with resources bound --
-# -- usage: run <process>
-alias run="/home/sbicego/usr/bin/runlim -s 3000 -r 3600"
-
-# -- guess right tool to open file --
-# -- usage: open <file>
-alias open="/usr/bin/gnome-open"
-
-# -- show resources used by process --
-# -- usage: time <process>
-alias time="/usr/bin/time --format=\"\n-------------------\n%E s %M KB\n-------------------\n\""
-
-# -- show file lines number --
-# -- usage: lines <file>
-alias lines="/usr/bin/wc -l <"
-
-# -- open emacs inside bash --
-# -- usage: edit [<file>]
-alias edit="/usr/bin/emacs -nw"
-
-# ------------------------------------------------------------------------ #
-# DIRS                                                                     #
-# ------------------------------------------------------------------------ #
-
-# -- emacs settings files --
-alias emacs-dir="cd /home/sbicego/emacs"
-
-# -- python scripts --
-alias scripts-dir="cd /home/sbicego/scripts/python"
-
-# -- latex packages --
-alias latex-dir="cd /home/sbicego/texmf/tex/latex"
-
-# -- shared dir --
-alias shared-dir="cd /home/sbicego/shared"
-
-# -- manual --
-alias manual-dir="cd /home/sbicego/Desktop/Settings/Notes"
-
-# ------------------------------------------------------------------------ #
+# aliases
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi

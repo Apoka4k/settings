@@ -1,0 +1,46 @@
+#!/usr/bin/python
+
+
+#imports
+import subprocess
+import os
+import sys
+
+# custom imports
+import common
+
+
+# main
+if __name__ == "__main__":
+
+    # get script name
+    fname = os.path.realpath(__file__)
+
+    # check args
+    if len(sys.argv) != 1:
+        print common.get_err_msg(fname)
+
+    # get executable
+    exe = common.command("rm", "-f")
+
+    # get commands
+    cmd_list = []
+
+    cmd = common.command(exe, "*.out")
+    cmd_list.append(cmd)
+
+    cmd = common.command(exe, "*.aux")
+    cmd_list.append(cmd)
+
+    cmd = common.command(exe, "*.log")
+    cmd_list.append(cmd)
+
+    cmd = common.command(exe, "*.toc")
+    cmd_list.append(cmd)
+
+    # execute commands
+    for cmd in cmd_list:
+        res = subprocess.call(cmd, shell=True)
+
+    # show results
+    print common.get_succ_msg(fname)
