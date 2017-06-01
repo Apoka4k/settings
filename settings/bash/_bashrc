@@ -31,8 +31,8 @@ fi
 export PS1="\[\e[1;33m\]\W\[\e[1;32m\] \\$ \[$(tput sgr0)\]"
 
 # set git prompt
-if [ -f /usr/etc/git/git-prompt.sh ]; then
-    . /usr/etc/git/git-prompt.sh
+if [ -f /home/apoka/.bash_dir/git-prompt.sh ]; then
+    . /home/apoka/.bash_dir/git-prompt.sh
     export PROMPT_COMMAND='__git_ps1 "\[\e[1;33m\]\W\[\e[1;97m\]" " \[\e[1;32m\]\\\$ \[$(tput sgr0)\]"'
     export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 fi
