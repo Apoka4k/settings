@@ -167,12 +167,10 @@
   (let ((map (or keymap (and (boundp 'xgtags-mode-map) xgtags-mode-map))))
     (cond
      ((not (keymapp map)))
-     (flag (define-key map "\e." 'xgtags-find-tag)
-           (define-key map "\e," 'xgtags-pop-stack)
-           (define-key map "\e/" 'xgtags-find-rtag))
-     (t (define-key map "\e." nil)
-        (define-key map "\e," nil)
-        (define-key map "\e/" nil)))))
+     (flag (define-key map "\e*" 'xgtags-pop-stack)
+           (define-key map "\e." 'xgtags-find-tag))
+     (t (define-key map "\e*" nil)
+        (define-key map "\e." nil)))))
 
 (defun xgtags--set-overwrite-complete-bindings (flag &optional keymap)
   (let ((map (or keymap (and (boundp 'xgtags-mode-map) xgtags-mode-map))))
@@ -344,6 +342,7 @@ killed!"
         (define-key keymap "u" 'xgtags-pop-stack)
         (define-key keymap "\C-t" 'xgtags-pop-stack)
         (define-key keymap "\C-m" 'xgtags-select-tag-near-point)
+        (define-key keymap "\e." 'xgtags-select-tag-near-point)
         keymap))
 
 (defvar xgtags--tags nil
