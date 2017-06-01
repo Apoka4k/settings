@@ -28,21 +28,18 @@ if __name__ == "__main__":
     tmp_find_out = tempfile.mktemp()
 
     # get find commands
-    find_cmd_list = ["*~", "*#", "lextab.py", "yacctab.py"]
-    # ["*pyc"]
+    find_cmd_list = ["*~", "*#", "lextab.py", "yacctab.py",
+                     "*.pyc"]
 
     # get files
     file_list = []
-
     for item in find_cmd_list:
         cmd = common.command("find", root_dir,
                              "-name", "\"%s\"" % item, "-type", "f",
-                             ">", tmp_find_out)
+                             "1>", tmp_find_out,
+                             "2>", "/dev/null")
 
-        res = subprocess.call(cmd, shell=True)
-        if res != 0:
-            print common.get_err_msg(fname)
-            sys.exit()
+        subprocess.call(cmd, shell=True)
         with open(tmp_find_out, "r") as tmp_find_out_ptr:
             lines = tmp_find_out_ptr.readlines()
         for line in lines:

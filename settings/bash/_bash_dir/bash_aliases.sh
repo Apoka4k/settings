@@ -52,7 +52,7 @@ alias edit="/usr/bin/emacs -nw"
 # ------------------------------------------------------------------------ #
 
 # -- python scripts --
-alias scripts-dir="cd /home/apoka/scripts/python"
+alias script-dir="cd /home/apoka/script/python"
 
 # -- shared dir --
 alias shared-dir="cd /home/apoka/shared"
