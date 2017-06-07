@@ -3,4 +3,3 @@
 (load "/home/apoka/.emacs_dir/functions.lisp")
 (load "/home/apoka/.emacs_dir/shortcuts.lisp")
 (load "/home/apoka/.emacs_dir/modes.lisp")
-(load "/home/apoka/.emacs_dir/flycheck.lisp")

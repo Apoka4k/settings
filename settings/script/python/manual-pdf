@@ -25,7 +25,7 @@ if __name__ == "__main__":
     exe = "gnome-open"
 
     # get path
-    pdf_path = common.path_glue(manual_rep, "manual.pdf")
+    pdf_path = common.path_glue(common.manual_rep, "manual.pdf")
 
     # get command
     cmd = common.command(exe, pdf_path, "&")

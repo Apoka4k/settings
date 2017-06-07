@@ -18,9 +18,9 @@ class color:
     # normal
     blue = "\033[0;34m"
     cyan = "\033[0;36m"
+    default = "\033[0;38m"
     gray = "\033[0;30m"
     green = "\033[0;32m"
-    light_green = "\033[0;38m"
     pink = "\033[0;35m"
     red = "\033[0;31m"
     white = "\033[0;37m"
@@ -29,16 +29,13 @@ class color:
     # bold
     bblue = "\033[1;34m"
     bcyan = "\033[1;36m"
+    bdefault = "\033[1;38m"
     bgray = "\033[1;30m"
     bgreen = "\033[1;32m"
-    blight_green = "\033[1;38m"
     bpink = "\033[1;35m"
     bred = "\033[1;31m"
     bwhite = "\033[1;37m"
     byellow = "\033[1;33m"
-
-    # default
-    default = "\033[0;m"
 
 # end color
 
@@ -447,7 +444,7 @@ rep_root = path_glue(home, "rep")
 settings_rep = path_glue(rep_root, "settings")
 
 # manual repository path
-manual_rep = path_glue(rep_root, "manual")
+manual_rep = path_glue(settings_rep, "manual")
 
 
 # =========================================================================== #

@@ -3,14 +3,13 @@
 (setq load-path (cons "/home/apoka/.emacs_dir/modes" load-path))
 
 ;; AGGIUNGERE IL MODO GTAGS
-(autoload 'gtags-mode "gtags.el" "Major mode for GTags targeted files." t)
-;; (autoload 'xgtags-mode "xgtags.el" "Major mode for GTags targeted files." t)
+(autoload 'xgtags-mode "xgtags.el" "Major mode for GTags targeted files." t)
 
 ;; AGGIUNGERE IL MODO GENERIC_INFO
 (autoload 'configuration-mode "generic_info.el" "Major mode for generic information files." t)
 (setq auto-mode-alist
       (append
-       (list (cons "\\.gi" 'configuration-mode))
+       (list (cons "\\.gi" 'generic_info-mode))
        auto-mode-alist))
 
 ;; AGGIUNGERE IL MODO MATLAB
@@ -58,15 +57,4 @@
 (general-mode 'matlab-mode)
 
 ;; CARICARE AUTOMATICAMENTE IL MODO GTAGS IN MODALITA' C
-(add-hook 'c-mode-hook 'gtags-mode)
-;; (add-hook 'c-mode-hook 'xgtags-mode)
-
-;; CARICARE AUTOMATICAMENTE IL FLYCHECK IN MODALITA' PYTHON
- (add-hook 'python-mode-hook 'flycheck-mode)
-
-;; CARICARE AUTOMATICAMENTE IL FLYCHECK IN MODALITA' C
- (add-hook 'c-mode-hook 'flycheck-mode)
-
-;; AGGIUNGERE ESTENSIONI AL MODO PYTHON
-;; (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
-;; (add-to-list 'auto-mode-alist '("\\.pyc\\'" . python-mode))
+(add-hook 'c-mode-hook 'xgtags-mode)

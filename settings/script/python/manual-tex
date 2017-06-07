@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     # get path
     dot_latex_path = common.path_glue(common.manual_rep,
-                                      "notes.tex")
+                                      "manual.tex")
 
     # get command
     cmd = common.command(exe, dot_latex_path, "&")

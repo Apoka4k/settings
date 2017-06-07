@@ -28,8 +28,7 @@ if __name__ == "__main__":
     tmp_find_out = tempfile.mktemp()
 
     # get find commands
-    find_cmd_list = ["*~", "*#", "lextab.py", "yacctab.py",
-                     "*.pyc"]
+    find_cmd_list = ["*~", "*#", "lextab.py", "yacctab.py"]
 
     # get files
     file_list = []
