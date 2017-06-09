@@ -3,12 +3,13 @@
 
 # imports
 import os
+import re
 import subprocess
 import sys
 
-
 # custom imports
 import common
+from common import color
 
 
 # main
@@ -18,17 +19,47 @@ if __name__ == "__main__":
     fname = os.path.realpath(__file__)
 
     # check args
-    if len(sys.argv) != 1:
+    if len(sys.argv) not in [2, 3]:
         print common.get_err_msg(fname)
+        common.show_usage(fname, ["string"], ["number"])
         sys.exit()
 
-    # get command
-    cmd = "reset"
+    # get args
+    raw_string = sys.argv[1]
+    string = "\"" + raw_string + "\""
+
+    if len(sys.argv) == 3:
+        number = sys.argv[2]
+    else:
+        number = "0"
 
     # execute command
-    res = subprocess.call(cmd, shell=True)
+    cmd = common.command("grep", "-Rn", "-C", str(number), string)
+    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    output, _ = proc.communicate()
 
-    # check correctness
-    if res != 0:
-        print common.get_err_msg(fname)
-        sys.exit()
+    # print output
+    hline = color.cyan + "-" * 79 + color.default
+    sepline = color.cyan + "-" * 2 + color.default
+
+    print ""
+    print hline
+    for line in output.split('\n'):
+        match = re.match("(.*)[:-](\d+)[:-] *(.*)", line)
+        if match is not None:
+            fname = match.group(1)
+            line_nbr = match.group(2)
+            rest = match.group(3)
+            new_line = color.yellow + fname + \
+                       color.green + " " + \
+                       color.cyan + line_nbr + \
+                       color.green + " " + \
+                       color.green + \
+                       rest.replace(raw_string,
+                                    color.white + raw_string + color.green)
+            print new_line
+        else:
+            if line == "--":
+                print ""
+    print hline
+    print ""
