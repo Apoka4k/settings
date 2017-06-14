@@ -34,7 +34,8 @@ if __name__ == "__main__":
                          "-type", "f",
                          "-not", "-name", "\"*~\"",
                          "-not", "-name", "\"*#\"",
-                         "-name", "\"*" + file_name + "\"*")
+                         "-name", "\"*" + file_name + "\"*",
+                         "2> /dev/null")
 
     # execute command
     sys.stdout.write(
