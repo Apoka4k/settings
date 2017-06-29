@@ -23,6 +23,12 @@ export PYTHONDONTWRITEBYTECODE="_"
 # -- script --
 export PYTHONPATH="/home/apoka/script/python:$PATH"
 
+# -- ply --
+export PYTHONPATH="/home/apoka/exe/ply:$PATH"
+
+# -- pycparser --
+export PYTHONPATH="/home/apoka/exe/pycparser:$PATH"
+
 # ------------------------------------------------------------------------ #
 # ALIASES                                                                  #
 # ------------------------------------------------------------------------ #
@@ -49,9 +55,17 @@ alias time="/usr/bin/time --format=\"\n-------------------\n%E s %M KB\n--------
 # -- usage: lines <file>
 alias lines="/usr/bin/wc -l <"
 
+# -- show object size --
+# -- usage: dim <path>
+alias dim="/usr/bin/du -sh"
+
 # -- open emacs inside bash --
 # -- usage: edit [<file>]
 alias edit="/usr/bin/emacs -nw"
+
+# -- show absolute real path --
+# -- usage: path [<path>]
+alias path="/usr/bin/realpath"
 
 # ------------------------------------------------------------------------ #
 # DIRS                                                                     #
