@@ -13,6 +13,9 @@
 # PROCESSES SETTINGS                                                       #
 # ------------------------------------------------------------------------ #
 
+# -- set mouse sensitivity --
+xinput --set-prop 10 "Device Accel Constant Deceleration" 1.5
+
 # -- don't create .pyc .pyo files --
 export PYTHONDONTWRITEBYTECODE="_"
 
