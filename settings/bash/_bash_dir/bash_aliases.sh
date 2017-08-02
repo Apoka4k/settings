@@ -14,7 +14,10 @@
 # ------------------------------------------------------------------------ #
 
 # -- set mouse sensitivity --
-xinput --set-prop 10 "Device Accel Constant Deceleration" 1.5
+mouse_ids=`xinput -list | grep Mouse | sed -n "s/.*id=\([0-9]*\).*/\1/p"`
+for mouse_id in $mouse_ids; do
+    xinput --set-prop $mouse_id "Device Accel Constant Deceleration" 1.5
+done
 
 # -- don't create .pyc .pyo files --
 export PYTHONDONTWRITEBYTECODE="_"
