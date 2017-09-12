@@ -47,11 +47,11 @@ alias chrome="google-chrome"
 
 # -- process execution with resources bound --
 # -- usage: run <process>
-alias run="/home/sbicego/usr/bin/runlim -s 3000 -r 3600"
+alias run="/usr/bin/runlim -s 3000 -r 3600"
 
 # -- guess right tool to open file --
 # -- usage: open <file>
-alias open="gnome-open"
+alias open="/usr/bin/gnome-open &> /dev/null"
 
 # -- show resources used by process --
 # -- usage: time <process>
@@ -67,11 +67,27 @@ alias dim="/usr/bin/du -sh"
 
 # -- open emacs inside bash --
 # -- usage: edit [<file>]
-alias edit="/usr/bin/emacs -nw"
+alias emacs-edit="/usr/bin/emacs -nw"
 
 # -- show absolute real path --
-# -- usage: path [<path>]
+# -- usage: path <path>
 alias path="/usr/bin/realpath"
+
+# -- extract compressed dia file --
+# -- usage: extract_dia <file>
+alias extract_dia="/bin/gunzip -S .dia"
+
+# ------------------------------------------------------------------------ #
+# OPTIONS                                                                  #
+# ------------------------------------------------------------------------ #
+
+# -- open file with gimp --
+# -- usage: gimp <file>
+alias gimp="/usr/bin/gimp &> /dev/null"
+
+# -- open dia --
+# -- usage: dia
+alias dia="/usr/bin/dia &> /dev/null &"
 
 # ------------------------------------------------------------------------ #
 # DIRS                                                                     #

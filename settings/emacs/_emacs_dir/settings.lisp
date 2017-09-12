@@ -11,6 +11,9 @@
 ;; SOSTITUIRE LE TABULAZIONI CON GLI SPAZI AD OGNI SALVATAGGIO
 (setq-default indent-tabs-mode nil)
 
+;; AGGIUNGERE UNA RIGA VUOTA ALLA FINE DEL FILE AD OGNI SALVATAGGIO
+(setq require-final-newline t)
+
 ;; RIMUOVERE GLI SPAZI PRECEDENTI IL TERMINE DI RIGA AD OGNI SALVATAGGIO
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
