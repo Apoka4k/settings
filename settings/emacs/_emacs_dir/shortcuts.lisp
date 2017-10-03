@@ -71,6 +71,9 @@
 ;; copia il token attualmente selezionato
 (global-set-key (kbd "M-q") 'copy-word)
 
+;; capitalizza le parole nella regione selezionata
+(global-set-key (kbd "C-x C-k") 'capitalize-region)
+
 ;; MACRO PERSONALIZZATE
 
 ;; passa alla prima occorrenza della stringa nel buffer corrente

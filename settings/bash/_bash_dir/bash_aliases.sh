@@ -27,19 +27,19 @@ export PYTHONDONTWRITEBYTECODE="_"
 # ------------------------------------------------------------------------ #
 
 # -- script --
-export PYTHONPATH="/home/apoka/script/python:$PATH"
+export PYTHONPATH="/home/apoka/script/python:$PYTHONPATH"
 
-# -- ply --
-export PYTHONPATH="/home/apoka/exe/ply:$PATH"
-
-# -- pycparser --
-export PYTHONPATH="/home/apoka/exe/pycparser:$PATH"
+# -- pysmt --
+# export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
 
 # ------------------------------------------------------------------------ #
 # ALIASES                                                                  #
 # ------------------------------------------------------------------------ #
 
 alias chrome="google-chrome"
+
+# -- pyprof2calltree --
+alias pyprof2calltree="/home/apoka/exe/pyprof2calltree/pyprof2calltree.py"
 
 # ------------------------------------------------------------------------ #
 # COMMANDS                                                                 #
