@@ -23,6 +23,13 @@ done
 export PYTHONDONTWRITEBYTECODE="_"
 
 # ------------------------------------------------------------------------ #
+# BASH PATHS                                                               #
+# ------------------------------------------------------------------------ #
+
+# xSAP test script path
+export XSAP_SCRIPT_DIR="/home/apoka/exe/ESTools/xSAP/scripts"
+
+# ------------------------------------------------------------------------ #
 # PYTHON PATHS                                                             #
 # ------------------------------------------------------------------------ #
 
@@ -31,6 +38,9 @@ export PYTHONPATH="/home/apoka/script/python:$PYTHONPATH"
 
 # -- pysmt --
 # export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
+
+# -- pyprof2calltree --
+export PYTHONPATH="/home/apoka/exe/pyprof2calltree:$PYTHONPATH"
 
 # ------------------------------------------------------------------------ #
 # ALIASES                                                                  #
@@ -76,6 +86,10 @@ alias path="/usr/bin/realpath"
 # -- extract compressed dia file --
 # -- usage: extract_dia <file>
 alias extract_dia="/bin/gunzip -S .dia"
+
+# -- open pdf file with evince --
+# -- usage: pdfreader <file>
+alias pdfreader="/usr/bin/evince"
 
 # ------------------------------------------------------------------------ #
 # OPTIONS                                                                  #
