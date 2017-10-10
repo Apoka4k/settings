@@ -485,6 +485,13 @@ class Backup():
         script_paths["tgt_dir"] = "script"
         self.backup_list.append(script_paths)
 
+        # icon files
+        icon_paths = {}
+        icon_paths["file"] = []
+        icon_paths["dir"] = [path_glue(home, ".icon")]
+        icon_paths["tgt_dir"] = "icon"
+        self.backup_list.append(icon_paths)
+
         # backup dir
         self.backup_dir = path_glue(settings_rep, "settings")
 
