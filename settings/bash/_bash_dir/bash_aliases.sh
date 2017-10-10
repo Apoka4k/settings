@@ -34,7 +34,7 @@ export PYTHONDONTWRITEBYTECODE="_"
 # ------------------------------------------------------------------------ #
 
 # -- script --
-export PYTHONPATH="/home/apoka/script/python:$PYTHONPATH"
+export PYTHONPATH="/home/apoka/.script/python:$PYTHONPATH"
 
 # -- pysmt --
 # export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
@@ -109,7 +109,7 @@ alias gimp="/usr/bin/gimp &> /dev/null"
 # ------------------------------------------------------------------------ #
 
 # -- python scripts --
-alias script-dir="cd /home/apoka/script/python"
+alias script-dir="cd /home/apoka/.script/python"
 
 # -- shared dir --
 # alias shared-dir="cd /home/apoka/shared"

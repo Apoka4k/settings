@@ -23,12 +23,10 @@ if __name__ == "__main__":
 
     # get paths
     trash_dir = common.path_glue(common.home, ".local/share/Trash")
+    trash_objs = common.path_glue(trash_dir, "*")
 
     # get command
-    cd_cmd = common.command("cd", trash_dir)
-    rm_cmd = common.command("rm", "-f", "-r", "*")
-
-    cmd = common.command(cd_cmd, ";", rm_cmd)
+    cmd = common.command("rm", "-f", "-r", trash_objs)
 
     # empty trash
     res = subprocess.call(cmd, shell=True)
