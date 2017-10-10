@@ -27,7 +27,7 @@ export PYTHONDONTWRITEBYTECODE="_"
 # ------------------------------------------------------------------------ #
 
 # xSAP test script path
-export XSAP_SCRIPT_DIR="/home/apoka/exe/ESTools/xSAP/scripts"
+# export XSAP_SCRIPT_DIR="/home/apoka/rep/estools/xSAP/scripts"
 
 # ------------------------------------------------------------------------ #
 # PYTHON PATHS                                                             #
@@ -40,16 +40,17 @@ export PYTHONPATH="/home/apoka/script/python:$PYTHONPATH"
 # export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
 
 # -- pyprof2calltree --
-export PYTHONPATH="/home/apoka/exe/pyprof2calltree:$PYTHONPATH"
+export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
 
 # ------------------------------------------------------------------------ #
 # ALIASES                                                                  #
 # ------------------------------------------------------------------------ #
 
+# chrome
 alias chrome="google-chrome"
 
 # -- pyprof2calltree --
-alias pyprof2calltree="/home/apoka/exe/pyprof2calltree/pyprof2calltree.py"
+alias pyprof2calltree="/home/apoka/rep/pyprof2calltree/pyprof2calltree.py"
 
 # ------------------------------------------------------------------------ #
 # COMMANDS                                                                 #
@@ -101,7 +102,7 @@ alias gimp="/usr/bin/gimp &> /dev/null"
 
 # -- open dia --
 # -- usage: dia
-alias dia="/usr/bin/dia &> /dev/null &"
+# alias dia="/usr/bin/dia &> /dev/null &"
 
 # ------------------------------------------------------------------------ #
 # DIRS                                                                     #
@@ -111,7 +112,7 @@ alias dia="/usr/bin/dia &> /dev/null &"
 alias script-dir="cd /home/apoka/script/python"
 
 # -- shared dir --
-alias shared-dir="cd /home/apoka/shared"
+# alias shared-dir="cd /home/apoka/shared"
 
 # -- manual --
 alias manual-dir="cd /home/apoka/rep/settings/manual"
