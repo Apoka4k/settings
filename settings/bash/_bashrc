@@ -71,8 +71,8 @@ if ! shopt -oq posix; then
 fi
 
 # scripts
-if [ -f ~/script/import.sh ]; then
-    . ~/script/import.sh
+if [ -f ~/.script/import.sh ]; then
+    . ~/.script/import.sh
 fi
 
 # aliases

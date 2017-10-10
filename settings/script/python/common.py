@@ -432,7 +432,7 @@ def get_separator():
 home = "/home/apoka"
 
 # script dir
-script_dir = path_glue(home, "script")
+script_dir = path_glue(home, ".script")
 
 # shared dir
 shared_dir = path_glue(home, "shared")
