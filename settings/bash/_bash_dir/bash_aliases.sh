@@ -37,7 +37,7 @@ export PYTHONDONTWRITEBYTECODE="_"
 export PYTHONPATH="/home/apoka/.script/python:$PYTHONPATH"
 
 # -- pysmt --
-# export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
+export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
 
 # -- pyprof2calltree --
 export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
@@ -50,7 +50,7 @@ export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
 alias chrome="google-chrome"
 
 # -- pyprof2calltree --
-alias pyprof2calltree="/home/apoka/rep/pyprof2calltree/pyprof2calltree.py"
+alias pyprof2calltree="/home/apoka/rep/pyprof2calltree/pyprof2calltree.py 2> /dev/null"
 
 # ------------------------------------------------------------------------ #
 # COMMANDS                                                                 #
@@ -92,6 +92,29 @@ alias extract_dia="/bin/gunzip -S .dia"
 # -- usage: pdfreader <file>
 alias pdfreader="/usr/bin/evince"
 
+# -- cmake for estools/builders/xsap --
+# -- usage: cmake ..
+alias cmake-xsap="cmake .. -DENABLE_LIBXML=ON -DBUILD_STATIC=OFF -DPREFER_STATIC_LIBRARIES=OFF"
+
+# -- extract compressed files --
+# -- usage: extract_* <file>
+alias extract_tar_gz="tar -zxf"
+alias extract_tar_xz="tar -xf"
+alias extract_bz_2="tar -xjf"
+alias extract_zip="unzip"
+
+# -- runsnake without stderr --
+# -- usage: runsnake <file>
+alias runsnake="/usr/bin/runsnake 2> /dev/null"
+
+# -- real path of current directory --
+# -- usage: pwd
+alias pwd="/bin/pwd -P"
+
+# -- copy symbolic links --
+# -- usage: cp <file> <file>
+alias cp="/bin/cp -d"
+
 # ------------------------------------------------------------------------ #
 # OPTIONS                                                                  #
 # ------------------------------------------------------------------------ #
@@ -102,7 +125,7 @@ alias gimp="/usr/bin/gimp &> /dev/null"
 
 # -- open dia --
 # -- usage: dia
-# alias dia="/usr/bin/dia &> /dev/null &"
+alias dia="/usr/bin/dia &"
 
 # ------------------------------------------------------------------------ #
 # DIRS                                                                     #

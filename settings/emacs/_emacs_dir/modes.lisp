@@ -45,9 +45,14 @@
   (font-lock-add-keywords
    mode
    '(
+     ;; highlight tabs
      ("\t+" . general-tab-face)
+     ;; highlight trailing spaces
      ("[ ]+$" . general-space-face)
-     ("^.\\{80,\\}$" (0 'general-line-face t))
+     ;; highlight excessive chars of long lines
+     ("^.\\{79\\}\\(.+\\)$" (1 'general-line-face t))
+     ;; highlight first 2 chars of long lines (for readibility)
+     ("^\\(.\\{2\\}\\).\\{78,\\}$" (1 'general-line-face t))
      )))
 ;; aggiungere il sottomodo ai modi
 (general-mode 'c-mode)
