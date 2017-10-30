@@ -50,7 +50,7 @@ export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
 alias chrome="google-chrome"
 
 # -- pyprof2calltree --
-alias pyprof2calltree="/home/apoka/rep/pyprof2calltree/pyprof2calltree.py 2> /dev/null"
+alias pyprof2calltree="/home/apoka/rep/pyprof2calltree/pyprof2calltree.py -k -i"
 
 # ------------------------------------------------------------------------ #
 # COMMANDS                                                                 #
@@ -114,6 +114,31 @@ alias pwd="/bin/pwd -P"
 # -- copy symbolic links --
 # -- usage: cp <file> <file>
 alias cp="/bin/cp -d"
+
+# -- get pdf from pdf --
+# -- usage: pdftk <in-file> <pages> <out-file>
+function pdf-split
+{
+    /usr/bin/pdftk $1 cat $2 output $3
+}
+
+# -- python with profile --
+# -- usage: python-profile <file> <args>
+alias python-profile="/usr/bin/python -m cProfile"
+
+# -- python with trace --
+# -- usage: python-trace <file> <args>
+alias python-trace="/usr/bin/python -m trace -t -g"
+
+# -- git user info configuration --
+# -- usage: git-set-name <name>
+# --        git-set-email <email>
+alias git-set-name="git config user.name"
+alias git-set-email="git config user.email"
+
+# -- cluster shortcut --
+# -- usage: ssh-korein
+alias ssh-korein="ssh sbicego%korein@gate.fbk.eu"
 
 # ------------------------------------------------------------------------ #
 # OPTIONS                                                                  #

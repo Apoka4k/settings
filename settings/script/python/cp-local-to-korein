@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+
+# --------------------------------------------------------------------------- #
+# libraries                                                                   #
+# --------------------------------------------------------------------------- #
+
+import os
+import subprocess
+import sys
+
+
+# --------------------------------------------------------------------------- #
+# functions                                                                   #
+# --------------------------------------------------------------------------- #
+
+def show_helper():
+    """
+    Helper.
+    """
+
+    print "Usage:"
+    print "  %s <local_path> <korein_path>" % os.path.basename(__file__)
+
+    sys.exit(1)
+
+
+def show_error_msg():
+    """
+    Show error message.
+    """
+
+    print "Error:"
+    print "  some error occurred."
+
+    sys.exit(1)
+
+
+def main():
+    """
+    Script.
+    """
+
+    # show helper
+    for help_cmd in ["-h", "-help"]:
+        if help_cmd in sys.argv[1:]:
+            show_helper()
+    if len(sys.argv[1:]) != 2:
+        show_helper()
+
+    # get args
+    src = sys.argv[1]
+    tgt = sys.argv[2]
+
+    # build command
+    cmd = ["scp", "-r",
+           src,
+           "sbicego%korein@gate.fbk.eu:" + tgt]
+
+    # run command
+    ret = subprocess.call(cmd)
+
+    # show error msg
+    if ret != 0:
+        show_error_msg()
+
+
+# --------------------------------------------------------------------------- #
+# main                                                                        #
+# --------------------------------------------------------------------------- #
+
+if __name__ == "__main__":
+    """
+    When this script is invoked as main program.
+    """
+
+    main()
