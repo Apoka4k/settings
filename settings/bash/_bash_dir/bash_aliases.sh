@@ -94,7 +94,8 @@ alias pdfreader="/usr/bin/evince"
 
 # -- cmake for estools/builders/xsap --
 # -- usage: cmake ..
-alias cmake-xsap="cmake .. -DENABLE_LIBXML=ON -DBUILD_STATIC=OFF -DPREFER_STATIC_LIBRARIES=OFF"
+alias cmake-xsap="cmake .. -DENABLE_LIBXML=ON -DBUILD_STATIC=ON -DPREFER_STATIC_LIBRARIES=ON"
+# alias cmake-xsap="cmake .. -DENABLE_LIBXML=ON -DBUILD_STATIC=OFF -DPREFER_STATIC_LIBRARIES=OFF"
 
 # -- extract compressed files --
 # -- usage: extract_* <file>
@@ -136,9 +137,10 @@ alias python-trace="/usr/bin/python -m trace -t -g"
 alias git-set-name="git config user.name"
 alias git-set-email="git config user.email"
 
-# -- cluster shortcut --
-# -- usage: ssh-korein
+# -- remote access shortcuts --
+# -- usage: ssh-<machine>
 alias ssh-korein="ssh sbicego%korein@gate.fbk.eu"
+alias ssh-mitchell="ssh sbicego%mitchell@gate.fbk.eu"
 
 # ------------------------------------------------------------------------ #
 # OPTIONS                                                                  #

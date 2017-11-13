@@ -19,7 +19,7 @@ def show_helper():
     """
 
     print "Usage:"
-    print "  %s <local_path> <korein_path>" % os.path.basename(__file__)
+    print "  %s <mitchell_path> <local_path>" % os.path.basename(__file__)
 
     sys.exit(0)
 
@@ -53,8 +53,8 @@ def main():
 
     # build command
     cmd = ["scp", "-r",
-           src,
-           "sbicego%korein@gate.fbk.eu:" + tgt]
+           "sbicego%mitchell@gate.fbk.eu:" + src,
+           tgt]
 
     # run command
     ret = subprocess.call(cmd)
