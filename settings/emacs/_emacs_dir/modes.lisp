@@ -5,11 +5,11 @@
 ;; AGGIUNGERE IL MODO GTAGS
 (autoload 'xgtags-mode "xgtags.el" "Major mode for GTags targeted files." t)
 
-;; AGGIUNGERE IL MODO GENERIC_INFO
-(autoload 'configuration-mode "generic_info.el" "Major mode for generic information files." t)
+;; AGGIUNGERE IL MODO CALLTREE
+(autoload 'calltree-mode "calltree.el" "Major mode for calltree visualization." t)
 (setq auto-mode-alist
       (append
-       (list (cons "\\.gi" 'generic_info-mode))
+       (list (cons "\\.calltree" 'calltree-mode))
        auto-mode-alist))
 
 ;; AGGIUNGERE IL MODO MATLAB

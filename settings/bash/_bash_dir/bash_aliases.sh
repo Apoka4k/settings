@@ -26,9 +26,6 @@ export PYTHONDONTWRITEBYTECODE="_"
 # BASH PATHS                                                               #
 # ------------------------------------------------------------------------ #
 
-# xSAP test script path
-# export XSAP_SCRIPT_DIR="/home/apoka/rep/estools/xSAP/scripts"
-
 # ------------------------------------------------------------------------ #
 # PYTHON PATHS                                                             #
 # ------------------------------------------------------------------------ #
@@ -37,7 +34,7 @@ export PYTHONDONTWRITEBYTECODE="_"
 export PYTHONPATH="/home/apoka/.script/python:$PYTHONPATH"
 
 # -- pysmt --
-export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
+# export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
 
 # -- pyprof2calltree --
 export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
@@ -86,7 +83,7 @@ alias path="/usr/bin/realpath"
 
 # -- extract compressed dia file --
 # -- usage: extract_dia <file>
-alias extract_dia="/bin/gunzip -S .dia"
+alias extract-dia="/bin/gunzip -S .dia"
 
 # -- open pdf file with evince --
 # -- usage: pdfreader <file>
@@ -99,10 +96,10 @@ alias cmake-xsap="cmake .. -DENABLE_LIBXML=ON -DBUILD_STATIC=ON -DPREFER_STATIC_
 
 # -- extract compressed files --
 # -- usage: extract_* <file>
-alias extract_tar_gz="tar -zxf"
-alias extract_tar_xz="tar -xf"
-alias extract_bz_2="tar -xjf"
-alias extract_zip="unzip"
+alias extract-tar-gz="tar -zxf"
+alias extract-tar-xz="tar -xf"
+alias extract-bz-2="tar -xjf"
+alias extract-zip="unzip"
 
 # -- runsnake without stderr --
 # -- usage: runsnake <file>
