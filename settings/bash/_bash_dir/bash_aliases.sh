@@ -95,7 +95,7 @@ alias cmake-xsap="cmake .. -DENABLE_LIBXML=ON -DBUILD_STATIC=ON -DPREFER_STATIC_
 # alias cmake-xsap="cmake .. -DENABLE_LIBXML=ON -DBUILD_STATIC=OFF -DPREFER_STATIC_LIBRARIES=OFF"
 
 # -- extract compressed files --
-# -- usage: extract_* <file>
+# -- usage: extract_<extension> <file>
 alias extract-tar-gz="tar -zxf"
 alias extract-tar-xz="tar -xf"
 alias extract-bz-2="tar -xjf"
@@ -112,13 +112,6 @@ alias pwd="/bin/pwd -P"
 # -- copy symbolic links --
 # -- usage: cp <file> <file>
 alias cp="/bin/cp -d"
-
-# -- get pdf from pdf --
-# -- usage: pdftk <in-file> <pages> <out-file>
-function pdf-split
-{
-    /usr/bin/pdftk $1 cat $2 output $3
-}
 
 # -- python with profile --
 # -- usage: python-profile <file> <args>
@@ -140,16 +133,30 @@ alias ssh-korein="ssh sbicego%korein@gate.fbk.eu"
 alias ssh-mitchell="ssh sbicego%mitchell@gate.fbk.eu"
 
 # ------------------------------------------------------------------------ #
-# OPTIONS                                                                  #
+# FUNCTIONAL ALIASES                                                       #
 # ------------------------------------------------------------------------ #
 
-# -- open file with gimp --
-# -- usage: gimp <file>
-alias gimp="/usr/bin/gimp &> /dev/null"
+# -- get pdf from pdf --
+# -- usage: pdftk <in-file> <pages> <out-file>
+function pdf-split
+{
+    /usr/bin/pdftk $1 cat $2 output $3
+}
 
-# -- open dia --
-# -- usage: dia
-alias dia="/usr/bin/dia &"
+# -- emacs --
+emacs() { command emacs $@ & }
+
+# -- gimp --
+function gimp
+{
+    command gimp $@ &> /dev/null &
+}
+
+# -- dia --
+function dia
+{
+    command dia $@ &
+}
 
 # ------------------------------------------------------------------------ #
 # DIRS                                                                     #
