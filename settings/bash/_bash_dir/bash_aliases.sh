@@ -44,7 +44,7 @@ export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
 # ------------------------------------------------------------------------ #
 
 # chrome
-alias chrome="google-chrome"
+alias chrome="/usr/bin/google-chrome"
 
 # -- pyprof2calltree --
 alias pyprof2calltree="/home/apoka/rep/pyprof2calltree/pyprof2calltree.py -k -i"
