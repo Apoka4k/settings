@@ -37,14 +37,11 @@ export PYTHONPATH="/home/apoka/.script/python:$PYTHONPATH"
 # export PYTHONPATH="/home/apoka/.smt_solvers/python-bindings-2.7:$PYTHONPATH"
 
 # -- pyprof2calltree --
-export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
+# export PYTHONPATH="/home/apoka/rep/pyprof2calltree:$PYTHONPATH"
 
 # ------------------------------------------------------------------------ #
 # ALIASES                                                                  #
 # ------------------------------------------------------------------------ #
-
-# chrome
-alias chrome="/usr/bin/google-chrome"
 
 # -- pyprof2calltree --
 alias pyprof2calltree="/home/apoka/rep/pyprof2calltree/pyprof2calltree.py -k -i"
@@ -103,7 +100,7 @@ alias extract-zip="unzip"
 
 # -- runsnake without stderr --
 # -- usage: runsnake <file>
-alias runsnake="/usr/bin/runsnake 2> /dev/null"
+# alias runsnake="/usr/bin/runsnake 2> /dev/null"
 
 # -- real path of current directory --
 # -- usage: pwd
@@ -115,11 +112,11 @@ alias cp="/bin/cp -d"
 
 # -- python with profile --
 # -- usage: python-profile <file> <args>
-alias python-profile="/usr/bin/python -m cProfile"
+# alias python-profile="/usr/bin/python -m cProfile"
 
 # -- python with trace --
 # -- usage: python-trace <file> <args>
-alias python-trace="/usr/bin/python -m trace -t -g"
+# alias python-trace="/usr/bin/python -m trace -t -g"
 
 # -- git user info configuration --
 # -- usage: git-set-name <name>
@@ -129,8 +126,8 @@ alias git-set-email="git config user.email"
 
 # -- remote access shortcuts --
 # -- usage: ssh-<machine>
-alias ssh-korein="ssh sbicego%korein@gate.fbk.eu"
-alias ssh-mitchell="ssh sbicego%mitchell@gate.fbk.eu"
+# alias ssh-korein="ssh sbicego%korein@gate.fbk.eu"
+# alias ssh-mitchell="ssh sbicego%mitchell@gate.fbk.eu"
 
 # ------------------------------------------------------------------------ #
 # FUNCTIONAL ALIASES                                                       #
@@ -153,9 +150,15 @@ function gimp
 }
 
 # -- dia --
-function dia
+# function dia
+# {
+#     command dia $@ &
+# }
+
+# -- chrome --
+function chrome
 {
-    command dia $@ &
+    command google-chrome $@ &> /dev/null &
 }
 
 # ------------------------------------------------------------------------ #
