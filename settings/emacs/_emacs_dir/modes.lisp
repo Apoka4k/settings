@@ -42,6 +42,14 @@
        (list (cons "\\.tex" 'LaTeX-mode))
        auto-mode-alist))
 
+;; PHP MODE
+(autoload 'php-mode "php-mode.el"
+  "Major mode for php files." t)
+(setq auto-mode-alist
+      (append
+       (list (cons "\\.php" 'php-mode))
+       auto-mode-alist))
+
 ;; DEFAULT MODE
 ;; default mode is given by the function 'general-mode';
 ;; apply it to a mode to add default features to such mode
