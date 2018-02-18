@@ -153,14 +153,16 @@ def rm_file(file_path):
 
 
 # remove directory content
+# note: keep hidden objects
 def rm_dir_content(dir_path):
 
     for item in os.listdir(dir_path):
-        item_path = path_glue(dir_path, item)
-        if os.path.isfile(item_path):
-            os.unlink(item_path)
-        elif os.path.isdir(item_path):
-            shutil.rmtree(item_path)
+        if item[0] != ".":
+            item_path = path_glue(dir_path, item)
+            if os.path.isfile(item_path):
+                os.unlink(item_path)
+            elif os.path.isdir(item_path):
+                shutil.rmtree(item_path)
 
 
 # get files contained in directory
@@ -486,12 +488,11 @@ class Backup():
         self.backup_list.append(script_paths)
 
         # backup dir
-        self.backup_dir = path_glue(settings_rep, "settings")
+        self.backup_dir = settings_rep
 
     def do_backup(self):
 
-        rm_dir(self.backup_dir)
-        os.makedirs(self.backup_dir)
+        rm_dir_content(self.backup_dir)
 
         for obj in self.backup_list:
             tgt_dir = path_glue(self.backup_dir, obj["tgt_dir"])
