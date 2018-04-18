@@ -174,7 +174,7 @@ alias script-dir="cd /home/apoka/.script/python"
 # -- shared dir --
 # alias shared-dir="cd /home/apoka/shared"
 
-# -- manual --
-alias manual-dir="cd /home/apoka/rep/settings/manual"
+# -- Windows desktop --
+alias windows-dir="cd /media/apoka/90FCD140FCD120F0/Users/Apoka/Desktop"
 
 # ------------------------------------------------------------------------ #
