@@ -1,0 +1,150 @@
+#!/usr/bin/env python
+
+
+# imports
+import datetime
+import os
+import sh
+import sys
+
+
+bred = lambda x: '\033[1;31m' + x + '\033[0;38m'
+cyan = lambda x: '\033[0;36m' + x + '\033[0;38m'
+
+
+def helper():
+    sys.stdout.write('Usage: %s\n'
+                     % os.path.basename(__file__))
+    sys.exit(0)
+
+
+def error():
+    sys.stderr.write(os.path.basename(__file__) + ': ' + \
+                     bred('error') + '\n')
+    sys.stderr.write('Usage: %s\n'
+                     % os.path.basename(__file__))
+    sys.exit(1)
+
+
+def error_occupied(trash_dir, obj=None):
+    sys.stderr.write(os.path.basename(__file__) + ': ' + \
+                     bred('error') + '\n')
+    sys.stderr.write('Trash dir is occupied')
+    if obj:
+        sys.stderr.write(' by a %s' % obj)
+    sys.stderr.write(': %s\n' % trash_dir)
+    sys.exit(1)
+
+
+def confirm(msg):
+    """Ask confirmation to user.
+
+    Program terminates if user doesn't confirm.
+    """
+    question = '{} [y/N]? '.format(msg.rstrip('?'))
+    answer = None
+    while answer not in ['y', 'n', '']:
+        answer = input(question).lower()
+    if answer not in ['y']:
+        sys.stdout.write('Close program\n')
+        exit(0)
+
+
+if __name__ == '__main__':
+
+    # check ars
+    if '--help' in sys.argv or '-h' in sys.argv:
+        helper()
+
+    if len(sys.argv) != 1:
+        error()
+
+    # ask confirmation
+    confirm('Do you really want to clear directories?')
+
+    # ensure trash dir
+    trash_dir = os.path.join(os.getenv('HOME'), '.trash')
+    if os.path.isfile(trash_dir):
+        error_occupied(trash_dir, 'file')
+    if not os.path.isdir(trash_dir):
+        os.mkdir(trash_dir)
+
+    download_dir = os.path.join(trash_dir,
+        datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '_downloads')
+    if os.path.isfile(download_dir):
+        error_occupied(download_dir, 'file')
+    if os.path.isdir(download_dir):
+        error_occupied(download_dir, 'dir')
+
+    desktop_dir = os.path.join(trash_dir,
+        datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '_desktop')
+    if os.path.isfile(desktop_dir):
+        error_occupied(desktop_dir, 'file')
+    if os.path.isdir(desktop_dir):
+        error_occupied(desktop_dir, 'dir')
+
+    home_dir = os.path.join(trash_dir,
+        datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '_home')
+    if os.path.isfile(home_dir):
+        error_occupied(home_dir, 'file')
+    if os.path.isdir(home_dir):
+        error_occupied(home_dir, 'dir')
+
+    # get files
+    download_objs = os.listdir(os.path.join(os.getenv('HOME'), 'Downloads'))
+    desktop_objs = os.listdir(os.path.join(os.getenv('HOME'), 'Desktop'))
+    home_objs = [
+        f for f in os.listdir(os.getenv('HOME'))
+        if os.path.isfile(f) and not f.startswith('.')
+    ]
+
+    # delete files
+    if not any([
+        download_objs,
+        desktop_objs,
+        home_objs
+    ]):
+        sys.exit(0)
+
+    sys.stdout.write('\n')
+    sys.stdout.write(bred('-' * 70) + '\n')
+    sys.stdout.write('\n')
+
+    if download_objs:
+        os.mkdir(download_dir)
+        for f in download_objs:
+            existent_f = os.path.join(os.getenv('HOME'), 'Downloads', f)
+            deleted_f = os.path.join(download_dir, f)
+            sys.stdout.write(cyan(existent_f) + '\n')
+            try:
+                sh.mv(existent_f, deleted_f)
+            except sh.ErrorReturnCode_1:
+                sys.stdout.write(bred('error') + ': ' + existent_f + '\n')
+        sys.stdout.write('\n')
+
+    if desktop_objs:
+        os.mkdir(desktop_dir)
+        for f in desktop_objs:
+            existent_f = os.path.join(os.getenv('HOME'), 'Desktop', f)
+            deleted_f = os.path.join(desktop_dir, f)
+            sys.stdout.write(cyan(existent_f) + '\n')
+            try:
+                sh.mv(existent_f, deleted_f)
+            except sh.ErrorReturnCode_1:
+                sys.stdout.write(bred('error') + ': ' + existent_f + '\n')
+        sys.stdout.write('\n')
+
+    if home_objs:
+        os.mkdir(home_dir)
+        for f in home_objs:
+            existent_f = os.path.join(os.getenv('HOME'), f)
+            deleted_f = os.path.join(home_dir, f)
+            sys.stdout.write(cyan(existent_f) + '\n')
+            try:
+                sh.mv(existent_f, deleted_f)
+            except sh.ErrorReturnCode_1:
+                sys.stdout.write(bred('error') + ': ' + existent_f + '\n')
+        sys.stdout.write('\n')
+
+    sys.stdout.write(bred('-' * 70) + '\n')
+    sys.stdout.write('\n')

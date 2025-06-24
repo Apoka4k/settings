@@ -1,0 +1,144 @@
+#!/usr/bin/env python
+
+"""
+Backup a directory or a file.
+"""
+
+import argparse
+import logging
+import os
+import shutil
+import sys
+
+
+def _setup_logging():
+    """
+    Setup logging.
+    """
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)-7s - %(filename)s:%(lineno)-4s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+    )
+
+
+def _parse_args(argv):
+    """
+    Parse command line arguments.
+    """
+
+    parser = argparse.ArgumentParser(epilog='Backup a directory or a file.')
+
+    parser.add_argument(
+        'path', metavar='PATH', nargs='?', default='.',
+        help='the path of the object to backup (default: working dir)'
+    )
+
+    return parser.parse_args(argv)
+
+
+def _ensure_dir(path):
+    """
+    Ensure a directory exists.
+    """
+
+    if not os.path.exists(path):
+        logging.info('Create dir: {}'.format(path))
+        os.mkdir(path)
+    elif not os.path.isdir(path):
+        logging.error('Not a directory: {}'.format(path))
+        raise NotADirectoryError(path)
+
+
+def _object_type(path):
+    """
+    Return the object type.
+    """
+
+    if os.path.isdir(path):
+        return 'dir'
+    elif os.path.isfile(path):
+        return 'file'
+    elif not os.path.exists(path):
+        logging.error('Object not found: {}'.format(os.path.realpath(path)))
+    else:
+        logging.error('Invalid object: {}'.format(os.path.realpath(path)))
+    raise FileNotFoundError(os.path.realpath(path))
+
+
+def _backup_dir():
+    """
+    Return the backup dir.
+    """
+
+    backup_dir = os.path.join(os.getenv('HOME'), 'backup')
+    _ensure_dir(backup_dir)
+    return backup_dir
+
+
+def _subdirs(path):
+    """
+    List all subdirectories.
+    """
+
+    return [
+        name for name in os.listdir(path)
+        if os.path.isdir(os.path.join(path, name))
+    ]
+
+
+def _is_int(text):
+    """
+    Check if the string contains an integer.
+    """
+
+    try:
+        int(text)
+    except ValueError:
+        return False
+    return True
+
+
+def backup(path):
+    """
+    Backup an object.
+    """
+
+    obj_type = _object_type(path)
+    obj_dir_name = os.path.join(_backup_dir(), os.path.splitext(os.path.basename(os.path.realpath(path)))[0])
+    _ensure_dir(obj_dir_name)
+
+    subdirs = [
+        int(subdir)
+        for subdir in _subdirs(obj_dir_name)
+        if _is_int(subdir)
+    ]
+
+    if subdirs:
+        index = max(subdirs) + 1
+    else:
+        index = 1
+    obj_subdir = os.path.join(obj_dir_name, str(index).rjust(2, '0'))
+
+    if obj_type == 'dir':
+        logging.info('Backup into {}'.format(obj_subdir))
+        shutil.copytree(path, obj_subdir, ignore=shutil.ignore_patterns('.*'))
+
+    elif obj_type == 'file':
+        _ensure_dir(obj_subdir)
+        logging.info('Backup into {}'.format(obj_subdir))
+        copy_to = shutil.copy(path, obj_subdir)
+
+    else:
+        logging.error('Invalid object type: {}'.format(obj_type))
+        raise ValueError
+
+    logging.info('Done')
+
+
+if __name__ == '__main__':
+
+    _setup_logging()
+    args = _parse_args(sys.argv[1:])
+    backup(args.path)

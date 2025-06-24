@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+"""
+Prettify HTML code.
+"""
+
+import argparse
+import io
+import os
+import requests
+import sys
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse
+
+
+def get_parser():
+    """
+    Define the argument parser.
+    """
+    parser = argparse.ArgumentParser(epilog='Prettify HTML code.')
+    parser.add_argument('input_obj', metavar='FILE|URL', nargs='?',
+        help='The input file or URL (default: stdin)')
+    return parser
+
+
+
+
+def parse_args():
+    """
+    Parse the arguments.
+    """
+    parser = get_parser()
+    args = parser.parse_args()
+
+    # Stdin
+    if args.input_obj is None:
+        if sys.stdin.isatty():
+            parser.error('Specify the input')
+        return sys.stdin
+
+    # URL
+    parsed_url = urlparse(args.input_obj)
+    if parsed_url.scheme and parsed_url.netloc:
+        try:
+            response = requests.get(args.input_obj)
+        except requests.exceptions.ConnectionError:
+            parser.error('Invalid URL: {}'.format(args.input_obj))
+        if response.status_code != 200:
+            parser.error('Invalid response code from URL: {}'.format(response.status_code))
+        return io.StringIO(response.content.decode())
+
+    # File
+    if not os.path.isfile(args.input_obj):
+        parser.error('File doesn\'t exist: {}'.format(args.input_obj))
+    return open(args.input_obj, 'r')
+
+
+if __name__ == '__main__':
+    sys.stdout.write(BeautifulSoup(parse_args(), 'html.parser').prettify())

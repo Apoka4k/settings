@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+"""
+Replace characters \n with actual newlines and print.
+"""
+
+import sys
+
+
+def cyan(x):
+    return '\033[0;36m{}\033[0;38m'.format(x)
+
+
+for arg in sys.argv[1:]:
+    text = arg.replace(r'\n', '\n')
+    print('')
+    print(cyan(text))

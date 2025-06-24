@@ -1,0 +1,92 @@
+#!/usr/bin/env python
+
+
+# imports
+import datetime
+import os
+import sh
+import sys
+
+
+# wildcard * matches point . as well: must use regexp to skip hidden files
+# find_extensions = ['*~', '*#', '.#*', '.*.swp']
+find_extensions = ['*~', '*#', '*.swp']
+
+bred = lambda x: '\033[1;31m' + x + '\033[0;38m'
+cyan = lambda x: '\033[0;36m' + x + '\033[0;38m'
+
+
+def helper():
+    sys.stdout.write('Usage: %s\n'
+                     % os.path.basename(__file__))
+    sys.exit(0)
+
+
+def error():
+    sys.stderr.write(os.path.basename(__file__) + ': ' + \
+                     bred('error') + '\n')
+    sys.stderr.write('Usage: %s\n'
+                     % os.path.basename(__file__))
+    sys.exit(1)
+
+
+def error_occupied(trash_dir, obj=None):
+    sys.stderr.write(os.path.basename(__file__) + ': ' + \
+                     bred('error') + '\n')
+    sys.stderr.write('Trash dir is occupied')
+    if obj:
+        sys.stderr.write(' by a %s' % obj)
+    sys.stderr.write(': %s\n' % trash_dir)
+    sys.exit(1)
+
+
+if __name__ == '__main__':
+
+    # check ars
+    if '--help' in sys.argv or '-h' in sys.argv:
+        helper()
+
+    if len(sys.argv) != 1:
+        error()
+
+    # ensure trash dir
+    trash_dir = os.path.join(os.getenv('HOME'), '.trash')
+    if os.path.isfile(trash_dir):
+        error_occupied(trash_dir, 'file')
+    if not os.path.isdir(trash_dir):
+        os.mkdir(trash_dir)
+    date_dir = os.path.join(trash_dir,
+        datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '_files')
+    if os.path.isfile(date_dir):
+        error_occupied(date_dir, 'file')
+    if os.path.isdir(date_dir):
+        error_occupied(date_dir, 'dir')
+
+    # get files
+    find_opts = [os.getenv('HOME'), '-wholename', trash_dir, '-prune', '-false', '-or', '-type', 'f',
+                 '-name', find_extensions[0]]
+    for find_extension in find_extensions[1:]:
+        find_opts += ['-or', '-name', find_extension]
+    out = sh.find(*find_opts, _ok_code=[0, 1])
+    files = out.stdout.decode('utf-8').split('\n')[:-1]
+
+    # delete files
+    if not files:
+        sys.exit(0)
+
+    sys.stdout.write('\n')
+    sys.stdout.write(bred('-' * 70) + '\n')
+    sys.stdout.write('\n')
+
+    os.mkdir(date_dir)
+    for f in files:
+        deleted_f = os.path.join(date_dir, f.replace('/', '__'))
+        try:
+            sh.mv(f, deleted_f)
+            sys.stdout.write(cyan(f) + '\n')
+        except sh.ErrorReturnCode_1:
+            sys.stdout.write(bred('error') + ': ' + f + '\n')
+
+    sys.stdout.write('\n')
+    sys.stdout.write(bred('-' * 70) + '\n')
+    sys.stdout.write('\n')
