@@ -1,0 +1,16 @@
+[user]
+	email = apoka.4k@gmail.com
+	name = Apoka
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	editor = emacs
+[credential]
+	helper = store
+[protocol "file"]
+	allow = always
+[http]
+	postBuffer = 157286400
