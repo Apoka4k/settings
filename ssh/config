@@ -1,0 +1,9 @@
+Host bitbucket-apoka
+    Hostname bitbucket.org
+    IdentityFile ~/.ssh/id_rsa
+    IdentitiesOnly yes
+
+Host github-apoka
+    Hostname github.com
+    IdentityFile ~/.ssh/id_rsa
+    IdentitiesOnly yes
