@@ -1,0 +1,16 @@
+" Display the line number
+set number
+
+" Display search matches as you type them
+set incsearch
+
+" Highlight all search matches
+set hlsearch
+
+" Tabs correspond to 4 spaces
+set tabstop=4
+set softtabstop=4
+set expandtab
+
+" Enable the mouse
+set mouse=a

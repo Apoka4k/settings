@@ -4,7 +4,7 @@
 ;; ------------------------------------------------------------------------- ;;
 
 ;; SET MODES DIRECTORY
-(setq load-path (cons "/home/apoka/.emacs_dir/modes" load-path))
+(setq load-path (cons "/home/apoka/.emacs-dir/modes" load-path))
 
 ;; ------------------------------------------------------------------------- ;;
 ;; LOAD MODES                                                                ;;
@@ -53,7 +53,7 @@
 ;; DEFAULT MODE
 ;; default mode is given by the function 'general-mode';
 ;; apply it to a mode to add default features to such mode
-(load "/home/apoka/.emacs_dir/modes/default.lisp")
+(load "/home/apoka/.emacs-dir/modes/default.el")
 (general-mode 'c-mode)
 (general-mode 'c++-mode)
 (general-mode 'python-mode)

@@ -9,7 +9,6 @@ import sys
 
 
 # wildcard * matches point . as well: must use regexp to skip hidden files
-# find_extensions = ['*~', '*#', '.#*', '.*.swp']
 find_extensions = ['*~', '*#', '*.swp']
 
 bred = lambda x: '\033[1;31m' + x + '\033[0;38m'
@@ -68,7 +67,7 @@ if __name__ == '__main__':
     for find_extension in find_extensions[1:]:
         find_opts += ['-or', '-name', find_extension]
     out = sh.find(*find_opts, _ok_code=[0, 1])
-    files = out.stdout.decode('utf-8').split('\n')[:-1]
+    files = out.split('\n')[:-1]
 
     # delete files
     if not files:

@@ -1,21 +1,12 @@
-# -- SYNTAX RULE --
+# To retrieve the code of a key or key combination,
+# on a terminal run `cat` and then press the key or
+# key combination: the code will be printed on the screen.
 #
-# "\e[_": _
-#
-# The first underscore has to be substituted
-# by a sequence of keys and the second underscore
-# has to be substituted by a function.
-#
-# The result is that in bash environment
-# the combination of keys produces the
-# effect defined by the function.
-#
-# The sequence of keys has to be one of the following:
-# - a normal key,
-# - a prefix key followed by a normal key,
-# - a standalone key.
-#
-# -- NORMAL KEYS --
+# If the key combination is intercepted by someone else
+# (e.g. the graphic environment) before reaching the terminal,
+# you won't see anything and such a key combination won't work.
+# In that case you can try to configure the graphic environment
+# to not intercept that key combinations.
 #
 # A : up
 # B : down
@@ -29,50 +20,37 @@
 # 5~ : PageUp
 # 6~ : PageDown
 #
-# -- PREFIX KEYS --
-#
 # 1;2 : Shift
 # 1;3 : Alt
 # 1;5 : Ctrl
 #
-# -- STANDALONE KEYS --
-#
 # \t : Tab
 # ? : Backspace
-#
-# -- FUNCTIONS --
-#
-# search on web
 
-# arrows
+# Arrows
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 "\e[C": forward-char
 "\e[D": backward-char
 
-# special keys
+# Keys
 "\e[1~": beginning-of-line
-"\e[2~": quoted-insert
 "\e[3~": delete-char
 "\e[4~": end-of-line
-"\e[5~": beginning-of-history
-"\e[6~": end-of-history
 "\e[\t": complete
 "\e[?": backward-delete-char
 
-# ctrl + arrow
+# Ctrl + arrow
 "\e[1;5C": forward-word
 "\e[1;5D": backward-word
 
-# alt + arrow
+# Shift + arrow
 "\e[1;2C": kill-line
 "\e[1;2D": backward-kill-line
 "\e[1;2A": kill-whole-line
 
-# -- OTHER SETTINGS --
-
-# remove sound
+# Remove sound
 set bell-style none
 
-# not duplicate completion
+# Avoid duplicating completion text
 set skip-completed-text On

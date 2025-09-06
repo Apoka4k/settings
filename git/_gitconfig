@@ -10,7 +10,3 @@
 	editor = emacs
 [credential]
 	helper = store
-[protocol "file"]
-	allow = always
-[http]
-	postBuffer = 157286400

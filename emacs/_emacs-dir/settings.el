@@ -26,7 +26,7 @@
 (setq lazy-highlight-cleanup nil)
 
 ;; ABILITARE IL NUMERO DI RIGA
-(global-linum-mode t)
+(global-display-line-numbers-mode)
 
 ;; ABILITARE LA SOSTITUZIONE IN SCRITTURA DEL TESTO EVIDENZIATO
 (delete-selection-mode 1)
@@ -59,3 +59,8 @@
 
 ;; ABILITARE L'AGGIUSTAMENTO ORIZZONTALE AUTOMATICO DELLA VISUALE
 (put 'scroll-left 'disabled nil)
+
+;; RENDERE L'ALLARME VISIVO ANZICHÉ SONORO
+(setq visible-bell t)
+;; DISABILITARE L'ALLARME (SIA VISIVO CHE SONORO)
+;; (setq ring-bell-function 'ignore)
